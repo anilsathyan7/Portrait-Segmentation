@@ -48,7 +48,7 @@ Anil Sathyan
 * https://github.com/cainxx/image-segmenter-ios
 * https://github.com/gallifilo/final-year-project
 * https://github.com/lizhengwei1992/mobile_phone_human_matting
-*   [Deeplab image segmentation](https://colab.research.google.com/github/tensorflow/models/blob/master/research/deeplab/deeplab_demo.ipynb)
-*   [Tensorflow - image segmentation](https://www.tensorflow.org/beta/tutorials/images/segmentation)
-*   [Hyperconnect - tips for fast portrait segmentation](https://hyperconnect.github.io/2018/07/06/tips-for-building-fast-portrait-segmentation-network-with-tensorflow-lite.html)
+*   [Deeplab Image Segmentation](https://colab.research.google.com/github/tensorflow/models/blob/master/research/deeplab/deeplab_demo.ipynb)
+*   [Tensorflow - Image segmentation](https://www.tensorflow.org/beta/tutorials/images/segmentation)
+*   [Hyperconnect - Tips for fast portrait segmentation](https://hyperconnect.github.io/2018/07/06/tips-for-building-fast-portrait-segmentation-network-with-tensorflow-lite.html)
 * [Keras Documentation](https://keras.io/)
