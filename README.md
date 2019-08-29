@@ -23,10 +23,10 @@
 
 ### TODO
 
-* Port code to TF 2.0
+* Port the code to TF 2.0
 * Use a bigger image size (224x224)
 * Try quantization-aware training
-* Train with mixed precision (fp16)
+* Train with mixed precision (FP16)
 * Improve accuracy & reduce artifacts at runtime
 
 ## Versioning
