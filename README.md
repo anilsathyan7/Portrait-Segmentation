@@ -7,6 +7,13 @@
 * Keras, Kito
 * Opencv, PIL, Matplotlib
 
+```
+pip uninstall -y tensorflow
+pip install -U tf-nightly
+pip install keras
+pip install kito
+```
+
 ## Prerequisites
 
 * Download training data-set
