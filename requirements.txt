@@ -1,0 +1,11 @@
+Dependencies:-
+------------
+
+pip uninstall -y tensorflow
+pip install -U tf-nightly
+pip install kito
+
+Order:-
+------ 
+
+train -> eval -> export -> test -> webcam
