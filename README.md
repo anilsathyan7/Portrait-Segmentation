@@ -9,7 +9,7 @@
 
 ## Prerequisites
 
-* Download model files : https://drive.google.com/open?id=1XRxpVu2I70Pu0IchXXEcfq9GDQw8XeT5
+* Download training data-set
 * GPU with CUDA support
 
 ## Demo
