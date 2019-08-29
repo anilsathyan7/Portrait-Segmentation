@@ -27,7 +27,7 @@
 * Use a bigger image size (224x224)
 * Try quantization-aware training
 * Train with mixed precision (fp16)
-* Improve accuracy & reduce artefacts at runtime
+* Improve accuracy & reduce artifacts at runtime
 
 ## Versioning
 
