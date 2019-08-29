@@ -3,10 +3,9 @@
 
 ## Dependencies
 
-* Python 3
-* Tensorflow
-* Keras
-* kito
+* Tensorflow, Python 3
+* Keras, Kito
+* Opencv, PIL, Matplotlib
 
 ## Prerequisites
 
