@@ -19,13 +19,20 @@ pip install kito
 * Download training data-set
 * GPU with CUDA support
 
+## Dataset
+
+## Model Architecture
+
+![Screenshot](portrait_seg.png)
+
 ## Demo
 
-### Inputs
+### Result
 
+![Screenshot](result.png)
 
+### Android Application
 
-### Output
 
 ### TODO
 
@@ -52,3 +59,5 @@ Anil Sathyan
 *   [Tensorflow - Image segmentation](https://www.tensorflow.org/beta/tutorials/images/segmentation)
 *   [Hyperconnect - Tips for fast portrait segmentation](https://hyperconnect.github.io/2018/07/06/tips-for-building-fast-portrait-segmentation-network-with-tensorflow-lite.html)
 * [Keras Documentation](https://keras.io/)
+* [Boundary-Aware Network for Fast and High-Accuracy Portrait Segmentation](https://arxiv.org/pdf/1901.03814.pdf)
+* [Fast Deep Matting for Portrait Animation on Mobile Phone](https://arxiv.org/pdf/1707.08289.pdf)
