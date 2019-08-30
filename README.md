@@ -29,7 +29,7 @@ pip install kito
 
 The dataset consists of **18698 human portrait images of size 128x128 in RGB format**, along with their**masks(ALPHA)**. Here we augment the **PFCN** dataset with (handpicked) portrait  images form **supervisely** dataset.Additionaly,we download **random selfie** images from web and generate their masks using state-of-the-art **deeplab-xception** network. 
 
-Now to increase the size of dataset, we perform augmentation like **cropping, brightness alteration and flipping**. Since most of our images contain plain background, we create new **synthetic images** with random backgrounds (natural) using the default dataset, with the help of a **python script**.
+Now to increase the size of dataset, we perform augmentation like **cropping, brightness alteration and flipping**. Since most of our images contain plain background, we create new **synthetic images** using random backgrounds (natural) using the default dataset, with the help of a **python script**.
 
 Besides the aforesaid augmentation techniques, we **normalize(also standardize)** the images and perform **run-time augmentations like flip, shift and zoom** using keras data generator and preprocessing module.
 
