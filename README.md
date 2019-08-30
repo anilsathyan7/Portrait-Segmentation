@@ -23,7 +23,7 @@ pip install kito
 
 ## Model Architecture
 
-![Screenshot](portrait_seg.png)
+![Screenshot](portrait_seg_small.png)
 
 ## Demo
 
