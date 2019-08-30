@@ -3,13 +3,11 @@ import os
 import tensorflow as tf
 import keras
 from keras.models import Model
-from keras.layers import Dense, Input,Flatten, concatenate,Reshape, Conv2D, Deconv2D, MaxPooling2D, Lambda,Activation,Conv2DTranspose
+from keras.layers import Dense, Input,Flatten, concatenate,Reshape, Conv2D, MaxPooling2D, Lambda,Activation,Conv2DTranspose
 from keras.layers import UpSampling2D, Conv2DTranspose, BatchNormalization, Dropout
 from keras.callbacks import TensorBoard, ModelCheckpoint, Callback, ReduceLROnPlateau
-from keras.regularizers import l1
 from keras.optimizers import SGD, Adam
 import keras.backend as K
-from keras.backend import tf as ktf
 from keras.utils import plot_model
 from keras.callbacks import TensorBoard, ModelCheckpoint, Callback
 import numpy as np
@@ -173,7 +171,7 @@ def get_mobile_unet(finetune=False, pretrained=False):
     x = Activation("relu")(x)
     
    
-    x = Deconv2D(1, (1,1), padding='same')(x)
+    x = Conv2DTranspose(1, (1,1), padding='same')(x)
     x = Activation('sigmoid', name="op")(x)
     
     
