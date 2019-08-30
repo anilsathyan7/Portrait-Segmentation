@@ -70,7 +70,7 @@ After ensuring the data files are stored in the desired directorires, run the sc
 2. Make sure you ground truth is correct/uncorrupted and is in desired format before training (even standard dataset).
 3. For mobile devices, make sure you use a mobile-friendly architecture (like mobilenet) for training and deployment.
 4. Using google colaboratory along with google drive for taining was EASY & FUN.It provides high end GPU (RAM also) for free.
-5. Some of the mobile optimization tools(even TF) are still experimental (GPU deegate,NNAPI,FP16 etc.) and are still buggy.
+5. Some of the mobile optimization tools(even TF) are still experimental (GPU deegate,NNAPI,FP16 etc.) and are buggy.They support only limited operations and edge devices.
 
 ## TODO
 
