@@ -1,5 +1,11 @@
 # Portrait-Segmentation
 
+A **Real-time Automatic Deep Matting** approach for **mobile devices**, using **Mobile-Unet and Keras**.
+
+**Portrait segmentation** refers to the process of segmenting a person in an image from its background.
+Here we use the concept of **semantic segmentation** to predict the label of every pixel(dense prediction) in an image.
+
+Here we limit ourselves to **binary classes** (person or background) and use only plain **portrait-selfie** images for matting.
 
 ## Dependencies
 
@@ -16,12 +22,12 @@ pip install kito
 
 ## Prerequisites
 
-* Download training data-set
+* Download training [data-set](https://drive.google.com/file/d/1UBLzvcqvt_fin9Y-48I_-lWQYfYpt_6J/view?usp=sharing)
 * GPU with CUDA support
 
 ## Dataset
 
-The dataset consists of **18698 human portrait images of size 128x128 in RGB format**. Here we augment the **PFCN** dataset with (handpicked) portrait  images form **supervisely** dataset.Additionaly,we download **random selfie** images from web and generate their masks using state-of-the-art **deeplab-xception** network. 
+The dataset consists of **18698 human portrait images of size 128x128 in RGB format**, along with their**masks(ALPHA)**. Here we augment the **PFCN** dataset with (handpicked) portrait  images form **supervisely** dataset.Additionaly,we download **random selfie** images from web and generate their masks using state-of-the-art **deeplab-xception** network. 
 
 Now to increase the size of dataset, we perform augmentation like **cropping, brightness alteration and flipping**. Since most of our images contain plain background, we create new **synthetic images** with random backgrounds (natural) using the default dataset, with the help of a **python script**.
 
