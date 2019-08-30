@@ -77,7 +77,7 @@ After ensuring the data files are stored in the desired directorires, run the sc
 7. The **segmentaion maps** produced at this low resolution (128x128) have coarse or **sharp edges** (stair-case effect), especially when we resize them to higher resolution.
 8. To tackle the problem of coarse edges, we apply a **blur filter** (also antialiasing at runtime) using **opencv** and perform **alpha blending** with the background image. Other approach was to **threshold** the blurred segmentation map with **smooth-step** function using **GLSL shaders**.
 9. If the background consists of **noise, clutter or objects like clothers, bags**  etc. the model **fails** miserably.
-10. Even though the stand-alone running time of exported (tflite) model is  low(around 100 ms),other operations like **pre/post-processing, data loading, data-transfer** etc. consumes **significant time** in a mobile device.
+10. Even though the stand-alone **running time** of exported (tflite) model is  **low(around 100 ms)**,other operations like **pre/post-processing, data loading, data-transfer** etc. consumes **significant time** in a mobile device.
 
 
 ## TODO
