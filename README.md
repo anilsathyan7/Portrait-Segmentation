@@ -21,9 +21,34 @@ pip install kito
 
 ## Dataset
 
+The dataset consists of **18698 human portrait images of size 128x128 in RGB format**. Here we augment the **PFCN** dataset with (handpicked) portrait  images form **supervisely** dataset.Additionaly,we download **random selfie** images from web and generate their masks using state-of-the-art **deeplab-xception** network. 
+
+Now to increase the size of dataset, we perform augmentation like **cropping, brightness alteration and flipping**. Since most of our images contain plain background, we create new **synthetic images** with random backgrounds (natural) using the default dataset, with the help of a **python script**.
+
+Besides the aforesaid augmentation techniques, we **normalize(also standardize)** the images and perform **run-time augmentations like flip, shift and zoom** using keras data generator and preprocessing module.
+
 ## Model Architecture
 
+Here we use **Mobilent v2** with **depth multiplier 0.5** as encoder (feature extractor).
+
+For the **decoder part**, we have two variants. You can use a upsampling block with either  **Transpose Convolution** or **Upsample2D+Convolution**. In the former case we use a **stride of 2**, whereas in the later we use **resize bilinear** for upsampling, along with Conv2d. Ensure proper **skip connections** between encoder and decoder parts for better results.
+
+Here is the snapshot of the upsampled version of model.
+
 ![Screenshot](portrait_seg_small.png)
+
+## How to run
+
+Download the dataset from the above link and put them in data folder.
+After ensuring the data files are stored in the desired directorires, run the scripts in the following order.
+
+```python
+1. python train.py # Train the model on data-set
+2. python eval.py checkpoints/up_super_model-102-0.06.hdf5 # Evaluate the model on test-set
+3. python export.py checkpoints/up_super_model-102-0.06.hdf5 # Export the model for deployment
+4. python test.py test/four.jpeg # Test the model on a single image
+5. python webcam.py test/beach.jpg # Run the model on webcam feed
+```
 
 ## Demo
 
@@ -33,8 +58,9 @@ pip install kito
 
 ### Android Application
 
+## Key Insights and Drawbacks
 
-### TODO
+## TODO
 
 * Port the code to TF 2.0
 * Use a bigger image size (224x224)
