@@ -45,8 +45,8 @@ Here is the snapshot of the upsampled version of model.
 
 ## How to run
 
-Download the dataset from the above link and put them in data folder.
-After ensuring the data files are stored in the desired directorires, run the scripts in the following order.
+Download the **dataset** from the above link and put them in **data** folder.
+After ensuring the data files are stored in the **desired directorires**, run the scripts in the **following order**.
 
 ```python
 1. python train.py # Train the model on data-set
