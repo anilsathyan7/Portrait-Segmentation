@@ -68,16 +68,16 @@ After ensuring the data files are stored in the desired directorires, run the sc
 
 ## Key Insights and Drawbacks
 
-1. Always start experimentation with standard/pretrained networks. Also try out default/standard hyperparameter settings before experimentation.
-2. Make sure you ground truth is correct/uncorrupted and is in desired format before training (even standard dataset).
-3. For mobile devices, make sure you use a mobile-friendly architecture (like mobilenet) for training and deployment.
-4. Using google colaboratory along with google drive for taining was EASY & FUN.It provides high end GPU (RAM also) for free.
-5. Some of the mobile optimization tools(even TF) are still experimental (GPU deegate,NNAPI,FP16 etc.) and are buggy.They support only limited operations and edge devices.
-6. Even state-of-the art segmenation models(deeplab-xception) seems to suffer from false positives (even at higher sizes), when we test them on a random image.
-7. The segmentaion maps produced at this low resolution (128x128) have coarse or sharp edges (stair-case effect), especially when we resize them to higher resolution.
-8. To tackle the problem of coarse edges, we apply a blur filter (also antialiasing at runtime) using opencv and perform alpha blending with the background image. Other approach was to threshold the blurred segmentation map with smooth-step function using GLSL shaders.
-9. If the background consists of noise, clutter or objects like clothers, bags  etc. the model fails miserably.
-10. Even though the stand-alone running time of exported (tflite) model is  low(around 100 ms),other operatiosn like pre/post-processing, data loading, data-transfer etc. consumes significant time in a mobile device.
+1. Always start experimentation with **standard/pretrained** networks. Also try out **default/standard hyperparameter** settings before experimentation.
+2. Make sure you **ground truth is correct/uncorrupted** and is in **desired format** before training (even standard dataset).
+3. For **mobile devices**, make sure you use a **mobile-friendly architecture (like mobilenet)** for training and deployment.
+4. Using **google colaboratory** along with google drive for taining was EASY & FUN.It provides **high end GPU** (RAM also) for free.
+5. Some of the mobile **optimization tools**(even TF) are still **experimental** (GPU deegate,NNAPI,FP16 etc.) and are buggy.They support only **limited operations and edge devices**.
+6. Even **state-of-the art segmenation models**(deeplab-xception) seems to suffer from **false positives** (even at higher sizes), when we test them on a random image.
+7. The **segmentaion maps** produced at this low resolution (128x128) have coarse or **sharp edges** (stair-case effect), especially when we resize them to higher resolution.
+8. To tackle the problem of coarse edges, we apply a **blur filter** (also antialiasing at runtime) using **opencv** and perform **alpha blending** with the background image. Other approach was to **threshold** the blurred segmentation map with **smooth-step** function using **GLSL shaders**.
+9. If the background consists of **noise, clutter or objects like clothers, bags**  etc. the model **fails** miserably.
+10. Even though the stand-alone running time of exported (tflite) model is  low(around 100 ms),other operations like **pre/post-processing, data loading, data-transfer** etc. consumes **significant time** in a mobile device.
 
 
 ## TODO
