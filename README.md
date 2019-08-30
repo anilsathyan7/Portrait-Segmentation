@@ -1,6 +1,6 @@
 # Portrait-Segmentation
 
-A **Real-time Automatic Deep Matting** approach for **mobile devices**, using **Mobile-Unet and Keras**.
+A **Real-time Automatic Deep Matting** approach for **mobile devices**, using **Mobile-Unet in Keras**.
 
 **Portrait segmentation** refers to the process of segmenting a person in an image from its background.
 Here we use the concept of **semantic segmentation** to predict the label of every pixel(dense prediction) in an image.
