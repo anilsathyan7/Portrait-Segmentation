@@ -9,8 +9,8 @@ Here we limit ourselves to **binary classes** (person or background) and use onl
 
 ## Dependencies
 
-* Tensorflow, Python 3
-* Keras, Kito
+* Tensorflow(>=1.14.0), Python 3
+* Keras(>=2.2.4), Kito
 * Opencv, PIL, Matplotlib
 
 ```
