@@ -1,6 +1,6 @@
 # Portrait-Segmentation
 
-**Real-time Automatic Deep Matting** for **mobile devices** with **Mobile-Unet**
+**Real-time Automatic Deep Matting** For **Mobile Devices** With **Mobile-Unet**
 
 **Portrait segmentation** refers to the process of segmenting a person in an image from its background.
 Here we use the concept of **semantic segmentation** to predict the label of every pixel(dense prediction) in an image.
