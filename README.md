@@ -60,6 +60,9 @@ After ensuring the data files are stored in the desired directorires, run the sc
 
 ### Result
 
+Here the input and output are images of size 128x128.
+The first row represents the input and the second row shows the cropped image obtained by cropping the input image with the mask output of the model.
+
 ![Screenshot](result.png)
 
 **Accuracy: 96%**
