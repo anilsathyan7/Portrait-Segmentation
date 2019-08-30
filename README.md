@@ -66,6 +66,12 @@ After ensuring the data files are stored in the desired directorires, run the sc
 
 ## Key Insights and Drawbacks
 
+1. Always start experimentation with standard/pretrained networks. Also try out default/standard hyperparameter settings before experimentation.
+2. Make sure you ground truth is correct/uncorrupted and is in desired format before training (even standard dataset).
+3. For mobile devices, make sure you use a mobile-friendly architecture (like mobilenet) for training and deployment.
+4. Using google colaboratory along with google drive for taining was EASY & FUN.It provides high end GPU (RAM also) for free.
+5. Some of the mobile optimization tools(even TF) are still experimental (GPU deegate, FP16 etc.) and are still buggy.
+
 ## TODO
 
 * Port the code to TF 2.0
