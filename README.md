@@ -69,7 +69,9 @@ The **first row** represents the **input** and the **second row** shows the corr
 
 ### Android Application
 
-![Screenshot](android_portrait_video.gif)
+Real-time portrait video in android application
+
+![Screenshot](android_portrait.gif)
 
 ## Key Insights and Drawbacks
 
