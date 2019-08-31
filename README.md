@@ -71,8 +71,6 @@ The **first row** represents the **input** and the **second row** shows the corr
 
 Real-time portrait video in android application
 
-![Screenshot](android_portrait.gif)
-
 <p align="center">
   <img  src="android_portrait.gif">
 </p>
