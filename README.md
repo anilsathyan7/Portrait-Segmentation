@@ -41,7 +41,7 @@ For the **decoder part**, we have two variants. You can use a upsampling block w
 
 Additionaly, we use **dropout** regularization to prevent **overfitting**.It also helps our network to learn more **robust** features during training.
 
-Here is the snapshot of the upsampled version of model.
+Here is the **snapshot** of the **upsampled** version of model.
 
 ![Screenshot](portrait_seg_small.png)
 
@@ -93,11 +93,12 @@ Real-time portrait video in android application
 
 ## TODO
 
-* Port the code to TF 2.0
-* Use a bigger image size (224x224)
-* Try quantization-aware training
-* Train with mixed precision (FP16)
-* Improve accuracy & reduce artifacts at runtime
+* Port the code to **TF 2.0**
+* Use a **bigger image** for training(224x224)
+* Try **quantization-aware** training
+* Train with **mixed precision** (FP16) 
+* Improve **accuracy** & reduce **artifacts** at runtime
+* Incroporate **depth** information and **boundary refinement** techniques
 
 ## Versioning
 
