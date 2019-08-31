@@ -74,7 +74,7 @@ Real-time portrait video in android application
 ![Screenshot](android_portrait.gif)
 
 <p align="center">
-  <img  src="android_portrait.gif)">
+  <img  src="android_portrait.gif">
 </p>
 
 ## Key Insights and Drawbacks
