@@ -57,6 +57,7 @@ After ensuring the data files are stored in the **desired directorires**, run th
 4. python test.py test/four.jpeg # Test the model on a single image
 5. python webcam.py test/beach.jpg # Run the model on webcam feed
 ```
+You may also run the **Jupyter Notebook** (ipynb) in google colaboratory, after downloading the training dataset.
 
 ## Demo
 
