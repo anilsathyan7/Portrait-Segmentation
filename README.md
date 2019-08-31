@@ -69,6 +69,8 @@ The **first row** represents the **input** and the **second row** shows the corr
 
 ### Android Application
 
+![Screenshot](android_portrait_video.gif)
+
 ## Key Insights and Drawbacks
 
 1. Always start experimentation with **standard/pretrained** networks. Also try out **default/standard hyperparameter** settings before experimentation.
