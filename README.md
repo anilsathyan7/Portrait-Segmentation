@@ -71,7 +71,7 @@ The **first row** represents the **input** and the **second row** shows the corr
 
 Real-time portrait video in android application
 
-<p align="center">
+<p align="left">
   <img  src="android_portrait.gif">
 </p>
 
