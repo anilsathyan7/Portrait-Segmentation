@@ -45,7 +45,7 @@ Here is the **snapshot** of the **upsampled** version of model.
 
 ![Screenshot](portrait_seg_small.png)
 
-(Shot on OnePlus 3 😉)
+
 ## How to run
 
 Download the **dataset** from the above link and put them in **data** folder.
@@ -78,6 +78,8 @@ Real-time portrait video in android application
 <p align="left">
   <img  src="android_portrait.gif">
 </p>
+
+(Shot on OnePlus 3 😉)
 
 ## Key Insights and Drawbacks
 
