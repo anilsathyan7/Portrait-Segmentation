@@ -60,6 +60,29 @@ After ensuring the data files are stored in the **desired directorires**, run th
 ```
 You may also run the **Jupyter Notebook** (ipynb) in google colaboratory, after downloading the training dataset.
 
+## Training graphs
+
+### Train Loss
+
+![Screenshot](graphs/train_loss.png)
+
+### Train Accuracy
+
+![Screenshot](graphs/train_acc.png)
+
+### Validation Loss
+
+![Screenshot](graphs/val_loss.png)
+
+### Validation Accuracy
+
+![Screenshot](graphs/val_acc.png)
+
+### Learning Rate Schedule
+
+![Screenshot](graphs/lr.png)
+
+
 ## Demo
 
 ### Result
