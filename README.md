@@ -62,6 +62,9 @@ You may also run the **Jupyter Notebook** (ipynb) in google colaboratory, after 
 
 ## Training graphs
 
+Since we are using a **pretrained mobilentv2** as encoder for a head start, the training **quickly converges to 90% accuracy** within first couple of epochs. Also, here we use a flexible **learning rate schedule** (ReduceLROnPlateau) for training the model.
+
+
 ### Training Loss
 
 ![Screenshot](graphs/train_loss.png)
