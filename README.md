@@ -62,11 +62,11 @@ You may also run the **Jupyter Notebook** (ipynb) in google colaboratory, after 
 
 ## Training graphs
 
-### Train Loss
+### Training Loss
 
 ![Screenshot](graphs/train_loss.png)
 
-### Train Accuracy
+### Training Accuracy
 
 ![Screenshot](graphs/train_acc.png)
 
