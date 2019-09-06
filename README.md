@@ -132,6 +132,7 @@ Real-time portrait video in android application
 * Use a **bigger image** for training(224x224)
 * Try **quantization-aware** training
 * Train with **mixed precision** (FP16) 
+* Optimize the model by performing weight **pruning**
 * Improve **accuracy** & reduce **artifacts** at runtime
 * Incroporate **depth** information and **boundary refinement** techniques
 
