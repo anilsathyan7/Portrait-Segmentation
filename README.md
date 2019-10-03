@@ -139,6 +139,8 @@ Move the **slider** to change the background image.
 
 Here is the **link** to the portrait segmentation **webapp**: [CVTRICKS](https://cvtricks.000webhostapp.com/)
 
+If you want to run it **locally**, start a local server using python SimpleHTTPServer.Initially configure the **hostname, port and CORS permissions** and then run it using your browser. 
+
 **NB:** The application is **computaionally intensive** and resource heavy.
 
 ## Key Insights and Drawbacks
@@ -186,8 +188,15 @@ Anil Sathyan
 * https://machinethink.net/blog/mobilenet-v2/
 *   [Deeplab Image Segmentation](https://colab.research.google.com/github/tensorflow/models/blob/master/research/deeplab/deeplab_demo.ipynb)
 *   [Tensorflow - Image segmentation](https://www.tensorflow.org/beta/tutorials/images/segmentation)
+*   [Tensorflowjs](https://www.tensorflow.org/js)
 *   [Hyperconnect - Tips for fast portrait segmentation](https://hyperconnect.github.io/2018/07/06/tips-for-building-fast-portrait-segmentation-network-with-tensorflow-lite.html)
 * [Prismal Labs: Real-time Portrait Segmentation on Smartphones](https://blog.prismalabs.ai/real-time-portrait-segmentation-on-smartphones-39c84f1b9e66)
 * [Keras Documentation](https://keras.io/)
 * [Boundary-Aware Network for Fast and High-Accuracy Portrait Segmentation](https://arxiv.org/pdf/1901.03814.pdf)
 * [Fast Deep Matting for Portrait Animation on Mobile Phone](https://arxiv.org/pdf/1707.08289.pdf)
+* [Super fast color transfer between images](https://www.pyimagesearch.com/2014/06/30/super-fast-color-transfer-images/)
+* [Seamless Cloning using OpenCV](https://www.learnopencv.com/seamless-cloning-using-opencv-python-cpp/)
+* [Tfjs Examples - Webcam Transfer Learning](https://github.com/tensorflow/tfjs-examples/blob/fc8646fa87de990a2fc0bab9d1268731186d9f04/webcam-transfer-learning/index.js)
+* [Opencv Samples: DNN-Classification](https://github.com/opencv/opencv/blob/master/samples/dnn/classification.py)
+* [Deep Learning In OpencCV](https://elinux.org/images/9/9e/Deep-Learning-in-OpenCV-Wu-Zhiwen-Intel.pdf)
+* [BodyPix - Person Segmentation in the Browser](https://github.com/tensorflow/tfjs-models/tree/master/body-pix)
