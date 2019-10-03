@@ -11,7 +11,7 @@ Here we limit ourselves to **binary classes** (person or background) and use onl
 
 * Tensorflow(>=1.14.0), Python 3
 * Keras(>=2.2.4), Kito
-* Opencv, PIL, Matplotlib
+* Opencv(>=3.4), PIL, Matplotlib
 
 ```
 pip uninstall -y tensorflow
@@ -57,6 +57,7 @@ After ensuring the data files are stored in the **desired directorires**, run th
 3. python export.py checkpoints/up_super_model-102-0.06.hdf5 # Export the model for deployment
 4. python test.py test/four.jpeg # Test the model on a single image
 5. python webcam.py test/beach.jpg # Run the model on webcam feed
+6. python segvideo.py test/sunset.jpg # Apply blending filters on video
 ```
 You may also run the **Jupyter Notebook** (ipynb) in google colaboratory, after downloading the training dataset.
 
@@ -106,6 +107,37 @@ Real-time portrait video in android application
 </p>
 
 (Shot on OnePlus 3 😉)
+
+### Fun With Filters(Python)
+ 
+ Let's add some filters to **harmonize** our output image with the background. Our aim is to give a **natural blended feel** to the output image i.e the **edges** should look smooth and the **lighting**(colour) of foreground should match(or blend) with its background.
+ 
+ The first method is the traditional **alpha blending**, where the  foreground images are blended with background using the blurred(gaussian) version of the mask.In the **smooth-step** filter, we clamp the blurred edges and apply a  polynomial function to give a curved appearence to the foreground image edges.Next, we use the **colour transfer** algorithm to transfer the global colour to the foreground image.Also, opencv(computational photography) provides a function called **seamless clone** to blend an image onto a new background using an alpha mask.Finally, we use the dnn module of opencv to load a **colour harmonization** model(deep model) in **caffe** and transfer the background style to the foreground.
+ 
+ Here are some sample results:-
+
+![Screenshot](blend_results.png)
+
+For **live action**, checkout the last script(segvideo.py) to see the effects applied on a **webcam video**.
+
+#### Keyboard Controls:-
+
+Hold down the following keys for filter selection.
+
+**C**- Colour transfer
+**S**- Seamless clone
+**M**- Smooth step
+**H**- Colour harmonize
+
+Move the **slider** to change the background image.
+
+### Tensorflowjs: Running the model on browser
+
+To ensure that your applications runs in a **platform independent** way(portabe), the easiest way is to implement them as a **web-application** and run it using a **browser**.You can easily convert the trained model to tfjs format and run them using javascript with the help of tensorflowjs conversion tools.If you are familiar with **React/Vue** js , you can easily incorporate the tfjs into you application and come up with a really cool **AI webapp**, in no time!!!
+
+Here is the link to the portrait segmentation webapp: [CVTRICKS](https://cvtricks.000webhostapp.com/)
+
+**NB:** The application is computaionally intensive and resource heavy.
 
 ## Key Insights and Drawbacks
 
