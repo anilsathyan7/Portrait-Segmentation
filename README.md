@@ -174,6 +174,7 @@ If you want to run it **locally**, start a local server using python **SimpleHTT
 * Optimize the model by performing weight **pruning**
 * Improve **accuracy** & reduce **artifacts** at runtime
 * Incroporate **depth** information and **boundary refinement** techniques
+* Apply **photorealistic style transfer** on foreground based on **background image**
 
 ## Versioning
 
