@@ -24,6 +24,7 @@ pip install kito
 
 * Download training [data-set](https://drive.google.com/file/d/1UBLzvcqvt_fin9Y-48I_-lWQYfYpt_6J/view?usp=sharing)
 * GPU with CUDA support
+* Download caffe harmonization [model](https://drive.google.com/file/d/1bWafRdYBupr8eEuxSclIQpF7DaC_2MEY/view?usp=sharing)
 
 ## Dataset
 
@@ -120,6 +121,7 @@ Real-time portrait video in android application
 ![Screenshot](blend_results.png)
 
 For **live action**, checkout the script **segvideo.py** to see the effects applied on a **webcam video**.
+Also download the **caffe model** and put it inside **models/caffe** folder.
 
 #### Keyboard Controls:-
 
