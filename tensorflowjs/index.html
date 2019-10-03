@@ -1,0 +1,52 @@
+<html>
+   <head>
+      <!-- TensorFlow.js script -->
+      <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.2.8/dist/tf.min.js"></script>
+      <style>
+         .row {
+         display: flex;
+         text-align: center;
+         }
+         .column {
+         flex: 50%;
+         margin: auto;
+         vertical-align: middle;
+         }
+      </style>
+   </head>
+   <body>
+      <h2 align="center">
+      Portrait Segmentation </h1>
+      <!-- Divide the screen -->
+      <div class="row" >
+         <!-- Inputs -->
+         <div class="column" >
+            <h3>Input Video</h3>
+            <!-- HTML Video-->
+            <video autoplay playsinline muted id="webcam" width="300" height="300" poster="loading.gif"></video>
+            <h3>Background Image</h3>
+            <!-- HTML Image -->
+            <img id="bg1" src="http://localhost:5000/bg.jpg" width="320" height="240" crossorigin="anonymous" alt="background" vertical-align="bottom">  
+            <br><br>
+            <input type="file"  accept="image/*" name="image" id="file"  onchange="loadFile(event)">
+         </div>
+         <!-- Outputs -->
+         <div class="column" >
+            <h3>Output Video</h3>
+            <!-- HTML Canvas -->
+            <br>
+            <button  id="start">Start</button>
+            <button  id="stop">Stop</button>
+            <br><br><br>
+            <canvas  width=300 height=300 id="mycanvas" crossorigin="anonymous"></canvas>
+            <br><br><br>
+            <a id="download"  download="blend.png">
+            <button type="button" onClick="download()">Download</button>
+            </a>
+         </div>
+      </div>
+   </body>
+   <!-- Main script -->
+   <script src = "index.js" > </script>
+</html>
+
