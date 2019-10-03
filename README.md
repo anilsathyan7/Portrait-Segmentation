@@ -108,11 +108,12 @@ Real-time portrait video in android application
 
 (Shot on OnePlus 3 😉)
 
-### Fun With Filters(Python)
+### Fun With Filters (Python)
+<p align="center">
+  Let's add some filters to <b>harmonize</b> our output image with the background. Our aim is to give a <b>natural blended feel</b> to the output image i.e the <b>edges</b> should look smooth and the <b>lighting</b>(colour) of foreground should match(or blend) with its background.
  
- Let's add some filters to **harmonize** our output image with the background. Our aim is to give a **natural blended feel** to the output image i.e the **edges** should look smooth and the **lighting**(colour) of foreground should match(or blend) with its background.
- 
- The first method is the traditional **alpha blending**, where the  foreground images are blended with background using the blurred(gaussian) version of the mask.In the **smooth-step** filter, we clamp the blurred edges and apply a  polynomial function to give a curved appearence to the foreground image edges.Next, we use the **colour transfer** algorithm to transfer the global colour to the foreground image.Also, opencv(computational photography) provides a function called **seamless clone** to blend an image onto a new background using an alpha mask.Finally, we use the dnn module of opencv to load a **colour harmonization** model(deep model) in **caffe** and transfer the background style to the foreground.
+ The first method is the traditional <b>alpha blending</b>, where the  foreground images are blended with background using the blurred(gaussian) version of the mask.In the <b>smooth-step</b> filter, we clamp the blurred edges and apply a  polynomial function to give a curved appearence to the foreground image edges.Next, we use the <b>colour transfer</b> algorithm to transfer the global colour to the foreground image.Also, opencv(computational photography) provides a function called <b>seamless clone</b> to blend an image onto a new background using an alpha mask.Finally, we use the dnn module of opencv to load a </b>colour harmonization</b> model(deep model) in <b>caffe</b> and transfer the background style to the foreground.
+ </P>
  
  Here are some sample results:-
 
@@ -125,15 +126,19 @@ For **live action**, checkout the last script(segvideo.py) to see the effects ap
 Hold down the following keys for filter selection.
 
 **C**- Colour transfer
+
 **S**- Seamless clone
+
 **M**- Smooth step
+
 **H**- Colour harmonize
 
 Move the **slider** to change the background image.
 
 ### Tensorflowjs: Running the model on browser
-
-To ensure that your applications runs in a **platform independent** way(portabe), the easiest way is to implement them as a **web-application** and run it using a **browser**.You can easily convert the trained model to tfjs format and run them using javascript with the help of tensorflowjs conversion tools.If you are familiar with **React/Vue** js , you can easily incorporate the tfjs into you application and come up with a really cool **AI webapp**, in no time!!!
+<p align="center">
+  To ensure that your applications runs in a <b>platform independent</b> way(portabe), the easiest way is to implement them as a <b>web-application</b> and run it using a <b>browser</b>.You can easily convert the trained model to tfjs format and run them using javascript with the help of tensorflowjs conversion tools.If you are familiar with <b>React/Vue</b> js , you can easily incorporate the tfjs into you application and come up with a really cool <b>AI webapp</b>, in no time!!!
+</p>
 
 Here is the link to the portrait segmentation webapp: [CVTRICKS](https://cvtricks.000webhostapp.com/)
 
