@@ -121,6 +121,7 @@ Real-time portrait video in android application
 ![Screenshot](blend_results.png)
 
 For **live action**, checkout the script **segvideo.py** to see the effects applied on a **webcam video**.
+
 Also download the **caffe model** and put it inside **models/caffe** folder.
 
 #### Keyboard Controls:-
