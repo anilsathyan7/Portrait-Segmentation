@@ -123,7 +123,7 @@ For **live action**, checkout the last script(segvideo.py) to see the effects ap
 
 #### Keyboard Controls:-
 
-Hold down the following keys for filter selection.
+Hold **down** the following keys for **filter** selection.
 
 * **C**- Colour transfer
 * **S**- Seamless clone
@@ -137,9 +137,9 @@ Move the **slider** to change the background image.
   To ensure that your applications runs in a <b>platform independent</b> way(portabe), the easiest way is to implement them as a <b>web-application</b> and run it using a <b>browser</b>.You can easily convert the trained model to tfjs format and run them using javascript with the help of tensorflowjs conversion tools.If you are familiar with <b>React/Vue</b> js , you can easily incorporate the tfjs into you application and come up with a really cool <b>AI webapp</b>, in no time!!!
 </p>
 
-Here is the link to the portrait segmentation webapp: [CVTRICKS](https://cvtricks.000webhostapp.com/)
+Here is the **link** to the portrait segmentation **webapp**: [CVTRICKS](https://cvtricks.000webhostapp.com/)
 
-**NB:** The application is computaionally intensive and resource heavy.
+**NB:** The application is **computaionally intensive** and resource heavy.
 
 ## Key Insights and Drawbacks
 
