@@ -125,13 +125,10 @@ For **live action**, checkout the last script(segvideo.py) to see the effects ap
 
 Hold down the following keys for filter selection.
 
-**C**- Colour transfer
-
-**S**- Seamless clone
-
-**M**- Smooth step
-
-**H**- Colour harmonize
+* **C**- Colour transfer
+* **S**- Seamless clone
+* **M**- Smooth step
+* **H**- Colour harmonize
 
 Move the **slider** to change the background image.
 
