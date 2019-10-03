@@ -119,7 +119,7 @@ Real-time portrait video in android application
 
 ![Screenshot](blend_results.png)
 
-For **live action**, checkout the script - **segvideo.py** to see the effects applied on a **webcam video**.
+For **live action**, checkout the script **segvideo.py** to see the effects applied on a **webcam video**.
 
 #### Keyboard Controls:-
 
@@ -132,7 +132,7 @@ Hold **down** the following keys for **filter** selection.
 
 Move the **slider** to change the background image.
 
-### Tensorflowjs: Running the model on browser
+### Tensorflowjs: Running the model on a browser
 <p align="justify">
   To ensure that your applications runs in a <b>platform independent</b> way(portabe), the easiest way is to implement them as a <b>web-application</b> and run it using a <b>browser</b>.You can easily convert the trained model to tfjs format and run them using javascript with the help of tensorflowjs conversion tools.If you are familiar with <b>React/Vue</b> js , you can easily incorporate the tfjs into you application and come up with a really cool <b>AI webapp</b>, in no time!!!
 </p>
