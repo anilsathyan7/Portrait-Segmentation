@@ -191,6 +191,7 @@ Anil Sathyan
 * https://www.tensorflow.org/model_optimization
 * https://github.com/cainxx/image-segmenter-ios
 * https://github.com/gallifilo/final-year-project
+* https://github.com/tantara/JejuNet
 * https://github.com/lizhengwei1992/mobile_phone_human_matting
 * https://machinethink.net/blog/mobilenet-v2/
 *   [Deeplab Image Segmentation](https://colab.research.google.com/github/tensorflow/models/blob/master/research/deeplab/deeplab_demo.ipynb)
