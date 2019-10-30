@@ -62,6 +62,8 @@ After ensuring the data files are stored in the **desired directorires**, run th
 ```
 You may also run the **Jupyter Notebook** (ipynb) in google colaboratory, after downloading the training dataset.
 
+In case you want to train with a **custom dataset**, check out the scripts in **utils** directory for data preparation.
+
 ## Training graphs
 
 Since we are using a **pretrained mobilentv2** as encoder for a head start, the training **quickly converges to 90% accuracy** within first couple of epochs. Also, here we use a flexible **learning rate schedule** (ReduceLROnPlateau) for training the model.
