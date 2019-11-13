@@ -177,6 +177,94 @@ The **upsamling block** in the **bilinear model** seems to be **expensive** than
 
 **Note**: All timings measured using [tflite benchmark tool](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/tools/benchmark) on OnePlus3.
 
+### The Paradoxical GPU
+
+Lets create two simple keras models to demonstrate and compare gpu performance with cpu ...
+
+1. Model-1
+
+It has a convolution layer with a 3x3 identity kernel
+
+Model: "model_1"
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+input_1 (InputLayer)         (None, 256, 256, 1)       0         
+_________________________________________________________________
+conv2d_1 (Conv2D)            (None, 256, 256, 1)       10        
+=================================================================
+Total params: 10
+Trainable params: 10
+Non-trainable params: 0
+_________________________________________________________________
+
+2. Model-2
+
+It has one convolution layer with identity kernel and a special 1x16 kernel for data compression
+
+Model: "model_2"
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+input_2 (InputLayer)         (None, 256, 256, 1)       0         
+_________________________________________________________________
+conv2d_2 (Conv2D)            (None, 256, 256, 1)       10        
+_________________________________________________________________
+conv2d_3 (Conv2D)            (None, 256, 16, 1)        17        
+=================================================================
+Total params: 27
+Trainable params: 27
+Non-trainable params: 0
+_________________________________________________________________
+
+Now, lets convert them into tflite and benchmark their performance ....
+
+| Model Name | CPU Time (ms) | GPU Time (ms)| Parameters | Size (B) | Output shpae |
+|----|----|----|----|-----|
+| **model-1** | 3.404 | 16.5  |  10 |  772 | 1x256x256x1 |
+| **model-2**  | 3.610  | 6.5 |  27 |  1204 | 1x256x16x1 |
+
+Clearly, the second model has one extra layer than the first model and their final output shapes differ slightly.
+Comparing the cpu speed of the two models, there is no surprise i.e The second model(bigger) takes slightly more time than the first.
+
+However, if you compare the cpu performance of a model with the gpu performance, it seems counter-intutive !!!
+**The cpu takes less time than gpu !!!**
+
+Similarly, if you compare the gpu speed of the two models, the  **second one(bigger) seems to be faster than the first one**, which is again contrary to our expectations !!!
+
+So why is this happening ??? Enter the **IO** ....
+
+It looks like something other than 'our model nodes' are taking up time, behind the scenes. If you closely observe, the output shape of the second model is smaller(256 vs 16). In the case of a gpu (mobile-gpu particularly), the iput data is initially copied to the gpu memory from main memory (or cache) and finally after execution the result is copied back to the main memory (or cache) from the gpu memory. This **copy process takes considerable amount of time**  and is normally proportional to data size and also depend on the hardware, copy mechanism etc. Also, for considerable speed-up the **gpu should be fed with a larger model or data**; otherwise the gains in terms of speed-up will be small. In the extreme cases(i.e very small inputs) the overheads will outweigh the possible benefits. 
+
+In our case, around 10ms(worst case) is taken for gpu copy or IO and this corresponds to the difference in output data size(or shape) mostly.
+
+**So, for this difference ...
+i.e 256x256 - 256x16 = 61440 fp32 values = 61440x4 bytes = 245760 bytes ~ 240Kb 
+it takes about 10ms extra copy time !!!**[in this device]
+
+Howvever you can avoid this problem by using SSBO and and opengl, as described in the [tflite-gpu documentation](https://www.tensorflow.org/lite/performance/gpu_advanced#inputoutput_buffers).
+For more info refer github issue: [Tensorflow lite gpu delegate inference using opengl and SSBO in android](https://github.com/tensorflow/tensorflow/issues/26297)
+
+Anyway, i haven't figure it out yet ... 😜
+
+But wait.. what was that **special filter** that we mentioned perviously ??? Enter the **compresion**
+
+Let's suppose we have a binary mask as the output of the model in float32 format.i.e output of float32[1x256x256x1] type has values 0.0 or 1.0 corresponding to masked region.Now, we have a matrix(sparse)  with only two values, resulting in a lot of redundancies. May be we can compress them using a standard mechanisms like **run length encoding(RLE)** or **bit packing**. Considering the choices of available operators in tflite-gpu, bit packing seems to be a better alternative than RLE.
+
+In this simple filter we perform a dot product of consecutoive 16 numbers(0.0, 1,0) with the following filter...
+
+[2<sup>-8</sup>, 2<sup>-7</sup>,2<sup>-6</sup>, 2<sup>-5</sup>,2<sup>-4</sup>, 2<sup>-3</sup>,2<sup>-2</sup>, 2<sup>-1</sup>,2<sup>0</sup>, 2<sup>1</sup>,2<sup>2</sup>, 2<sup>3</sup>,2<sup>4</sup>, 2<sup>5</sup>,2<sup>6</sup>, 2<sup>7</sup>]
+
+We do this for all consecutive 16 numbers and convert each of them(group) into a sigle float32 number. We can use a **convolution operation** with a **stride of 16** using this **filter of size (1,16)**.So, in the end we will have a output shape float32[1,256,16,1] with 16x reduced memory(copy).
+For more info refer code: gpucom.ipynb
+
+But this method will be useful only if we can **decode this data in less than 10ms**(in this particular case).
+
+Now according to the official tensorflow-gpu paper -[On-Device Neural Net Inference with Mobile GPUs](https://arxiv.org/pdf/1907.01989.pdf), we need to **redesign** our network around those **4-channel boundaries** so as to avoid the redundant memory copy; but at the same time they also recommend **not to use reshape** operators.
+
+Now, this is  huge **burden** put on the network designers(or application developer) part(due to limitation of opengl backend). I feel it is better to do some compile-time optimization of the model(say during conversion or internally)  to avoid runtime redundant copies. But, since tflite-gpu is in it's  **early development stage**, it's too much to ask!!!. Also, in the future we can expect the models to run **faster** with better **hardwares**(GPU,Memory etc.) and more **mobile-friendly architectures**.
+
+Finally, if the **model is very small**,then we won't gain any **speed-up with gpu**; we can use cpu instead. Also, we cannot use a **large model**(say 513x513 input with 50 or more channles). It won't run due to **resource constraints**. Finally, if it's a **real-time application** and you run the model **continously** for a long time, the device may start **heating** up(or slow down) and in extreme cases **crash** the application.
 
 ### Fun With Filters (Python)
 <p align="justify">
@@ -260,6 +348,7 @@ Anil Sathyan
 
 ## Acknowledgments
 * https://www.tensorflow.org/model_optimization
+* https://www.tensorflow.org/lite/performance/gpu_advanced
 * https://github.com/cainxx/image-segmenter-ios
 * https://github.com/gallifilo/final-year-project
 * https://github.com/tantara/JejuNet
@@ -286,4 +375,5 @@ Anil Sathyan
 * [High-Resolution Network for Photorealistic Style Transfer](https://arxiv.org/pdf/1904.11617.pdf)
 * [Tflite Benchmark Tool](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/tools/benchmark)
 * [Ezgif: Online Image Editor](https://ezgif.com/)
+* [Tensorflow lite gpu delegate inference using opengl and SSBO in android](https://github.com/tensorflow/tensorflow/issues/26297)
 * [Stackoverflow and Google](https://www.google.com/search?safe=active&sxsrf=ACYBGNTd70uFDhsbIL_sDXh5RlOpZtiWhQ%3A1570097540928&source=hp&ei=hMmVXaTvNcXerQH_j4DICA&q=stackoverflow&oq=stackoverflow&gs_l=psy-ab.3..35i39l2j0l2j0i20i263j0l3j0i131j0.1830.5666..5966...2.0..0.208.1381.12j1j1......0....1..gws-wiz.....10..35i362i39j0i67.tnbRuhKMNAk&ved=0ahUKEwikwb-R7f_kAhVFbysKHf8HAIkQ4dUDCAU&uact=5) 😜
