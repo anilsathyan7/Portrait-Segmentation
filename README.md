@@ -248,7 +248,7 @@ For more info refer github issue: [Tensorflow lite gpu delegate inference using 
 
 Anyway, i haven't figure it out yet ... 😜
 
-But wait.. what was that **special filter** that we mentioned perviously ??? Enter the **compresion** ...
+But wait.. what was that **special filter** that we mentioned perviously ??? Enter the **compression** ...
 
 Let's suppose we have a **binary mask** as the output of the model in **float32** format.i.e output of **float32[1x256x256x1]** type has values 0.0 or 1.0 corresponding to masked region.Now, we have a matrix(sparse)  with only two values, resulting in lot of redundancies. May be we can compress them using a standard mechanisms like **run length encoding(RLE)** or **bit packing**. Considering the choices of available operators in tflite-gpu, bit packing seems to be a better alternative than RLE.
 
