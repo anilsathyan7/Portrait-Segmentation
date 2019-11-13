@@ -167,14 +167,13 @@ Timings (microseconds): count=50 first=544544 curr=540075 min=533873 max=551555 
 ```
 
 * Unfortunately, the benchmark tool doesn't allow **gpu operator profiling**. 
-
 * For the current models, it  was observed that **single threaded CPU** execution was faster than multithreaded execution.
-
 * Also, if you properly **fuse** layers like  Add, Mul etc. and **eliminate** layers like Pad you may gain couple of milliseconds on GPU (may be more on CPU).
-
-Note: All timings measured using [tflite benchmark tool](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/tools/benchmark) on OnePlus3.
-
 * We were unable to properly run the current models in NNAPI or FP16 mode due to some operator and compatibility issues. 
+
+**Note**: All timings measured using [tflite benchmark tool](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/tools/benchmark) on OnePlus3.
+
+
 
 
 ### Fun With Filters (Python)
