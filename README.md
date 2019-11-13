@@ -220,7 +220,7 @@ _________________________________________________________________
 Now, lets convert them into tflite and benchmark their performance ....
 
 | Model Name | CPU Time (ms) | GPU Time (ms)| Parameters | Size (B) | Output shpae |
-|----|----|----|----|-----|
+|----|----|----|----|-----|-----|
 | **model-1** | 3.404 | 16.5  |  10 |  772 | 1x256x256x1 |
 | **model-2**  | 3.610  | 6.5 |  27 |  1204 | 1x256x16x1 |
 
@@ -234,7 +234,7 @@ Similarly, if you compare the gpu speed of the two models, the  **second one(big
 
 So why is this happening ??? Enter the **IO** ....
 
-It looks like something other than 'our model nodes' are taking up time, behind the scenes. If you closely observe, the output shape of the second model is smaller(256 vs 16). In the case of a gpu (mobile-gpu particularly), the iput data is initially copied to the gpu memory from main memory (or cache) and finally after execution the result is copied back to the main memory (or cache) from the gpu memory. This **copy process takes considerable amount of time**  and is normally proportional to data size and also depend on the hardware, copy mechanism etc. Also, for considerable speed-up the **gpu should be fed with a larger model or data**; otherwise the gains in terms of speed-up will be small. In the extreme cases(i.e very small inputs) the overheads will outweigh the possible benefits. 
+It looks like something other than 'our model nodes' are taking up time, behind the scenes. If you closely observe, the **output shape** of the second model is smaller(256 vs 16). In the case of a gpu (mobile-gpu particularly), the input data is initially copied to the gpu memory from main memory (or cache) and finally after execution the result is copied back to the main memory (or cache) from the gpu memory. This **copy process takes considerable amount of time**  and is normally proportional to data size and also depend on the hardware, copy mechanism etc. Also, for considerable speed-up the **gpu should be fed with a larger model or data**; otherwise the gains in terms of speed-up will be small. In the extreme cases(i.e very small inputs) the **overheads will outweigh the possible benefits**. 
 
 In our case, around 10ms(worst case) is taken for gpu copy or IO and this corresponds to the difference in output data size(or shape) mostly.
 
