@@ -228,11 +228,12 @@ Clearly, the second model has one extra layer than the first model and their fin
 Comparing the cpu speed of the two models, there is no surprise i.e The second model(bigger) takes slightly more time than the first.
 
 However, if you compare the cpu performance of a model with the gpu performance, it seems counter-intutive !!!
+
 **The cpu takes less time than gpu !!!**
 
 Similarly, if you compare the gpu speed of the two models, the  **second one(bigger) seems to be faster than the first one**, which is again contrary to our expectations !!!
 
-So why is this happening ??? Enter the **IO** ....
+So why is this happening ??? Enter the **IO** ...
 
 It looks like something other than 'our model nodes' are taking up time, behind the scenes. If you closely observe, the **output shape** of the second model is smaller(256 vs 16). In the case of a gpu (mobile-gpu particularly), the input data is initially copied to the gpu memory from main memory (or cache) and finally after execution the result is copied back to the main memory (or cache) from the gpu memory. This **copy process takes considerable amount of time**  and is normally proportional to data size and also depend on the hardware, copy mechanism etc. Also, for considerable speed-up the **gpu should be fed with a larger model or data**; otherwise the gains in terms of speed-up will be small. In the extreme cases(i.e very small inputs) the **overheads will outweigh the possible benefits**. 
 
@@ -240,23 +241,22 @@ In our case, around 10ms(worst case) is taken for gpu copy or IO and this corres
 
 **So, for this difference ...
 i.e 256x256 - 256x16 = 61440 fp32 values = 61440x4 bytes = 245760 bytes ~ 240Kb 
-it takes about 10ms extra copy time !!!**[in this device]
+it takes about 10ms extra copy time !!!**
 
 Howvever you can avoid this problem by using SSBO and and opengl, as described in the [tflite-gpu documentation](https://www.tensorflow.org/lite/performance/gpu_advanced#inputoutput_buffers).
-
 For more info refer github issue: [Tensorflow lite gpu delegate inference using opengl and SSBO in android](https://github.com/tensorflow/tensorflow/issues/26297)
 
 Anyway, i haven't figure it out yet ... 😜
 
-But wait.. what was that **special filter** that we mentioned perviously ??? Enter the **compresion**
+But wait.. what was that **special filter** that we mentioned perviously ??? Enter the **compresion** ...
 
 Let's suppose we have a binary mask as the output of the model in float32 format.i.e output of float32[1x256x256x1] type has values 0.0 or 1.0 corresponding to masked region.Now, we have a matrix(sparse)  with only two values, resulting in a lot of redundancies. May be we can compress them using a standard mechanisms like **run length encoding(RLE)** or **bit packing**. Considering the choices of available operators in tflite-gpu, bit packing seems to be a better alternative than RLE.
 
-In this simple filter we perform a dot product of consecutoive 16 numbers(0.0, 1,0) with the following filter...
+In this simple filter we perform a dot product of consecutive 16 numbers(0.0's & 1.0's) with the following filter...
 
 [2<sup>-8</sup>, 2<sup>-7</sup>,2<sup>-6</sup>, 2<sup>-5</sup>,2<sup>-4</sup>, 2<sup>-3</sup>,2<sup>-2</sup>, 2<sup>-1</sup>,2<sup>0</sup>, 2<sup>1</sup>,2<sup>2</sup>, 2<sup>3</sup>,2<sup>4</sup>, 2<sup>5</sup>,2<sup>6</sup>, 2<sup>7</sup>]
 
-We do this for all consecutive 16 numbers and convert each of them(group) into a sigle float32 number. We can use a **convolution operation** with a **stride of 16** using this **filter of size (1,16)**.So, in the end we will have a output shape float32[1,256,16,1] with 16x reduced memory(copy).
+We do this for all consecutive 16 numbers and convert each of them(group) into a sigle float32 number. We can use a **convolution operation** with a **stride of 16** using this **filter of size (1,16)**. So, in the end we will have a output shape float32[1,256,16,1] with 16x reduced memory(copy).
 For more info refer code: gpucom.ipynb
 
 But this method will be useful only if we can **decode this data in less than 10ms**(in this particular case).
