@@ -166,14 +166,16 @@ Number of nodes executed: 84
 Timings (microseconds): count=50 first=544544 curr=540075 min=533873 max=551555 avg=542990 std=4363
 ```
 
+The **upsamling block** in the **bilinear model** seems to be **expensive** than the corresponding block in deconv model.This seems to be due to the the convolution layer using a **stride of 1** with a larger image size with **more channels**; whereas in the case of transpose convoltuion we use a **stride of 2**, with **lesser channels**.
+
+![Screenshot](upsample_blocks.png)
+
 * Unfortunately, the benchmark tool doesn't allow **gpu operator profiling**. 
 * For the current models, it  was observed that **single threaded CPU** execution was faster than multithreaded execution.
 * Also, if you properly **fuse** layers like  Add, Mul etc. and **eliminate** layers like Pad you may gain couple of milliseconds on GPU (may be more on CPU).
 * We were unable to properly run the current models in NNAPI or FP16 mode due to some operator and compatibility issues. 
 
 **Note**: All timings measured using [tflite benchmark tool](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/tools/benchmark) on OnePlus3.
-
-
 
 
 ### Fun With Filters (Python)
