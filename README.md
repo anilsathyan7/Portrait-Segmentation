@@ -111,11 +111,11 @@ Real-time portrait video in android application
 
 (Shot on OnePlus 3 😉)
 
-### Model running time (Android)
+### Model running time
 
-Summary of model running time and size 
+Summary of model size and runnig time in android
 
-|    | Model Name | CPU Time (ms) | GPU Time (ms)| Parameters (M) | Size (MB)
+| Model Name | CPU Time (ms) | GPU Time (ms)| Parameters (M) | Size (MB)
 |----|----|----|----|-----|
 | **deconv_fin_munet.tflite ** | 165 | 54  |  3.624 |  14.5 |
 | **bilinear_fin_munet.tflite **  | 542  | 115 |  3.620 |  14.5 |
@@ -124,7 +124,7 @@ Summary of model running time and size
 
 The benchmark tool allows us to profile the running time of **each operator in CPU** of the mobile device. Here is the summary of the operator profiling. 
 
-**1. Deconv model (CPU)**
+**1. Deconv model**
 
 $ adb shell /data/local/tmp/benchmark_model_tf14 --graph=/data/local/tmp/deconv_fin_munet.tflite --enable_op_profiling=true --num_threads=1
 
@@ -145,7 +145,7 @@ Number of nodes executed: 94
 Timings (microseconds): count=50 first=164708 curr=162772 min=162419 max=167496 avg=164746 std=1434
 ```
 
-**2. Bilinear model (CPU)**
+**2. Bilinear model**
 
 $ adb shell /data/local/tmp/benchmark_model_tf14 --graph=/data/local/tmp/bilinear_fin_munet.tflite --enable_op_profiling=true --num_threads=1
 
