@@ -243,7 +243,8 @@ In our case, around 10ms(worst case) is taken for gpu copy or IO and this corres
 i.e 256x256 - 256x16 = 61440 fp32 values = 61440x4 Bytes = 245760 Bytes ~ 240KB 
 it takes about 10ms extra copy time !!!**
 
-Howvever you can avoid this problem by using **SSBO and and opengl**, as described in the [tflite-gpu documentation](https://www.tensorflow.org/lite/performance/gpu_advanced#inputoutput_buffers).
+However, you can avoid this problem by using **SSBO and and opengl**, as described in the [tflite-gpu documentation](https://www.tensorflow.org/lite/performance/gpu_advanced#inputoutput_buffers).
+
 For more info refer github issue: [Tensorflow lite gpu delegate inference using opengl and SSBO in android](https://github.com/tensorflow/tensorflow/issues/26297)
 
 Anyway, i haven't figure it out yet ... 😜
@@ -256,10 +257,11 @@ In this simple filter we perform a dot product of consecutive 16 numbers(0.0's &
 
 [2<sup>-8</sup>, 2<sup>-7</sup>,2<sup>-6</sup>, 2<sup>-5</sup>,2<sup>-4</sup>, 2<sup>-3</sup>,2<sup>-2</sup>, 2<sup>-1</sup>,2<sup>0</sup>, 2<sup>1</sup>,2<sup>2</sup>, 2<sup>3</sup>,2<sup>4</sup>, 2<sup>5</sup>,2<sup>6</sup>, 2<sup>7</sup>]
 
-We do this for all consecutive 16 numbers and convert each of them(group) into a sigle float32 number. We can use a **convolution operation** with a **stride and filter of size (1,16)**. So, in the end we will have a output shape float32[1,256,16,1] with **16x** reduced memory(copy).
-For more info refer code: gpucom.ipynb
+We do this for all consecutive 16 numbers and convert each of them(group) into a sigle float32 number. We can use a **convolution operation** with a **stride and filter of size (1,16)**. So, in the end we will have a output shape float32[1,256,16,1] with **16x** reduced memory(copy).i.e each float32 number now represents a 16 bit binary pattern in original mask. Now the **data copy time** from GPU memory to cpu memory will be reduced and at the same time **no information is lost** due to compression.
 
 But this method will be useful only if we can **decode this data in less than 10ms**(in this particular case).
+
+For more info refer code: gpucom.ipynb
 
 * Now according to the official tensorflow-gpu paper -[On-Device Neural Net Inference with Mobile GPUs](https://arxiv.org/pdf/1907.01989.pdf), we need to **redesign** our network around those **4-channel boundaries** so as to avoid the redundant memory copy; but at the same time they also recommend **not to use reshape** operators. Now, this is  huge **burden** put on the network designers(or application developer) part(due to limitation of opengl backend). I feel it is better to do some compile-time optimization of the model(say during conversion or internally)  to avoid runtime redundant copies. But, since tflite-gpu is in it's  **early development stage**, it's too much to ask!!!. Also, in the future we can expect the models to run **faster** with better **hardwares**(GPU,Memory etc.) and more **mobile-friendly architectures**.
 
