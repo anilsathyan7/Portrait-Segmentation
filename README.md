@@ -183,7 +183,7 @@ Lets create two simple keras models to demonstrate and compare gpu performance w
 
 1. Model-1
 
-It has a convolution layer with a 3x3 identity kernel
+It has a convolution layer with a 3x3 identity kernel.
 ```
 Model: "model_1"
 _________________________________________________________________
@@ -200,7 +200,7 @@ _________________________________________________________________
 ```
 2. Model-2
 
-It has one convolution layer with identity kernel and a special 1x16 kernel for data compression
+It has one convolution layer with identity kernel and a special 1x16 kernel for data compression.
 ```
 Model: "model_2"
 _________________________________________________________________
@@ -217,12 +217,55 @@ Trainable params: 27
 Non-trainable params: 0
 _________________________________________________________________
 ```
+3. Model-3
+
+It is similar to model 1; but it has four channels instead of one.
+```
+Model: "model_3"
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+input_3 (InputLayer)         (None, 256, 256, 4)       0         
+_________________________________________________________________
+conv2d_4 (Conv2D)            (None, 256, 256, 4)       148       
+=================================================================
+Total params: 148
+Trainable params: 148
+Non-trainable params: 0
+```
+
+4. Model-4
+
+The model is simialr to model-3.
+
+The input channels are four and  we add an additional reshape layer at the end.
+
+```
+Model: "model_4"
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+input_4 (InputLayer)         (None, 256, 256, 4)       0         
+_________________________________________________________________
+conv2d_5 (Conv2D)            (None, 256, 256, 1)       37        
+_________________________________________________________________
+conv2d_6 (Conv2D)            (None, 256, 16, 1)        17        
+_________________________________________________________________
+reshape_1 (Reshape)          (None, 256, 16)           0         
+=================================================================
+Total params: 54
+Trainable params: 54
+Non-trainable params: 0
+```
+
 Now, lets convert them into tflite and benchmark their performance ....
 
-| Model Name | CPU Time (ms) | GPU Time (ms)| Parameters | Size (B) | Output shpae |
+| Model Name | CPU Time (ms) | GPU Time (ms)| Parameters | Input Size (B) |  Output Size (B) |Output shpae |
 |----|----|----|----|-----|-----|
-| **model-1** | 3.404 | 16.5  |  10 |  772 | 1x256x256x1 |
-| **model-2**  | 3.610  | 6.5 |  27 |  1204 | 1x256x16x1 |
+| **model-1** | 3.404 | 16.5  |  10 |  772 | 1x256x256x1 | 1x256x256x1
+| **model-2**  | 3.610  | 6.5 |  27 |  1204 | 1x256x16x1 | 1x256x16x1
+| **model-3** | 10.145 | 4.8  |  148 |  1320 | 1x256x256x4 | 1x256x256x4
+| **model-4**  | 7.300  | 2.7 |  54 |  1552 | 1x256x256x4 | 1x256x16x4
 
 Clearly, the second model has one extra layer than the first model and their final output shapes differ slightly.
 Comparing the cpu speed of the two models, there is no surprise i.e The second model(bigger) takes slightly more time than the first.
@@ -260,6 +303,12 @@ In this simple filter we perform a dot product of consecutive 16 numbers(0.0's &
 We do this for all consecutive 16 numbers and convert each of them(group) into a sigle float32 number. We can use a **convolution operation** with a **stride and filter of size (1,16)**. So, in the end we will have a output shape float32[1,256,16,1] with **16x** reduced memory(copy).i.e each float32 number now represents a 16 bit binary pattern in original mask. Now the **data copy time** from GPU memory to cpu memory will be reduced and at the same time **no information is lost** due to compression.
 
 But this method will be useful only if we can **decode this data in less than 10ms**(in this particular case).
+
+Now, the **third model** is similar to the the first one; but it has **4 channles insted of 1**.The number of paramters, size and cpu execution time of third model is greater than the first one. This is no surprise as the third model has four times the number of channels than the first one.But in th case of gpu, the trend is just opposite i.e gpu execution time of model3 is less than that of model1.This difference in number of channels alone accounts for **more than 10ms time** .This is beacuse of the **hidden data copy** happening within the gpu as mentioned in the [official documentation](https://www.tensorflow.org/lite/performance/gpu_advanced#tips_and_tricks).So, it would be a good idea to make the **number of channels in layers a multiple of four** throughout our model.
+
+Finally, we combine all the **tricks and tips** discussed so far in **model-4**.It is the **largest** and most complex model among the four; but it has the least gpu execution time. We have added an additional **reshape layer** and made the last dimension a **multiple of four**(i.e 16), besides the aforementioned **compression** technique.
+
+These **techniques** have helped us to reduce the gpu execution time by **6x**.Lastly, we should also note that the overall gain depends on the **hardware** and the **model architecture**.
 
 For more info refer code: gpucom.ipynb
 
