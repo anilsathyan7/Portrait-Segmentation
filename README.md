@@ -259,10 +259,10 @@ Non-trainable params: 0
 
 Now, lets convert them into tflite and benchmark their performance ....
 
-| Model Name | CPU Time (ms) | GPU Time (ms)| Parameters | Input Size (B) |  Output Size (B) |Output shpae |
+| Model Name | CPU Time (ms) | GPU Time (ms)| Parameters | Model Size (B) |  Input Shape | Output Shape |
 |----|----|----|----|-----|-----|-----|
 | **model-1** | 3.404 | 16.5  |  10 |  772 | 1x256x256x1 | 1x256x256x1 |
-| **model-2**  | 3.610  | 6.5 |  27 |  1204 | 1x256x16x1 | 1x256x16x1 |
+| **model-2**  | 3.610  | 6.5 |  27 |  1204 | 1x256x256x1 | 1x256x16x1 |
 | **model-3** | 10.145 | 4.8  |  148 |  1320 | 1x256x256x4 | 1x256x256x4 |
 | **model-4**  | 7.300  | 2.7 |  54 |  1552 | 1x256x256x4 | 1x256x16x4 |
 
@@ -310,6 +310,8 @@ Now in the case of gpu, the trend is just opposite i.e gpu execution time of mod
 Finally, we combine all the **tricks and tips** discussed so far in **model-4**.It is the **largest** and most complex model among the four; but it has the least gpu execution time. We have added an additional **reshape layer** and made the last dimension a **multiple of four**(i.e 16), besides the aforementioned **compression** technique.
 
 These **techniques** have helped us to reduce the gpu execution time by **6x**. Lastly, we should also note that the overall gain depends on the **hardware** and the **model architecture**.
+
+In summary, make your **data/layer size as small as possile and data/layer shape a multiple of four** for improved gpu performance.
 
 For more info refer code: gpucom.ipynb
 
