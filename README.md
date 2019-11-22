@@ -262,10 +262,10 @@ Now, lets convert them into tflite and benchmark their performance ....
 
 | Model Name | CPU Time (ms) | GPU Time (ms)| Parameters | Input Size (B) |  Output Size (B) |Output shpae |
 |----|----|----|----|-----|-----|
-| **model-1** | 3.404 | 16.5  |  10 |  772 | 1x256x256x1 | 1x256x256x1
-| **model-2**  | 3.610  | 6.5 |  27 |  1204 | 1x256x16x1 | 1x256x16x1
-| **model-3** | 10.145 | 4.8  |  148 |  1320 | 1x256x256x4 | 1x256x256x4
-| **model-4**  | 7.300  | 2.7 |  54 |  1552 | 1x256x256x4 | 1x256x16x4
+| **model-1** | 3.404 | 16.5  |  10 |  772 | 1x256x256x1 | 1x256x256x1 |
+| **model-2**  | 3.610  | 6.5 |  27 |  1204 | 1x256x16x1 | 1x256x16x1 |
+| **model-3** | 10.145 | 4.8  |  148 |  1320 | 1x256x256x4 | 1x256x256x4 |
+| **model-4**  | 7.300  | 2.7 |  54 |  1552 | 1x256x256x4 | 1x256x16x4 |
 
 Clearly, the second model has one extra layer than the first model and their final output shapes differ slightly.
 Comparing the cpu speed of the two models, there is no surprise i.e The second model(bigger) takes slightly more time than the first.
@@ -304,7 +304,9 @@ We do this for all consecutive 16 numbers and convert each of them(group) into a
 
 But this method will be useful only if we can **decode this data in less than 10ms**(in this particular case).
 
-Now, the **third model** is similar to the the first one; but it has **4 channles insted of 1**.The number of paramters, size and cpu execution time of third model is greater than the first one. This is no surprise as the third model has four times the number of channels than the first one.But in th case of gpu, the trend is just opposite i.e gpu execution time of model3 is less than that of model1.This difference in number of channels alone accounts for **more than 10ms time** .This is beacuse of the **hidden data copy** happening within the gpu as mentioned in the [official documentation](https://www.tensorflow.org/lite/performance/gpu_advanced#tips_and_tricks).So, it would be a good idea to make the **number of channels in layers a multiple of four** throughout our model.
+Now, the **third model** is similar to the the first one; but it has **4 channles insted of 1**.The number of paramters, size and cpu execution time of third model is greater than the first one. This is not surprising since the third model has four times the number of channels than the first one.
+
+Now in the case of gpu, the trend is just opposite i.e gpu execution time of model-3 is less than that of model-1.This difference in number of channels alone accounts for **more than 10ms time**. This is beacuse of the **hidden data copy** happening within the gpu as mentioned in the [official documentation](https://www.tensorflow.org/lite/performance/gpu_advanced#tips_and_tricks).So, it would be a good idea to make the **number of channels in layers a multiple of four** throughout our model.
 
 Finally, we combine all the **tricks and tips** discussed so far in **model-4**.It is the **largest** and most complex model among the four; but it has the least gpu execution time. We have added an additional **reshape layer** and made the last dimension a **multiple of four**(i.e 16), besides the aforementioned **compression** technique.
 
