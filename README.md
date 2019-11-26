@@ -257,6 +257,31 @@ Trainable params: 54
 Non-trainable params: 0
 ```
 
+5. Model-5
+
+The model is similar to model-4. 
+It has an additional reshape operator for resizing the flattened input tensor.
+
+```
+Model: "model_5"
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+input_1 (InputLayer)         (None, 196608)            0         
+_________________________________________________________________
+reshape_1 (Reshape)          (None, 256, 256, 3)       0         
+_________________________________________________________________
+conv2d_1 (Conv2D)            (None, 256, 256, 1)       28        
+_________________________________________________________________
+conv2d_2 (Conv2D)            (None, 256, 16, 1)        17        
+_________________________________________________________________
+reshape_2 (Reshape)          (None, 256, 16)           0         
+=================================================================
+Total params: 45
+Trainable params: 45
+Non-trainable params: 0
+```
+
 Now, lets convert them into tflite and benchmark their performance ....
 
 | Model Name | CPU Time (ms) | GPU Time (ms)| Parameters | Model Size (B) |  Input Shape | Output Shape |
@@ -264,7 +289,8 @@ Now, lets convert them into tflite and benchmark their performance ....
 | **model-1** | 3.404 | 16.5  |  10 |  772 | 1x256x256x1 | 1x256x256x1 |
 | **model-2**  | 3.610  | 6.5 |  27 |  1204 | 1x256x256x1 | 1x256x16x1 |
 | **model-3** | 10.145 | 4.8  |  148 |  1320 | 1x256x256x4 | 1x256x256x4 |
-| **model-4**  | 7.300  | 2.7 |  54 |  1552 | 1x256x256x4 | 1x256x16x4 |
+| **model-4**  | 7.300  | 2.7 |  54 |  1552 | 1x256x256x4 | 1x256x16 |
+| **model-5**  | 7.682  | 4.0 |  45 |  1784 | 1x196608 | 1x256x16 |
 
 Clearly, the second model has one extra layer than the first model and their final output shapes differ slightly.
 Comparing the cpu speed of the two models, there is no surprise i.e The second model(bigger) takes slightly more time than the first.
@@ -306,6 +332,8 @@ But this method will be useful only if we can **decode this data in less than 10
 Now, the **third model** is similar to the the first one; but it has **4 channles insted of 1**.The number of paramters, size and cpu execution time of third model is greater than the first one. This is not surprising since the third model has four times the number of channels than the first one.
 
 Now in the case of gpu, the trend is just opposite i.e gpu execution time of model-3 is less than that of model-1.This difference in number of channels alone accounts for **more than 10ms time**. This is beacuse of the **hidden data copy** happening within the gpu as mentioned in the [official documentation](https://www.tensorflow.org/lite/performance/gpu_advanced#tips_and_tricks).So, it would be a good idea to make the **number of channels in layers a multiple of four** throughout our model.
+
+In **model-5**, we **flatten the input** of shape(1x256x256x3) into 1x196608, instead of adding an additional channel (i.e 4 insted of 3).But we have to include an additional **rehshape** operator before subsequent layers for further processing. However, it was observed that the  **gpu time increased** considerably, even though the cpu time was unchanged. It looks like reshape operators takes significant amount of time in a gpu; unlike the cpu.
 
 Finally, we combine all the **tricks and tips** discussed so far in **model-4**.It is the **largest** and most complex model among the four; but it has the least gpu execution time. We have added an additional **reshape layer** and made the last dimension a **multiple of four**(i.e 16), besides the aforementioned **compression** technique.
 
