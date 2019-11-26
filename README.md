@@ -282,6 +282,31 @@ Trainable params: 45
 Non-trainable params: 0
 ```
 
+6. Model-6
+
+It is similar to model-5.
+Here we use strided slice operator to remove the fourth channle from input instead of a reshape operator.
+
+```
+Model: "model_6"
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+input_1 (InputLayer)         (None, 256, 256, 4)       0         
+_________________________________________________________________
+lambda_1 (Lambda)            (None, 256, 256, 3)       0         
+_________________________________________________________________
+conv2d_1 (Conv2D)            (None, 256, 256, 1)       28        
+_________________________________________________________________
+conv2d_2 (Conv2D)            (None, 256, 16, 1)        17        
+_________________________________________________________________
+reshape_1 (Reshape)          (None, 256, 16)           0         
+=================================================================
+Total params: 45
+Trainable params: 45
+Non-trainable params: 0
+```
+
 Now, lets convert them into tflite and benchmark their performance ....
 
 | Model Name | CPU Time (ms) | GPU Time (ms)| Parameters | Model Size (B) |  Input Shape | Output Shape |
@@ -291,6 +316,8 @@ Now, lets convert them into tflite and benchmark their performance ....
 | **model-3** | 10.145 | 4.8  |  148 |  1320 | 1x256x256x4 | 1x256x256x4 |
 | **model-4**  | 7.300  | 2.7 |  54 |  1552 | 1x256x256x4 | 1x256x16 |
 | **model-5**  | 7.682  | 4.0 |  45 |  1784 | 1x196608 | 1x256x16 |
+| **model-6**  | 7.649  | 3.0 |  45 |  1996 | 1x256x256x4 | 1x256x16 |
+
 
 Clearly, the second model has one extra layer than the first model and their final output shapes differ slightly.
 Comparing the cpu speed of the two models, there is no surprise i.e The second model(bigger) takes slightly more time than the first.
@@ -333,7 +360,7 @@ Now, the **third model** is similar to the the first one; but it has **4 channle
 
 Now in the case of gpu, the trend is just opposite i.e gpu execution time of model-3 is less than that of model-1.This difference in number of channels alone accounts for **more than 10ms time**. This is beacuse of the **hidden data copy** happening within the gpu as mentioned in the [official documentation](https://www.tensorflow.org/lite/performance/gpu_advanced#tips_and_tricks).So, it would be a good idea to make the **number of channels in layers a multiple of four** throughout our model.
 
-In **model-5**, we **flatten the input** of shape(1x256x256x3) into 1x196608, instead of adding an additional channel (i.e 4 insted of 3). But we have to include an additional **rehshape** operator before subsequent layers for further processing. However, it was observed that the  **gpu time increased** considerably, even though the cpu time was almost unchanged. It looks like **reshape operators** takes significant amount of **time in a gpu**; unlike the cpu.
+In **model-5**, we **flatten the input** of shape(1x256x256x3) into 1x196608, instead of adding an additional channel (i.e 4 insted of 3). But we have to include an additional **rehshape** operator before subsequent layers for further processing. However, it was observed that the  **gpu time increased** considerably, even though the cpu time was almost unchanged. It looks like **reshape operators** takes significant amount of **time in a gpu**; unlike the cpu. Another strategy is to exclude the fourth channel from input using a **strided slice** operator as shown on **model-6**. This approach is slightly better than the former method of reshape operator; even though the cpu time is same for both.
 
 Finally, we combine all the **tricks and tips** discussed so far in **model-4**.It is the **largest** and most complex model among the four; but it has the least gpu execution time. We have added an additional **reshape layer** and made the last dimension a **multiple of four**(i.e 16), besides the aforementioned **compression** technique.
 
