@@ -179,7 +179,7 @@ The **upsamling block** in the **bilinear model** seems to be **expensive** than
 
 ### The Paradoxical GPU
 
-Lets create two simple keras models to demonstrate and compare gpu performance with cpu ...
+Lets create some simple keras models to demonstrate and compare gpu performance with cpu ...
 
 1. Model-1
 
