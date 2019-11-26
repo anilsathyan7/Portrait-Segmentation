@@ -285,7 +285,7 @@ Non-trainable params: 0
 6. Model-6
 
 It is similar to model-5.
-Here we use strided slice operator to remove the fourth channle from input instead of a reshape operator.
+Here we use strided slice operator to remove the fourth channle from input instead of reshape.
 
 ```
 Model: "model_6"
@@ -362,7 +362,7 @@ Now in the case of gpu, the trend is just opposite i.e gpu execution time of mod
 
 In **model-5**, we **flatten the input** of shape(1x256x256x3) into 1x196608, instead of adding an additional channel (i.e 4 insted of 3). But we have to include an additional **rehshape** operator before subsequent layers for further processing. However, it was observed that the  **gpu time increased** considerably, even though the cpu time was almost unchanged. It looks like **reshape operators** takes significant amount of **time in a gpu**; unlike the cpu. Another strategy is to exclude the fourth channel from input using a **strided slice** operator as shown on **model-6**. This approach is slightly better than the former method of reshape operator; even though the cpu time is same for both.
 
-Finally, we combine all the **tricks and tips** discussed so far in **model-4**.It is the **largest** and most complex model among the four; but it has the least gpu execution time. We have added an additional **reshape layer** and made the last dimension a **multiple of four**(i.e 16), besides the aforementioned **compression** technique.
+Finally, we combine all the **tricks and tips** discussed so far in **model-4**. It is the **largest** and most complex model among the four; but it has the least gpu execution time. We have added an additional **reshape layer** and made the last dimension a **multiple of four**(i.e 16), besides the aforementioned **compression** technique.
 
 These **techniques** have helped us to reduce the gpu execution time by **6x**. Lastly, we should also note that the overall gain depends on the **hardware** and the **model architecture**.
 
