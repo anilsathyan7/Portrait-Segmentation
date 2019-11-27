@@ -307,6 +307,29 @@ Trainable params: 45
 Non-trainable params: 0
 ```
 
+7. Model-7
+
+It is similar to mode-3.
+Herw we use strided-slice to remove the fourth channel of input and pad operator to make the number of channels of output=4.
+
+```
+Model: "model_7"
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+input_1 (InputLayer)         (None, 256, 256, 4)       0         
+_________________________________________________________________
+lambda_1 (Lambda)            (None, 256, 256, 3)       0         
+_________________________________________________________________
+conv2d_1 (Conv2D)            (None, 256, 256, 1)       28        
+_________________________________________________________________
+lambda_2 (Lambda)            (None, 256, 256, 4)       0         
+=================================================================
+Total params: 28
+Trainable params: 28
+Non-trainable params: 0
+```
+
 Now, lets convert them into tflite and benchmark their performance ....
 
 | Model Name | CPU Time (ms) | GPU Time (ms)| Parameters | Model Size (B) |  Input Shape | Output Shape |
@@ -317,6 +340,8 @@ Now, lets convert them into tflite and benchmark their performance ....
 | **model-4**  | 7.300  | 2.7 |  54 |  1552 | 1x256x256x4 | 1x256x16 |
 | **model-5**  | 7.682  | 4.0 |  45 |  1784 | 1x196608 | 1x256x16 |
 | **model-6**  | 7.649  | 3.0 |  45 |  1996 | 1x256x256x4 | 1x256x16 |
+| **model-7**  | 9.283  | 5.7 |  28 |  1608 | 1x256x256x4 | 1x256x256x4 |
+
 
 
 Clearly, the second model has one extra layer than the first model and their final output shapes differ slightly.
@@ -366,7 +391,7 @@ Finally, we combine all the **tricks and tips** discussed so far in **model-4**.
 
 These **techniques** have helped us to reduce the gpu execution time by **6x**. Lastly, we should also note that the overall gain depends on the **hardware** and the **model architecture**.
 
-In summary, make your **data/layer size as small as possile and data/layer shape a multiple of four** for improved gpu performance.
+In summary, make your **data/layer size as small as possile and data/layer shape a multiple of four** for improved gpu performance.Also, **reduce** the usage of operators that change the **tensor shapes**.
 
 For more info refer code: gpucom.ipynb
 
