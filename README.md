@@ -94,7 +94,7 @@ Since we are using a **pretrained mobilentv2** as encoder for a head start, the 
 
 ### Result
 
-#### 1. Model Type 1
+#### 1. Model Type - 1
 Here the **inputs and outputs** are images of size **128x128**.The backbone is **mobilenetv2** with **depth multiplier 0.5**. 
 The **first row** represents the **input** and the **second row** shows the corresponding **cropped image** obtained by cropping the input image with the **mask output** of the model.
 
@@ -103,7 +103,7 @@ The **first row** represents the **input** and the **second row** shows the corr
 **Accuracy: 96%**, 
 **FPS: 10-15**
 
-#### 2. Model Type 2
+#### 2. Model Type - 2
 Here the **inputs and outputs** are images of size **224x224**. The backbone is **mobilenetv3** with **depth multiplier 1.0**.
 The **first row** represents the **input** and the **second row** shows the corresponding **cropped image** obtained by cropping the input image with the **mask output** of the model.
 
@@ -134,7 +134,7 @@ Summary of model size and runnig time in android
 | **munet_mnv3_wm10.tflite**  | 167  | 59.5 |  2.552 |  10.2 |
 | **munet_mnv3_wm05.tflite**  | 75  | 30 |  1.192 |  4.8 |
 
-The parameter 'wm' refers to the **width multiplier**(similar to depth multiplier). We can configure the **number of filters** of particular layers and adjust the **speed-accuracy tradeoffs** of the network using this paramter. 
+The parameter 'wm' refers to the **width multiplier** (similar to depth multiplier). We can configure the **number of filters** of particular layers and adjust the **speed-accuracy tradeoffs** of the network using this paramter. 
 
 #### CPU Profiling :-
 
