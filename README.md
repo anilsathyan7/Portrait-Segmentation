@@ -505,8 +505,8 @@ Anil Sathyan
 * https://github.com/yulu/GLtext
 * https://machinethink.net/blog/mobilenet-v2/
 * [On-Device Neural Net Inference with Mobile GPUs](https://arxiv.org/pdf/1907.01989.pdf)
-* [Searching for MobileNetV3] (https://arxiv.org/abs/1905.02244)
-* [Google AI Blog: MobilenetV3] (https://ai.googleblog.com/2019/11/introducing-next-generation-on-device.html)
+* [Searching for MobileNetV3](https://arxiv.org/abs/1905.02244)
+* [Google AI Blog: MobilenetV3](https://ai.googleblog.com/2019/11/introducing-next-generation-on-device.html)
 *   [Deeplab Image Segmentation](https://colab.research.google.com/github/tensorflow/models/blob/master/research/deeplab/deeplab_demo.ipynb)
 *   [Tensorflow - Image segmentation](https://www.tensorflow.org/beta/tutorials/images/segmentation)
 *   [Tensorflowjs - Tutorials](https://www.tensorflow.org/js)
