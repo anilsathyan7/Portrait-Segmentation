@@ -94,13 +94,25 @@ Since we are using a **pretrained mobilentv2** as encoder for a head start, the 
 
 ### Result
 
-Here the **inputs and outputs** are images of size **128x128**.
+#### 1. Model Type 1
+Here the **inputs and outputs** are images of size **128x128**.The backbone is **mobilenetv2** with **depth multiplier 0.5**. 
 The **first row** represents the **input** and the **second row** shows the corresponding **cropped image** obtained by cropping the input image with the **mask output** of the model.
 
 ![Screenshot](result.png)
 
 **Accuracy: 96%**
+**FPS: 10-15**
 
+#### 2. Model Type 2
+Here the **inputs and outputs** are images of size **224x224**. The backbone is **mobilenetv3** with **depth multiplier 1.0**.
+The **first row** represents the **input** and the **second row** shows the corresponding **cropped image** obtained by cropping the input image with the **mask output** of the model.
+
+![Screenshot](result2.png)
+
+**Accuracy: 97%**
+**FPS: 10-15**
+
+**NB:** Accuracy measured on a predefined test data-set and fps on Oneplus3 using the android application (Adreno 530 GPU).
 ### Android Application
 
 Real-time portrait video in android application
