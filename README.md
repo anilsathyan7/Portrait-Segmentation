@@ -134,6 +134,8 @@ Summary of model size and runnig time in android
 | **munet_mnv3_wm10.tflite**  | 167  | 59.5 |  2.552 |  10.2 |
 | **munet_mnv3_wm05.tflite**  | 75  | 30 |  1.192 |  4.8 |
 
+The parameter 'wm' refers to the **width multiplier**(similar to depth multiplier). We can configure the **number of filters** of particular layers and adjust the **speed-accuracy tradeoffs** of the network using this paramter. 
+
 #### CPU Profiling :-
 
 The benchmark tool allows us to profile the running time of **each operator in CPU** of the mobile device. Here is the summary of the operator profiling. 
