@@ -131,6 +131,8 @@ Summary of model size and runnig time in android
 |----|----|----|----|-----|
 | **deconv_fin_munet.tflite** | 165 | 54  |  3.624 |  14.5 |
 | **bilinear_fin_munet.tflite**  | 542  | 115 |  3.620 |  14.5 |
+| **munet_mnv3_wm10.tflite**  | 167  | 59.5 |  2.552 |  10.2 |
+| **munet_mnv3_wm05.tflite**  | 75  | 30 |  1.192 |  4.8 |
 
 #### CPU Profiling :-
 
