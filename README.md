@@ -100,7 +100,7 @@ The **first row** represents the **input** and the **second row** shows the corr
 
 ![Screenshot](result.png)
 
-**Accuracy: 96%**
+**Accuracy: 96%**, 
 **FPS: 10-15**
 
 #### 2. Model Type 2
@@ -109,10 +109,10 @@ The **first row** represents the **input** and the **second row** shows the corr
 
 ![Screenshot](result2.png)
 
-**Accuracy: 97%**
+**Accuracy: 97%**, 
 **FPS: 10-15**
 
-**NB:** Accuracy measured on a predefined test data-set and fps on Oneplus3 using the android application (Adreno 530 GPU).
+**NB:** Accuracy measured on a predefined test data-set and FPS on the android application, using Oneplus3.
 ### Android Application
 
 Real-time portrait video in android application
