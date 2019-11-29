@@ -415,6 +415,10 @@ For more info refer code: gpucom.ipynb
 
 * Finally, if the **model is very small**,then we won't gain any **speed-up with gpu**; we can use cpu instead. Also, we cannot use a **large model**(say 513x513 input with 100 or more channles). It won't run due to **resource constraints**. Also, if it's a **real-time application** and you run the model **continously** for a long time, the device may start **heating** up(or slow down) and in extreme cases **crashes** the application.
 
+Here is the **official benchmark** and comparsion of tflite models on a variety of smartphones...
+
+![Screenshot](https://user-images.githubusercontent.com/1130185/69826286-88c06480-1238-11ea-8120-0b486441e9cb.png)
+
 ### Fun With Filters (Python)
 <p align="justify">
   Let's add some filters to <b>harmonize</b> our output image with the background. Our aim is to give a <b>natural blended feel</b> to the output image i.e the <b>edges</b> should look smooth and the <b>lighting</b>(colour) of foreground should match(or blend) with its background.
