@@ -58,7 +58,8 @@ After ensuring the data files are stored in the **desired directorires**, run th
 3. python export.py checkpoints/up_super_model-102-0.06.hdf5 # Export the model for deployment
 4. python test.py test/four.jpeg # Test the model on a single image
 5. python webcam.py test/beach.jpg # Run the model on webcam feed
-6. python segvideo.py test/sunset.jpg # Apply blending filters on video
+6. python tflite_webcam.py  # Run the tflite-model using python
+7. python segvideo.py test/sunset.jpg # Apply blending filters on video
 ```
 You may also run the **Jupyter Notebook** (ipynb) in google colaboratory, after downloading the training dataset.
 
