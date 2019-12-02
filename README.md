@@ -509,6 +509,7 @@ Anil Sathyan
 * https://github.com/tantara/JejuNet
 * https://github.com/lizhengwei1992/mobile_phone_human_matting
 * https://github.com/dailystudio/ml/tree/master/deeplab
+* https://github.com/PINTO0309/TensorflowLite-UNet
 * https://github.com/xiaochus/MobileNetV3
 * https://github.com/yulu/GLtext
 * https://machinethink.net/blog/mobilenet-v2/
