@@ -124,6 +124,10 @@ Real-time portrait video in android application
 
 (Shot on OnePlus 3 😉)
 
+The android tflite [gpu inference library](https://github.com/tensorflow/tensorflow/tree/2621a4957221bab2ff97c8a15712dbf41b21abd0/tensorflow/lite/delegates/gpu) seems to be in active development and is being **constantly updated**. The recent **OpenCL backed** seems to have improved the overall performance of the gpu delegate. Also, they have released an android support library for basic image handling and processing. Hopefully, in the next release they might include full support for **fp16 models and faster gpu io** mechanisms.
+
+The current android demo application uses the **nightly experimental gpu delegate**. You can directly import the **gradle project using android studio** and run them on you android phones. Also, ensure you have the **latest updated version** of android studio and gradle. 
+
 ### Model running time
 
 Summary of model size and runnig time in android
@@ -459,8 +463,8 @@ If you want to run it **locally**, start a local server using python **SimpleHTT
 
 ## Key Insights and Drawbacks
 
-1. Always start experimentation with **standard/pretrained** networks. Also try out **default/standard hyperparameter** settings before experimentation.
-2. Make sure your **ground truth is correct/uncorrupted** and is in **desired format** before training (even standard dataset).
+1. Always start experimentation with **standard/pretrained** networks. Also try out **default/standard hyperparameter** settings before experimentation. Often **standard datasets may not be sufficient** for your particular application scenario .So, do not hesitate to re-train your model with a **custom dataset** specific to your application or use case (For eg:- if a model can’t handle a specific **pose**, it may be that the **dataset is not representative enough**).
+2. Make sure your **ground truth is correct/uncorrupted** and is in **desired format** before training (even standard dataset).Your model is only as good as your dataset. If you want **very high accuracy and robustness** on a mobile app, make sure you have a **large dataset**(10K or more)of images for training, preferably **captured using a mobile device**.
 3. For **mobile devices**, make sure you use a **mobile-friendly architecture (like mobilenet)** for training and deployment.
 4. Using **google colaboratory** along with google drive for training was **EASY & FUN**.It provides **high end GPU** (RAM also) for free.
 5. Some of the mobile **optimization tools**(even TF) are still **experimental** (GPU deegate, NNAPI, FP16 etc.) and are buggy.They support only **limited operations and edge devices**.
@@ -533,6 +537,6 @@ Anil Sathyan
 * [BodyPix - Person Segmentation in the Browser](https://github.com/tensorflow/tfjs-models/tree/master/body-pix)
 * [High-Resolution Network for Photorealistic Style Transfer](https://arxiv.org/pdf/1904.11617.pdf)
 * [Tflite Benchmark Tool](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/tools/benchmark)
-* [Ezgif: Online Image Editor](https://ezgif.com/)
+* [TensorFlow Lite Android Support Library](https://github.com/tensorflow/tensorflow/blob/764a3ab93ac7425b49b9c13dc151bc9c2f2badf6/tensorflow/lite/experimental/support/java/README.md)
 * [Tensorflow lite gpu delegate inference using opengl and SSBO in android](https://github.com/tensorflow/tensorflow/issues/26297)
-* [Stackoverflow and Google](https://www.google.com/search?safe=active&sxsrf=ACYBGNTd70uFDhsbIL_sDXh5RlOpZtiWhQ%3A1570097540928&source=hp&ei=hMmVXaTvNcXerQH_j4DICA&q=stackoverflow&oq=stackoverflow&gs_l=psy-ab.3..35i39l2j0l2j0i20i263j0l3j0i131j0.1830.5666..5966...2.0..0.208.1381.12j1j1......0....1..gws-wiz.....10..35i362i39j0i67.tnbRuhKMNAk&ved=0ahUKEwikwb-R7f_kAhVFbysKHf8HAIkQ4dUDCAU&uact=5) 😜
+
