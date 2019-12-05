@@ -126,6 +126,12 @@ Real-time portrait video in android application
 
 The android tflite [gpu inference library](https://github.com/tensorflow/tensorflow/tree/2621a4957221bab2ff97c8a15712dbf41b21abd0/tensorflow/lite/delegates/gpu) seems to be in active development and is being **constantly updated**. The recent **OpenCL backed** seems to have improved the overall performance of the gpu delegate. Also, they have released an android support library for basic image handling and processing. Hopefully, in the next release they might include full support for **fp16 models and faster gpu io** mechanisms.
 
+Here is a demo of android **video bokeh** filter ...
+
+<p align="left">
+  <img  src="video_bokeh.gif">
+</p>
+
 The current android demo application uses the **nightly experimental gpu delegate**. You can directly import the **gradle project using android studio** and run them on you android phones. Also, ensure you have the **latest updated version** of android studio and gradle. 
 
 ### Model running time
