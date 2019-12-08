@@ -134,6 +134,12 @@ Here is a demo of android **video bokeh** filter ...
 
 The current android demo application uses the **nightly experimental gpu delegate**. You can directly import the **gradle project using android studio** and run them on you android phones. Also, ensure you have the **latest updated version** of android studio and gradle. 
 
+The following figure shows the overall **flow of data** in the demo android application.
+
+<p align="left">
+  <img  src="DFD.png">
+</p>
+
 ### Model running time
 
 Summary of model size and runnig time in android
