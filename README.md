@@ -436,7 +436,7 @@ Here is the **official benchmark** and comparsion of tflite models on a variety 
 
 ![Screenshot](https://user-images.githubusercontent.com/1130185/69826286-88c06480-1238-11ea-8120-0b486441e9cb.png)
 
-To know more about the latest advances in deep learning on smartphones, checkout: [AI Benchmark] (https://arxiv.org/pdf/1910.06663.pdf)
+To know more about the latest advances in deep learning on smartphones, checkout: [AI Benchmark](https://arxiv.org/pdf/1910.06663.pdf)
 
 ### Fun With Filters (Python)
 <p align="justify">
