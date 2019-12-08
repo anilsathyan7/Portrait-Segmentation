@@ -436,6 +436,8 @@ Here is the **official benchmark** and comparsion of tflite models on a variety 
 
 ![Screenshot](https://user-images.githubusercontent.com/1130185/69826286-88c06480-1238-11ea-8120-0b486441e9cb.png)
 
+To know more about the latest advances in deep learning on smartphones checkout: [AI Benchmark: All About Deep Learning on Smartphones in 2019](https://arxiv.org/pdf/1910.06663.pdf)
+
 ### Fun With Filters (Python)
 <p align="justify">
   Let's add some filters to <b>harmonize</b> our output image with the background. Our aim is to give a <b>natural blended feel</b> to the output image i.e the <b>edges</b> should look smooth and the <b>lighting</b>(colour) of foreground should match(or blend) with its background.
@@ -530,6 +532,7 @@ Anil Sathyan
 * https://github.com/yulu/GLtext
 * https://machinethink.net/blog/mobilenet-v2/
 * [On-Device Neural Net Inference with Mobile GPUs](https://arxiv.org/pdf/1907.01989.pdf)
+* [AI Benchmark: All About Deep Learning on Smartphones in 2019](https://arxiv.org/pdf/1910.06663.pdf)
 * [Searching for MobileNetV3](https://arxiv.org/abs/1905.02244)
 * [Google AI Blog: MobilenetV3](https://ai.googleblog.com/2019/11/introducing-next-generation-on-device.html)
 *   [Deeplab Image Segmentation](https://colab.research.google.com/github/tensorflow/models/blob/master/research/deeplab/deeplab_demo.ipynb)
