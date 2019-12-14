@@ -60,6 +60,7 @@ After ensuring the data files are stored in the **desired directorires**, run th
 5. python webcam.py test/beach.jpg # Run the model on webcam feed
 6. python tflite_webcam.py  # Run the model using tflite interpreter
 7. python segvideo.py test/sunset.jpg # Apply blending filters on video
+8. python bgsub.py # Perform static background subtraction
 ```
 You may also run the **Jupyter Notebook** (ipynb) in google colaboratory, after downloading the training dataset.
 
