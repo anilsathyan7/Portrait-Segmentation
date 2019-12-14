@@ -475,15 +475,15 @@ If you want to run it **locally**, start a local server using python **SimpleHTT
 
 **NB:** The application is **computaionally intensive** and resource heavy.
 
-### Segmentation as Background Subtraction: A Naive Approach
+### Segmentation via Background Subtraction: A Naive Approach
 
-If we have a **static background**, we can easily obtain the mask of the new objects appearing on the scene using the methods of background subtraction. Even though this seems straight-forward; there seems to be couple of **challenges** in this scenario. Firstly, even if object does not move in the background, there will be small variations in corresponding pixel values due to changes in **lighting**, noise, camera quality etc. Secondly, if the new objects have **colour** similar to that of the background, it becomes difficult to find the image difference.
+If we have a **static background**, we can easily obtain the mask of new objects appearing on the scene using the methods of background subtraction. Even though this seems straight-forward; there seems to be couple of **challenges** in this scenario. Firstly, even if objects does not move in the background, there will be small variations in corresponding pixel values due to changes in **lighting**, noise, camera quality etc. Secondly, if the new objects have **colour** similar to that of the background, it becomes difficult to find the **image difference**.
 
-Here is a simple **algorithm** for segmentation, using background subtraction. We assume that the backgroud image or camera is  static during the entire experiment.
+Here is a simple **algorithm** for segmentation, using background subtraction. We assume that the backgroud image or camera is  **static** during the entire experiment.
 
 1. Capture the first 'N' background images and find the mean background image.
 2. Convert the background image to grayscale and apply gaussian blur.
-3. Capture the next frame with new object and apply gaussian blur.
+3. Capture the next frame in grayscale, with new objects and apply gaussian blur.
 4. Find the absolute differece between current frame and background image.
 5. Threshold the differecne with a value 'T' and create the binary difference-mask.
 6. Apply morphological operations to fill up the holes in the mask.
