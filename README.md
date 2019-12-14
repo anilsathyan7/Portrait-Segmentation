@@ -475,6 +475,27 @@ If you want to run it **locally**, start a local server using python **SimpleHTT
 
 **NB:** The application is **computaionally intensive** and resource heavy.
 
+### Segmentation as Background Subtraction: A Naive Approach
+
+If we have a **static background**, we can easily obtain the mask of the new objects appearing on the scene using the methods of background subtraction. Even though this seems straight-forward; there seems to be couple of **challenges** in this scenario. Firstly, even if object does not move in the background, there will be small variations in corresponding pixel values due to changes in **lighting**, noise, camera quality etc. Secondly, if the new objects have **colour** similar to that of the background, it becomes difficult to find the image difference.
+
+Here is a simple **algorithm** for segmentation, using background subtraction. We assume that the backgroud image or camera is  static during the entire experiment.
+
+1. Capture the first 'N' background images and find the mean background image.
+2. Convert the background image to grayscale and apply gaussian blur.
+3. Capture the next frame with new object and apply gaussian blur.
+4. Find the absolute differece between current frame and background image.
+5. Threshold the differecne with a value 'T' and create the binary difference-mask.
+6. Apply morphological operations to fill up the holes in the mask.
+7. Find the largest contour and remove the smaller blobs in the mask.
+8. Apply alpha blend on the frame with any background image, using the mask.
+9. Display the output on screen.
+10. Repeat steps 3 to 9, until a keyborad interruption.
+
+The algorithm works pretty well, if there is **proper lighting and clear colour differecne** between the foreground object and background. Another idea is to detect the face and exclude potential bcakground regions based on some heuristics. Other classical methods include **grabcut, active contours**, feature based(**HOG**) detectors etc. But none of them seems to be **robust, real-time and light-weight** like our deep neural network models.
+
+Also check-out this cool application: [Virtual Stage Camera](https://www.roland.com/global/products/virtual_stage_camera/)
+
 ## Key Insights and Drawbacks
 
 1. Always start experimentation with **standard/pretrained** networks. Also try out **default/standard hyperparameter** settings before experimentation. Often **standard datasets may not be sufficient** for your particular application scenario .So, do not hesitate to re-train your model with a **custom dataset** specific to your application or use case (For eg:- if a model can’t handle a specific **pose**, it may be that the **dataset is not representative enough**).
