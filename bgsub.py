@@ -4,10 +4,8 @@ from  scipy import ndimage
 
 '''
 A script for foreground segmenation using background subtraction.
-The algorithms assumes a static background scenary.
-The foreground object should be introduced into the scene
-only after the window pop-up.
-
+The algorithms assumes a static background scenary.The foreground 
+object should be introduced into the scene only after window pop-up.
 '''
 
 # Create a video capturer
