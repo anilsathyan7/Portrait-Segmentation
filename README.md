@@ -492,7 +492,7 @@ Here is a simple **algorithm** for segmentation, using background subtraction. W
 9. Display the output on screen.
 10. Repeat steps 3 to 9, until a keyborad interruption.
 
-The algorithm works pretty well, if there is **proper lighting and clear colour differecne** between the foreground object and background. Another idea is to detect the face and exclude potential bcakground regions based on some heuristics. Other classical methods include **grabcut, active contours**, feature based(**HOG**) detectors etc. But none of them seems to be **robust, real-time and light-weight** like our deep neural network models. Additionaly, using trimap-masks and [depth sensors(ToF)](https://community.arm.com/developer/tools-software/graphics/b/blog/posts/the-rise-of-depth-on-mobile) on phone and can help us acheive better visual perception and accuracy on the application.
+The algorithm works pretty well, if there is **proper lighting and clear colour differecne** between the foreground object and background. Another idea is to detect the face and exclude potential bcakground regions based on some heuristics. Other classical methods include **grabcut, active contours**, feature based(**HOG**) detectors etc. But none of them seems to be **robust, real-time and light-weight** like our deep neural network models. Additionaly, using trimap-masks and [depth sensors(ToF)](https://community.arm.com/developer/tools-software/graphics/b/blog/posts/the-rise-of-depth-on-mobile) on phone could help us acheive better visual perception and accuracy on the mobile application.
 
 Also check-out this cool application: [Virtual Stage Camera](https://www.roland.com/global/products/virtual_stage_camera/)
 
