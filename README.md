@@ -151,6 +151,8 @@ The following figure shows the overall **flow of data** in the demo android appl
   <img  src="pictures/DFD.png">
 </p>
 
+Here, we have used image view for displaying the output for the sake of simplicity. In practice it would be a good idea to display it on a **GLSurfaceview or TextureView**, which are hardware accelerated. Also, the videos and textures **looks better** on such views(the first gif is actually a glsurface-view). Also, there is still scope for reducing the latency due to **CPU-GPU data copy** by directly accessing the pixel buffers from GPU, without transfering the image to CPU memory.
+
 ### Model running time
 
 Summary of model size and runnig time in android
@@ -504,7 +506,7 @@ Here is a simple **algorithm** for segmentation, using background subtraction. W
 9. Display the output on screen.
 10. Repeat steps 3 to 9, until a keyborad interruption.
 
-The algorithm works pretty well, if there is **proper lighting and clear colour differecne** between the foreground object and background. Another idea is to detect the face and exclude potential bcakground regions based on some heuristics. Other classical methods include **grabcut, active contours**, feature based(**HOG**) detectors etc. But none of them seems to be **robust, real-time and light-weight** like our deep neural network models. Additionaly, using trimap-masks and [depth sensors(ToF)](https://community.arm.com/developer/tools-software/graphics/b/blog/posts/the-rise-of-depth-on-mobile) on phone could help us acheive better visual perception and accuracy on the mobile application.
+The algorithm works pretty well, if there is **proper lighting and clear colour difference** between the foreground object and background. Another idea is to detect the face and exclude potential background regions based on some heuristics. Other classical methods include **grabcut, active contours**, feature based(**HOG**) detectors etc. But none of them seems to be **robust, real-time and light-weight** like our deep neural network models. Additionaly, using trimap-masks and [depth sensors(ToF)](https://community.arm.com/developer/tools-software/graphics/b/blog/posts/the-rise-of-depth-on-mobile) on phone could help us acheive better visual perception and accuracy on the mobile application.
 
 Also check-out this cool application: [Virtual Stage Camera](https://www.roland.com/global/products/virtual_stage_camera/)
 
