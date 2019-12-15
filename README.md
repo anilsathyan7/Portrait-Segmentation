@@ -10,7 +10,7 @@ Here we limit ourselves to **binary classes** (person or background) and use onl
 ## Dependencies
 
 * Tensorflow(>=1.14.0), Python 3
-* Keras(>=2.2.4), Kito
+* Keras(>=2.2.4), Kito, Scipy
 * Opencv(>=3.4), PIL, Matplotlib
 
 ```
@@ -30,7 +30,7 @@ pip install kito
 
 The dataset consists of **18698 human portrait images of size 128x128 in RGB format**, along with their **masks(ALPHA)**. Here we augment the [**PFCN**](https://1drv.ms/u/s!ApwdOxIIFBH19Ts5EuFd9gVJrKTo) dataset with (handpicked) portrait  images form **supervisely** dataset. Additionaly, we download **random selfie** images from web and generate their masks using state-of-the-art **deeplab-xception** model for semantic segmentation. 
 
-Now to increase the size of dataset, we perform augmentation like **cropping, brightness alteration and flipping**. Since most of our images contain plain background, we create new **synthetic images** using random backgrounds (natural) using the default dataset, with the help of a **python script**.
+Now to increase the size of dataset and model robustness, we perform augmentation like **cropping, brightness alteration, flipping, curve filters, motion blur etc.**. Since most of our images contain plain background, we create new **synthetic images** using random backgrounds (natural) using the default dataset, with the help of a **python script**.
 
 Besides the aforesaid augmentation techniques, we **normalize(also standardize)** the images and perform **run-time augmentations like flip, shift and zoom** using keras data generator and preprocessing module.
 
@@ -46,6 +46,7 @@ Here is the **snapshot** of the **upsampled** version of model.
 
 ![Screenshot](pictures/portrait_seg_small.png)
 
+The other two architectures that we've experimented include **mobilenet_v3 and prisma-net** ,and their block diagrams are provided in the **pictures** directory. 
 
 ## How to run
 
