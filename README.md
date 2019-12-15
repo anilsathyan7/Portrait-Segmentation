@@ -158,7 +158,7 @@ Here, we have used image view for displaying the output for the sake of simplici
 Summary of model size and runnig time in android
 
 | Model Name | CPU Time (ms) | GPU Time (ms)| Parameters (M) | Size (MB) | Input Shape |
-|----|----|----|----|-----|
+|----|----|----|----|-----|-----|
 | **deconv_fin_munet.tflite** | 165 | 54  |  3.624 |  14.5 | 128 |
 | **bilinear_fin_munet.tflite**  | 542  | 115 |  3.620 |  14.5 | 128 |
 | **munet_mnv3_wm10.tflite**  | 167  | 59.5 |  2.552 |  10.2 | 224 |
