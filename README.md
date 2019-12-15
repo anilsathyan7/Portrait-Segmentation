@@ -44,7 +44,7 @@ Additionaly, we use **dropout** regularization to prevent **overfitting**.It als
 
 Here is the **snapshot** of the **upsampled** version of model.
 
-![Screenshot](portrait_seg_small.png)
+![Screenshot](pictures/portrait_seg_small.png)
 
 
 ## How to run
@@ -100,7 +100,7 @@ Since we are using a **pretrained mobilentv2** as encoder for a head start, the 
 Here the **inputs and outputs** are images of size **128x128**.The backbone is **mobilenetv2** with **depth multiplier 0.5**. 
 The **first row** represents the **input** and the **second row** shows the corresponding **cropped image** obtained by cropping the input image with the **mask output** of the model.
 
-![Screenshot](result.png)
+![Screenshot](pictures/result.png)
 
 **Accuracy: 96%**, 
 **FPS: 10-15**
@@ -109,7 +109,7 @@ The **first row** represents the **input** and the **second row** shows the corr
 Here the **inputs and outputs** are images of size **224x224**. The backbone is **mobilenetv3** with **depth multiplier 1.0**.
 The **first row** represents the **input** and the **second row** shows the corresponding **cropped image** obtained by cropping the input image with the **mask output** of the model.
 
-![Screenshot](result2.png)
+![Screenshot](pictures/result2.png)
 
 **Accuracy: 97%**, 
 **FPS: 10-15**
@@ -120,7 +120,7 @@ The **first row** represents the **input** and the **second row** shows the corr
 Real-time portrait video in android application
 
 <p align="left">
-  <img  src="android_portrait.gif">
+  <img  src="pictures/android_portrait.gif">
 </p>
 
 (Shot on OnePlus 3 😉)
@@ -130,7 +130,7 @@ The android tflite [gpu inference library](https://github.com/tensorflow/tensorf
 Here is a demo of android **video bokeh** filter ...
 
 <p align="left">
-  <img  src="video_bokeh.gif">
+  <img  src="pictures/video_bokeh.gif">
 </p>
 
 The current android demo application uses the **nightly experimental gpu delegate**. You can directly import the **gradle project using android studio** and run them on you android phones. Also, ensure you have the **latest updated version** of android studio and gradle. 
@@ -138,7 +138,7 @@ The current android demo application uses the **nightly experimental gpu delegat
 The following figure shows the overall **flow of data** in the demo android application.
 
 <p align="left">
-  <img  src="DFD.png">
+  <img  src="pictures/DFD.png">
 </p>
 
 ### Model running time
@@ -202,7 +202,7 @@ Timings (microseconds): count=50 first=544544 curr=540075 min=533873 max=551555 
 
 The **upsamling block** in the **bilinear model** seems to be **expensive** than the corresponding block in deconv model.This seems to be due to the the convolution layer using a **stride of 1** with a larger image size with **more channels**; whereas in the case of transpose convoltuion we use a **stride of 2**, with **lesser channels**.
 
-![Screenshot](upsample_blocks.png)
+![Screenshot](pictures/upsample_blocks.png)
 
 * Unfortunately, the benchmark tool doesn't allow **gpu operator profiling**. 
 * For the current models, it  was observed that **single threaded CPU** execution was faster than multithreaded execution.
@@ -448,7 +448,7 @@ To know more about the latest advances in deep learning on smartphones, checkout
  
  Here are some sample results:-
 
-![Screenshot](blend_results.png)
+![Screenshot](pictures/blend_results.png)
 
 For **live action**, checkout the script **segvideo.py** to see the effects applied on a **webcam video**.
 
