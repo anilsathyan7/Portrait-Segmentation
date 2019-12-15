@@ -114,6 +114,16 @@ The **first row** represents the **input** and the **second row** shows the corr
 **Accuracy: 97%**, 
 **FPS: 10-15**
 
+#### 3. Model Type - 3
+Here the **inputs and outputs** are images of size **256x256**. The prisma-net architecture is based on **unet** and uses residual blocks with **depthwise separable convolutions** instead of regular convolutional blocks(Conv+BN+Relu). Also,it uses **elementwise addition** instead of feature concatenation in the decoder part.  
+
+The **first row** represents the **input** and the **second row** shows the corresponding **cropped image** obtained by cropping the input image with the **mask output** of the model.
+
+![Screenshot](pictures/result3.png)
+
+**Accuracy: 96%**, 
+**FPS: 8-10**
+
 **NB:** Accuracy measured on a predefined test data-set and FPS on the android application, using Oneplus3.
 ### Android Application
 
@@ -151,6 +161,7 @@ Summary of model size and runnig time in android
 | **bilinear_fin_munet.tflite**  | 542  | 115 |  3.620 |  14.5 |
 | **munet_mnv3_wm10.tflite**  | 167  | 59.5 |  2.552 |  10.2 |
 | **munet_mnv3_wm05.tflite**  | 75  | 30 |  1.192 |  4.8 |
+| **prisma-net.tflite**  | 426  | 107 |  0.923 |  3.7 |
 
 The parameter 'wm' refers to the **width multiplier** (similar to depth multiplier). We can configure the **number of filters** of particular layers and adjust the **speed-accuracy tradeoffs** of the network using this paramter. 
 
