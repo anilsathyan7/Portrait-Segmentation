@@ -126,6 +126,13 @@ The **first row** represents the **input** and the **second row** shows the corr
 **FPS: 8-10**
 
 **NB:** Accuracy measured on a predefined test data-set and FPS on the android application, using Oneplus3.
+
+### Failure cases
+
+![Screenshot](pictures/failures.png)
+
+When there are objects like **clothes, bags** etc. in the background the model fails to segment them properly as background, especially if they seem connected to the foreground person. Also if there are **variations in lighting** or illumination within the image, there seems to be a **flickering** effect on the video resulting in holes in the foreground object.
+
 ### Android Application
 
 Real-time portrait video in android application
