@@ -573,7 +573,7 @@ Anil Sathyan
 * https://github.com/PINTO0309/TensorflowLite-UNet
 * https://github.com/xiaochus/MobileNetV3
 * https://github.com/yulu/GLtext
-* https://github.com/berak/opencv_smallfry/blob/master/java_dnn/StyleTransfer.java
+* https://github.com/berak/opencv_smallfry/blob/master/java_dnn
 * https://machinethink.net/blog/mobilenet-v2/
 * [On-Device Neural Net Inference with Mobile GPUs](https://arxiv.org/pdf/1907.01989.pdf)
 * [AI Benchmark: All About Deep Learning on Smartphones in 2019](https://arxiv.org/pdf/1910.06663.pdf)
