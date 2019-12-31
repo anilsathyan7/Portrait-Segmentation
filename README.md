@@ -541,6 +541,7 @@ Also check-out this cool application: [Virtual Stage Camera](https://www.roland.
 19. **Opencv dnn** module provides support for running models trained on popular platforms like **Caffe,Tensorflow, Torch** etc.It supports acceleration through **OpenCL, Vulkan, Intel IE** etc.It also supports variety  of hardwares like **CPU,GPU and VPU**.Finally, we can also run  smaller **FP16 models** for improved speed.
 20. Once you are familiar with tensorflow, it is fairly easy to **train and perform inference** using **tensorflowjs**.It also comes with support of **WebGL** backend for accelerating the **inference** and training process.Th main advantage is the **portability** of the application i.e it can be run on **PC, phones or tablet** without any modifications.
 21. The minimalistic version of **mobilenetv3** with **depth-multiplier 1 and input size 224** has almost the **same latency** as the **mobilenetv2** with **input size 128 and depth multiplier 0.5**. The accuracy was also found to be same on the test-datastet; however the edges of the segmentation map was **much smoother** in mobilenetv3, with higher image size. Theoretically, it should also be able to capture **more details** than the smaller 128 model.
+22. No amount of skillful **post-processing** and attempting to extract useful data from the output will make up for a **poor model choice**, or one where too many **sacrifices** were made for **speed**.
 
 
 ## TODO
