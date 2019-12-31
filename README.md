@@ -573,12 +573,14 @@ Anil Sathyan
 * https://github.com/PINTO0309/TensorflowLite-UNet
 * https://github.com/xiaochus/MobileNetV3
 * https://github.com/yulu/GLtext
+* https://github.com/berak/opencv_smallfry/blob/master/java_dnn/StyleTransfer.java
 * https://machinethink.net/blog/mobilenet-v2/
 * [On-Device Neural Net Inference with Mobile GPUs](https://arxiv.org/pdf/1907.01989.pdf)
 * [AI Benchmark: All About Deep Learning on Smartphones in 2019](https://arxiv.org/pdf/1910.06663.pdf)
 * [Searching for MobileNetV3](https://arxiv.org/abs/1905.02244)
 * [Google AI Blog: MobilenetV3](https://ai.googleblog.com/2019/11/introducing-next-generation-on-device.html)
 * [Youtube Stories: Mobile Real-time Video Segmentation ](https://ai.googleblog.com/2018/03/mobile-real-time-video-segmentation.html)
+* [Facebook SparkAR: Background Segmentation](https://sparkar.facebook.com/ar-studio/learn/documentation/tracking-people-and-places/segmentation/)
 * [Learning to Predict Depth on the Pixel 3 Phones](https://ai.googleblog.com/2018/11/learning-to-predict-depth-on-pixel-3.html)
 * [iOS Video Depth Maps Tutorial](https://www.raywenderlich.com/5999357-video-depth-maps-tutorial-for-ios-getting-started)
 *   [Deeplab Image Segmentation](https://colab.research.google.com/github/tensorflow/models/blob/master/research/deeplab/deeplab_demo.ipynb)
