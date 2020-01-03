@@ -501,7 +501,7 @@ If you want to run it **locally**, start a local server using python **SimpleHTT
 
 Intel's openvino toolkit allows us to **convert and optimize** deep neural network models trained in popular frameworks like **Tensorflow, Caffe, ONNX** etc. on **Intel CPU's, GPU's and Vision Accelerators(VPU)**, for efficient inferencing at the edge.
 Here, we will convert and optimize a pretrained deeplab model in tensorflow using openvino toolkit, for **person segmentation**.
-As an additional step, we will see how we can **send the output video to an external media server** using ffmpeg library and pipes.
+As an additional step, we will see how we can **send the output video to an external server** using ffmpeg library and pipes.
 
 1. Download and install [openvino toolkit](https://docs.openvinotoolkit.org/latest/index.html).
 2. Download the tensorflow [deeplabv3_pascal_voc_model](http://download.tensorflow.org/models/deeplabv3_mnv2_pascal_trainval_2018_01_29.tar.gz), for semantic segmentation.
@@ -512,12 +512,12 @@ Once you install and configure the openvino inference engine and model optimizer
 python3 /opt/intel/openvino/deployment_tools/model_optimizer/mo.py --input_model frozen_inference_graph.pb --output SemanticPredictions --input ImageTensor --input_shape "(1,513,513,3)"
 ```
 
-If the conversion is successful two new files **'frozen_inference_graph.xml'** and **'frozen_inference_graph.bin'** will be generated. Now, you can run the openvino python edge application for person segmentation as follows:
+If the conversion is successful, two new files viz. **'frozen_inference_graph.xml'** and **'frozen_inference_graph.bin'** will be generated. Now, you can run the openvino python edge application for person segmentation as follows:
 ```
 python3 app.py -m models/deeplabv3_mnv2_pascal_trainval/frozen_inference_graph.xml
 ```
 
-You may view the live rtmp stream using **ant-media LiveApp** in browser or use **ffplay**(or vlc).
+You may view the live output rtmp stream using **ant-media LiveApp** in a browser or use **ffplay**(or vlc).
 ```
 ffplay 'rtmp://localhost:1935/LiveApp/segme live=1'
 ```
