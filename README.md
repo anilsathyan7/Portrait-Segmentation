@@ -497,6 +497,35 @@ If you want to run it **locally**, start a local server using python **SimpleHTT
 
 **NB:** The application is **computaionally intensive** and resource heavy.
 
+### Openvino: Deploying deep vision models at the edge
+
+Intel's openvino toolkit allows us to **convert and optimize** deep neural network models trained in popular frameworks like **Tensorflow, Caffe, ONNX** etc. on **Intel CPU's, GPU's and Vision Accelerators(VPU)**, for efficient inferencing at the edge.
+Here, we will convert and optimize a pretrained deeplab model in tensorflow using openvino toolkit, for **person segmentation**.
+As an additional step, we will see how we can **send the output video to an external media server** using ffmpeg library and pipes.
+
+1. Download and install [openvino toolkit](https://docs.openvinotoolkit.org/latest/index.html).
+2. Download the tensorflow [deeplabv3_pascal_voc_model](http://download.tensorflow.org/models/deeplabv3_mnv2_pascal_trainval_2018_01_29.tar.gz), for semantic segmentation.
+3. Download and install [ant-media server](https://github.com/ant-media/Ant-Media-Server/wiki/Getting-Started).
+
+Once you install and configure the openvino inference engine and model optimizer, you can directly **convert the tensroflow deeplab model** with a single command:
+```
+python3 /opt/intel/openvino/deployment_tools/model_optimizer/mo.py --input_model frozen_inference_graph.pb --output SemanticPredictions --input ImageTensor --input_shape "(1,513,513,3)"
+```
+
+If the conversion is successful two new files **'frozen_inference_graph.xml'** and **'frozen_inference_graph.bin'** will be generated. Now, you can run the openvino python edge application for person segmentation as follows:
+```
+python3 app.py -m models/deeplabv3_mnv2_pascal_trainval/frozen_inference_graph.xml
+```
+
+You may view the live rtmp stream using **ant-media LiveApp** in browser or use **ffplay**(or vlc).
+```
+ffplay 'rtmp://localhost:1935/LiveApp/segme live=1'
+```
+
+The application also saves a **local copy** of output using **OpenCV VideoWriter**.
+
+**NB: Make sure that both opencv and ffmpeg are properly configured**
+
 ### Segmentation via Background Subtraction: A Naive Approach
 
 If we have a **static background**, we can easily obtain the mask of new objects appearing on the scene using the methods of background subtraction. Even though this seems straight-forward; there seems to be couple of **challenges** in this scenario. Firstly, even if objects does not move in the background, there will be small variations in corresponding pixel values due to changes in **lighting**, noise, camera quality etc. Secondly, if the new objects have **colour** similar to that of the background, it becomes difficult to find the **image difference**.
@@ -607,4 +636,4 @@ Anil Sathyan
 * [Tflite Benchmark Tool](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/tools/benchmark)
 * [TensorFlow Lite Android Support Library](https://github.com/tensorflow/tensorflow/blob/764a3ab93ac7425b49b9c13dc151bc9c2f2badf6/tensorflow/lite/experimental/support/java/README.md)
 * [Tensorflow lite gpu delegate inference using opengl and SSBO in android](https://github.com/tensorflow/tensorflow/issues/26297)
-
+* [Udacity: Intel Edge AI Fundamentals Course](https://www.udacity.com/scholarships/intel-edge-ai-scholarship)
