@@ -45,7 +45,7 @@ Here are some tools for **annotation and data collection** which i found to be u
 3. **Online Annotation Tools** - Pros: Automated, Easy to Use, Flexible; Cons: Price; Eg: **Supervisely, Remove.bg**.
 4. **Crowd Sourcing Tools** - Pros: Potential Size and Variety, Less Effort; Cons: Time, Quality; Eg: **Amazon MTurk**.
 
-If you are planning to use the model on mobile phones specifically for **portrait selfies**, it would be a good idea to include lots of such **portrait images captured using mobile phones** in your datset.
+If you are planning to use the model on mobile phones specifically for **portrait selfies**, it would be a good idea to include lots of such **portrait images captured using mobile phones** in your dataset.
 
 Also checkout the datset: [UCF Selfie](https://www.crcv.ucf.edu/data/Selfie)
 
