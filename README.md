@@ -133,7 +133,11 @@ The **first row** represents the **input** and the **second row** shows the corr
 
 When there are objects like **clothes, bags** etc. in the background the model fails to segment them properly as background, especially if they seem connected to the foreground person. Also if there are **variations in lighting** or illumination within the image, there seems to be a **flickering** effect on the video resulting in holes in the foreground object.
 
-### Android Application
+### Android Application 
+
+## SegMe_V0
+
+This version of android demo application uses the **nightly experimental gpu delegate** for on-device inferencing and **GLSurfaceView** for displaying the output on screen.
 
 Real-time portrait video in android application
 
@@ -143,6 +147,8 @@ Real-time portrait video in android application
 
 (Shot on OnePlus 3 😉)
 
+## SegMe_V1
+
 The android tflite [gpu inference library](https://github.com/tensorflow/tensorflow/tree/2621a4957221bab2ff97c8a15712dbf41b21abd0/tensorflow/lite/delegates/gpu) seems to be in active development and is being **constantly updated**. The recent **OpenCL backed** seems to have improved the overall performance of the gpu delegate. Also, they have released an android support library for basic image handling and processing. Hopefully, in the next release they might include full support for **fp16 models and faster gpu io** mechanisms.
 
 Here is a demo of android **video bokeh** filter ...
@@ -151,7 +157,7 @@ Here is a demo of android **video bokeh** filter ...
   <img  src="pictures/video_bokeh.gif">
 </p>
 
-The current android demo application uses the **nightly experimental gpu delegate**. You can directly import the **gradle project using android studio** and run them on you android phones. Also, ensure you have the **latest updated version** of android studio and gradle. 
+This version of android demo application uses the **nightly experimental gpu delegate**. You can directly import the **gradle project using android studio** and run them on you android phones. Also, ensure you have the **latest updated version** of android studio and gradle. 
 
 The following figure shows the overall **flow of data** in the demo android application.
 
@@ -160,6 +166,19 @@ The following figure shows the overall **flow of data** in the demo android appl
 </p>
 
 Here, we have used image view for displaying the output for the sake of simplicity. In practice it would be a good idea to display it on a **GLSurfaceview or TextureView**, which are hardware accelerated. Also, the videos and textures **looks better** on such views(the first gif is actually a glsurface-view). Also, there is still scope for reducing the latency due to **CPU-GPU data copy** by directly accessing the pixel buffers from GPU, without transfering the image to CPU memory.
+
+## SegMe_V2
+
+This version of android demo application uses the **tensorflow-lite-gpu:1.15.0**.The following are the additional changes and **improvements** from the previos version:- 
+
+1. Replace imageview with gpuimageview
+2. Add additionals filters on video
+3. Improve quality of mask and video
+4. Add color harmonization using opencv-dnn
+5. Add slider control for mask thresholding
+6. Save the image on device
+
+Initially, download the [caffe-harmonization](http://vllab.ucmerced.edu/ytsai/CVPR17/harmonize_iter_200000.caffemodel) model and put it itn **assets** folder. Use **single-tap** on the image to **change filters** and **long-press** for **saving**(and harmonizing) the current frame as an image on device.
 
 ### Model running time
 
