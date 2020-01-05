@@ -34,6 +34,21 @@ Now to increase the size of dataset and model robustness, we perform augmentatio
 
 Besides the aforesaid augmentation techniques, we **normalize(also standardize)** the images and perform **run-time augmentations like flip, shift and zoom** using keras data generator and preprocessing module.
 
+### Annotation Tools
+
+A good dataset is always the first step for coming up with a robust and and accurate model, especially in case of semantic segmentation process. There are many standard datsets available for portrait(or person) segmentation like **PFCN, MSCOCO Person, PascalVOV Person, Supervisely** etc. But it seems that either the **quality or quantity** of the images are still insufficient for our use case. So, it would be a good idea to **collect custom images** for our training process. It is easy to collect images and create ground truth for tasks like classification or object detection; but for semantic segmentation we need to be extra-careful regarding the **quality of masks**. Also, data collection and annotation takes a lot of time and effort, compared to other computer vision tasks. 
+
+Here are some tools for **annotation and data collection** which i found to be useful in this regard:-
+
+1. **Offline Image Editors** - Pros: Free, High Accuracy; Cons: Manual Annotation Time; Eg: **GIMP, Photoshop** etc.
+2. **Pretrained Models**: Pros - Fast, Easy to Use; Cons: Limited Accuracy; Eg: **Deeplab Xception, MaskRCNN** etc.
+3. **Online Annotation Tools** - Pros: Automated, Easy to Use, Flexible, Task specific; Cons: Price; Eg: **Supervisely, Remove.bg**.
+4. **Crowd Sourcing Tools** - Pros: Potential Size and Variety, Minimal Effort; Cons: Time, Quality; Eg: **Amazon Mechanical Turk**.
+
+If you are planning to use model on mobile phones specifically for **portrait selfies**, it would be a good idea to include lots of such **portrait images captured using mobile phones** in your datset.
+
+Also checkout the datset: [UCF Selfie](https://www.crcv.ucf.edu/data/Selfie)
+
 ## Model Architecture
 
 Here we use **Mobilent v2** with **depth multiplier 0.5** as encoder (feature extractor).
