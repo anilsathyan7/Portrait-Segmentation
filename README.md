@@ -672,3 +672,4 @@ Anil Sathyan
 * [Tensorflow lite gpu delegate inference using opengl and SSBO in android](https://github.com/tensorflow/tensorflow/issues/26297)
 * [Udacity: Intel Edge AI Fundamentals Course](https://www.udacity.com/scholarships/intel-edge-ai-scholarship)
 * [Android: Hair Segmentation with GPU](https://github.com/google/mediapipe/blob/master/mediapipe/docs/examples.md#hair-segmentation-with-gpu)
+* [Image Effects for Android using OpenCV: Image Blending](https://heartbeat.fritz.ai/image-effects-for-android-using-opencv-image-blending-319e0e042e27)
