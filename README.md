@@ -581,6 +581,29 @@ The algorithm works pretty well, if there is **proper lighting and clear colour 
 
 Also check-out this cool application: [Virtual Stage Camera](https://www.roland.com/global/products/virtual_stage_camera/)
 
+### Techniques For Improving Robustness, Accuracy and Speed
+
+Here are some **advanced** techniques to improve the **accuracy, speed and robustness** of the portrait segmentation model for **videos**. Most of them are inspired from the following two papers:-
+
+1. **PortraitNet: Real-time portrait segmentation network for mobiledevice**
+2. **Real-time Hair Segmentation and Recoloring on Mobile GPUs**
+
+**Boundary Loss**: In order to improve the boundary accuracy and sharpness, we modify the last layer in the decoder module by adding a new convolution layer in parallel to generate a **boundary detection map**. We generate the boundary ground truth from manual labeled mask using traditional edge detection algorithm like **canny** or sobel, on-the-fly. Also, we need to use **focal loss** instead of BCE, for training the network with boundary masks. Finally, we can remove this additional convolution layer for edges and export the model for inference.
+
+**Consistency Constraint Loss**: A novel method to generate soft labels using the tiny network itself with data augmentation, where we use **KL divergence** between the heatmap outputs of the original image and texture enhanced image, for training the model. It further improves the accuracy and **robustness** of the model under various **lighting** conditions. 
+
+**Refined Decoder Module**: The decoder module consists of refined residual block with **depthwise convolution** and up-sampling blocks with transpose convolution. Even though  it includes the skip connectios similar to unet architecture, they are **added** to the layers in decoder module channel-wise instead of usual concatenation. Overall, this improves the execution **speed** of the model.
+
+**Temporal Consistency**: A video model should exhibit **temporal redundancy** across adjacent frames. Since the neighbouring frames are similar, their corresponding segmentation masks should also be similar(ideally). Current methods that utilize LSTM, GRU(Deep) or Optical flow(Classic) to realize this are too computationally expensive for real-time applications on mobile phones. So, to leverage this temporal redundancy, we append the segmentation output of the **previous frame** as the **fourth channel(prior)** of the current input frame during inference. During training, we can apply techniques like **affine transformations, thin plate spline smoothing, motion blur** etc. on the annotated ground truth to use it as a previous-mask. Also, to make sure that the model robustly handles all the use cases, we must also train it using an **empty previous mask**.
+
+**High resolution Input**: In our original pipeline, we **downsample** our full resolution image from mobile camera to a lower  resolution(say 128 or 224) and finally after inference, we  upsample the output mask to full resolution. Even though output results are satisfactory; there are couple of problems with this approach. Firstly, the resized mask **edges** will be coarse(stair-case) or **rough** and extra **post-processing** steps will be needed to smoothen the mask. Secondly, we loose lots of **details** in the input due to downsampling and thus it affects the output mask quality. If we use a larger input size, it would obviously increase the computation time of the model. The primary reason for this increase, is the increase in number of parameters. Also, on a mobile device the CPU-GPU data transfer takes considerable amount of time, especially when the inputs are large. To solve the latter problem, we can use techniques like **SSBO**(low level) or frameworks like **mediapipe**(high-level) which already comes with a optimized inference pipeline. As for the former one, we can slightly modify the architecture of the model such that, for most part **convolutions** happen at a **lower spatial dimension**. The idea is to rapidly downsample the input at the beginning of the  network and work with a smaller resolution image throughout a **deeper** version of the network . Finally, **upsample** the result from the final layers to full scale, **within-the model**. Thus, it ensures that the model **learns the upsampling or downsampling** itself and removes the need for a separate post-inference resize or smoothing. 
+
+**Advanced Activation Function**: Newer activation  functions like **Swish**(mobilenetv3) or **PRelu**(mediapipe hair segmentation) seems to give better **accuracy** with lower execution time. However, we may need to restructure our network and implement **custom-layers**  for such operators to properly run on mobile **GPU**, using tensorflow-lite.
+
+The portrait-net model for **videos** was successfully trained using **pytorch** and exported to **tflite** format. The new dataset consist of **10,000** images for training and **2670** images for testing(without anuy augmentations).It includes portrait images form **pfcn, supervisely and baidu** datasets. It took about **1 week** for training the model on a **GTX 1060 6GB** with batch size of 32 and an **mIOU of 94%** was obtained on the test dataset. The new portrait dataset, conversion scripts, **trained models** and corresponding inference code in python are also available in the respective folders. It can be easily used with the current **android application**(SegMeV2) by slightly modifying the **I/O** handling steps.
+
+**Note**: For more information check out the respective **papers and repositories**.
+
 ## Key Insights and Drawbacks
 
 1. Always start experimentation with **standard/pretrained** networks. Also try out **default/standard hyperparameter** settings before experimentation. Often **standard datasets may not be sufficient** for your particular application scenario .So, do not hesitate to re-train your model with a **custom dataset** specific to your application or use case (For eg:- if a model can’t handle a specific **pose**, it may be that the **dataset is not representative enough**).
@@ -674,3 +697,6 @@ Anil Sathyan
 * [Android: Hair Segmentation with GPU](https://github.com/google/mediapipe/blob/master/mediapipe/docs/examples.md#hair-segmentation-with-gpu)
 * [Image Effects for Android using OpenCV: Image Blending](https://heartbeat.fritz.ai/image-effects-for-android-using-opencv-image-blending-319e0e042e27)
 * [Converting Bitmap to ByteBuffer (float) in Tensorflow-lite Android](https://stackoverflow.com/questions/55777086/converting-bitmap-to-bytebuffer-float-in-tensorflow-lite-android)
+* [Real-time Hair Segmentation and Recoloring on Mobile GPUs](https://arxiv.org/pdf/1907.06740.pdf)
+* [PortraitNet: Real-time portrait segmentation network for mobile device](https://www.sciencedirect.com/science/article/abs/pii/S0097849319300305)
+* [ONNX2Keras](https://github.com/nerox8664/onnx2keras)
