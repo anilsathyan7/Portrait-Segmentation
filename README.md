@@ -632,13 +632,16 @@ The portrait-net model for **videos** was successfully trained using **pytorch**
 
 ## TODO
 
-- [ ] Port the code to **TF 2.0**
+- [ ] **Combine** all techniques and train a **TF2.0** model
 - [x] Use a **bigger image** for training(224x224)
 - [ ] Try **quantization-aware** training
 - [ ] Train with **mixed precision** (FP16) 
 - [ ] Optimize the model by performing weight **pruning**
 - [ ] Improve **accuracy** & reduce **artifacts** at runtime
-- [ ] Incroporate **depth** information and **boundary refinement** techniques
+- [x] Leverage **temporal consistency** in video
+- [x] Include **boundary refinement** techniques
+- [ ] Reduce GPU memory **copy time**
+- [ ] Incroporate **depth** information
 - [ ] Apply **photorealistic style transfer** on foreground based on **background image**
 
 ## Versioning
