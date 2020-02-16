@@ -25,7 +25,7 @@ pip install kito
 * Download training [data-set](https://drive.google.com/file/d/1UBLzvcqvt_fin9Y-48I_-lWQYfYpt_6J/view?usp=sharing)
 * GPU with CUDA support
 * Download caffe harmonization [model](https://drive.google.com/file/d/1bWafRdYBupr8eEuxSclIQpF7DaC_2MEY/view?usp=sharing)
-* Download mixed dataset: [Portrait_Mix](https://drive.google.com/file/d/12vl1fzh1WBib3i6fCweOKgukvxWO0t27/view?usp=sharing)
+* Download mixed dataset: [portrait-mix](https://drive.google.com/file/d/12vl1fzh1WBib3i6fCweOKgukvxWO0t27/view?usp=sharing)
 
 ## Dataset
 
