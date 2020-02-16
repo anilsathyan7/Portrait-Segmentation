@@ -25,6 +25,7 @@ pip install kito
 * Download training [data-set](https://drive.google.com/file/d/1UBLzvcqvt_fin9Y-48I_-lWQYfYpt_6J/view?usp=sharing)
 * GPU with CUDA support
 * Download caffe harmonization [model](https://drive.google.com/file/d/1bWafRdYBupr8eEuxSclIQpF7DaC_2MEY/view?usp=sharing)
+* Download mixed dataset: [Portrait_Mix](https://drive.google.com/file/d/12vl1fzh1WBib3i6fCweOKgukvxWO0t27/view?usp=sharing)
 
 ## Dataset
 
@@ -77,6 +78,7 @@ After ensuring the data files are stored in the **desired directorires**, run th
 6. python tflite_webcam.py  # Run the model using tflite interpreter
 7. python segvideo.py test/sunset.jpg # Apply blending filters on video
 8. python bgsub.py # Perform static background subtraction
+9. python portrait_video.py # Use portrait-net for video segmentation
 ```
 You may also run the **Jupyter Notebook** (ipynb) in google colaboratory, after downloading the training dataset.
 
