@@ -673,6 +673,7 @@ Anil Sathyan
 * https://www.tensorflow.org/lite/performance/gpu_advanced
 * https://github.com/cainxx/image-segmenter-ios
 * https://github.com/gallifilo/final-year-project
+* https://github.com/dong-x16/PortraitNet
 * https://github.com/tantara/JejuNet
 * https://github.com/lizhengwei1992/mobile_phone_human_matting
 * https://github.com/dailystudio/ml/tree/master/deeplab
