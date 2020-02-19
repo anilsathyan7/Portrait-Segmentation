@@ -57,13 +57,12 @@ while True:
     interpreter.set_tensor(input_details[0]['index'], np.array(prepimg, dtype=np.float32))
     interpreter.invoke()
     outputs = interpreter.get_tensor(output_details[0]['index'])
-    outputs = outputs.squeeze()
+    outputs = outputs.reshape(224,224,1)
 
     # Save output to feed subsequent inputs
     pred_video = outputs
 
     # Process the output
-    outputs = outputs[...,np.newaxis] 
     outputs = cv2.resize(outputs, size)
     _,_,outputs=blend(frame, outputs)
     
