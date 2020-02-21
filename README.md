@@ -720,3 +720,5 @@ Anil Sathyan
 * [Real-time Hair Segmentation and Recoloring on Mobile GPUs](https://arxiv.org/pdf/1907.06740.pdf)
 * [PortraitNet: Real-time portrait segmentation network for mobile device](https://www.sciencedirect.com/science/article/abs/pii/S0097849319300305)
 * [ONNX2Keras Converter](https://github.com/nerox8664/onnx2keras)
+* [Google: Coral AI](https://coral.ai/docs/accelerator/get-started/)
+* [Hacking Google Coral Edge TPU](https://towardsdatascience.com/hacking-google-coral-edge-tpu-motion-blur-and-lanczos-resize-9b60ebfaa552)
