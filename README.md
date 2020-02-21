@@ -620,6 +620,16 @@ The portrait-net model for **videos** was successfully trained using **pytorch**
 
 **Note**: For more information check out the respective **papers and repositories**.
 
+## Post-Training Quantization and Edge TPU Inference
+
+**Quantizing** deep neural networks uses techniques that allow for **reduced precision** representations of weights and, optionally, activations for both storage and computation(for eg. UINT8 or FLOAT16). It can **reduce model size** while also improving CPU and hardware accelerator **latency**, with little **degradation in model accuracy**. Tensorflow lite supports two types of quantization viz. **quantization qware training and post training quantization**. Even though the former method produces better accuracy, it is only  **supported** by a few subset of convolutional neural network architectures. Also, currently tensorflow 2.0 and keras does not support this technique. Therefore, we are left with only one option i.e Post-training quantization.
+
+Again, there are two types of post-training quantization: **weight quantization and full integer quantization**(float also). In the weight quantization, only the weights are converted to **8 bit integer** format. At inference, weights are converted from 8-bits of precision to floating point and computed using **floating-point kernels**. In full integer quantization, we use integer weights and **integer computations** on the model layers. For this purpose, you need to measure the dynamic range of activations and inputs by supplying a **representative data set**, during the conversion process. The potential advantages include **faster inference, reduced memory usage** and access to hardware accelerators like TPU, NPU etc. On the flip side, it can lead to **accuracy degradation**, especially in scenarios where high **pixel accuracies** or precise boundaries are desired.
+
+The **Coral USB Accelerator** is a USB device that provides an Edge TPU as a coprocessor for your computer. It accelerates inferencing for your machine learning models when attached to the host computer. Initially, we need to convert our float model to a **fully quantized** format, using the aforementioned techniques. Then, we need to convert the quantized model to tpu format with the help of **edge tpu compiler**. Finally, we can run the tpu model on the device with the help of **edge tpu runtime** library. Compared to quantized inference on CPU, TPU offers additional advantages like **faster inference, reduced power** etc. 
+
+The **portrait-net and prisma-net** models were successfully converted to quantized format. Their **size** was reduced by about **3x** and their outputs were verified using a test dataset. We were able to convert the prisma-net model to tpu format; but infortunately the portrait-net model failed in the conversion process(layer compatability issue). The edge tpu model took only a mere **12.2 ms** for inference, in comparison to the quantized inference on CPU, which took about **4357.0ms**. The **CPU**(i7-3632QM CPU @ 2.20GHz) might mostly be using a **single core** for inference. But even if we include other possible overheads, this **300x speed-up** seems to be worth the effort. Besides, it consumes **20 times less power** than CPU. 
+
 ## Key Insights and Drawbacks
 
 1. Always start experimentation with **standard/pretrained** networks. Also try out **default/standard hyperparameter** settings before experimentation. Often **standard datasets may not be sufficient** for your particular application scenario .So, do not hesitate to re-train your model with a **custom dataset** specific to your application or use case (For eg:- if a model can’t handle a specific **pose**, it may be that the **dataset is not representative enough**).
@@ -722,3 +732,5 @@ Anil Sathyan
 * [ONNX2Keras Converter](https://github.com/nerox8664/onnx2keras)
 * [Google: Coral AI](https://coral.ai/docs/accelerator/get-started/)
 * [Hacking Google Coral Edge TPU](https://towardsdatascience.com/hacking-google-coral-edge-tpu-motion-blur-and-lanczos-resize-9b60ebfaa552)
+* [Peter Warden's Blog: How to Quantize Neural Networks with TensorFlow](https://petewarden.com/2016/05/03/how-to-quantize-neural-networks-with-tensorflow/)
+* [Tensorflow: Post Training Quantization](https://www.tensorflow.org/lite/performance/post_training_quantization)
