@@ -1,6 +1,6 @@
 from PIL import Image
 import os, sys
-from scipy.misc import imsave
+from imageio import imsave
 import cv2
 import numpy as np
 import random
@@ -34,30 +34,37 @@ dirs_bgd = os.listdir( bgd_path )
 dirs_bgd.sort()
 
 # Target size [modify if needed]
-x,y = (128,128)
+x,y = (256,256)
 
 # Ensure same name for corresponding mask and image
 def resize():
     for item in dirs_img:
         if os.path.isfile(img_path+item):
+   
+            # Ensure masks are in png format
+            png_msk=item.rsplit('.',1)[0]+'.png' 
+
             img = Image.open(img_path+item).convert('RGB')
-            msk = Image.open(msk_path+item).convert('RGB')
+            msk = Image.open(msk_path+png_msk).convert('RGB')
             bgd = Image.open(bgd_path+random.choice(dirs_bgd)).convert('RGB')
             
+            # Resize foreground, mask and background 
             img = img.resize((x,y), Image.ANTIALIAS)
-            msk = msk.resize((x,y), Image.ANTIALIAS)
+            msk = msk.resize((x,y), Image.NEAREST)
             bgd = bgd.resize((x,y), Image.ANTIALIAS)
 
-            
+            # Perform alpha blending with new background
             img = np.array(img)/255.0
             msk = np.array(msk)[:,:,0].reshape(x,y,1)/255.0
             bgd = np.array(bgd)/255.0
             
             synimg = bgd*(1.0-msk) + img*msk
             
+            # Save the new images and masks
             imsave(syn_img+"syn_"+item, synimg)
-            imsave(syn_msk+"syn_"+item, np.squeeze(msk))
-            
-resize()
+            imsave(syn_msk+"syn_"+png_msk, np.squeeze(msk))
+
+if __name__== "__main__":            
+    resize()
 
 #Sample run : python synthetic_arg.py -iimg PNGImages_128/ -imsk PNGMasks_128/ -ibgd bgd_img/ -oimg syn_img/ -omsk syn_msk/
