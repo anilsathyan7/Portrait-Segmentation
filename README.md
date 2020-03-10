@@ -159,7 +159,7 @@ Here is the model **summary**:-
 **1. Model 1**
 
 * Dataset: Portrait-mix (PFCN+Baidu+Supervisely)
-* Device: Onplus3 (GPU: Adreno 530)
+* Device: Oneplus3 (GPU: Adreno 530)
 * Size: 224x224
 
 | **Metrics** | **Values** |
