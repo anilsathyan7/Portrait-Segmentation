@@ -156,6 +156,12 @@ Here the **inputs and outputs** are images of size **224x224**. The **decoder** 
 
 Here is the model **summary**:-
 
+**1. Model 1**
+
+* Dataset: Portrait-mix (PFCN+Baidu+Supervisely)
+* Device: Onplus3 (GPU: Adreno 530)
+* Size: 224x224
+
 | **Metrics** | **Values** |
 |----|----|
 | **mIOU** | 94% |
@@ -163,7 +169,20 @@ Here is the model **summary**:-
 | **Size** | 8.3 MB |
 | **Params** | 2.1M  |
 
-**NB:** Accuracy measured on a predefined **test data-set** and **executiom time**(GPU) on **Oneplus3**, with the help of **tflite benchmark tool**.
+**2. Model 2**
+
+* Dataset: AISegment
+* Device: Redmi Note 8 Pro (GPU: Mali-G76 MC4)
+* Size: 256x256
+
+| **Metrics** | **Values** |
+|----|----|
+| **mIOU** | 98% |
+| **Time** | 37ms |
+| **Size** | 8.3 MB |
+| **Params** | 2.1M  |
+
+**NB:** Accuracy measured on a random **test data-set** and **executiom time**(GPU) using **tflite benchmark tool**.
 
 ### Android Application 
 
@@ -621,7 +640,7 @@ The portrait-net model for **videos** was successfully trained using **pytorch**
 
 Here is the link to **Android application**: [SegVid.apk](https://drive.google.com/file/d/1iTQUC9mXudfeUQBeavD1Rv0Cyh-T7E1o/view?usp=sharing)
 
-It supports 32 and 64 bit ARM architectures(armeabi-v7a and amr64-v8a).
+It supports **32 and 64 bit ARM** architectures(armeabi-v7a and amr64-v8a).
 The application works best on portrait videos with **good lighting** conditions.
 
 **Note**: For more information on training, check out the respective **papers and repositories**.
@@ -651,7 +670,7 @@ The **portrait-net and prisma-net** models were successfully converted to quanti
 11. Still, there is a scope for improving the **latency** of inference by performing all the **postprocessing in the GPU**, without transfering the data to CPU. This can be acheived by using opengl shader storge buffers (**SSBO**). We can configure the GPU delegate to **accept input from SSBO** and also access model **output from GPU memory** for further processing (wihout CPU) and subsequent rendering.
 12. Make sure most(all if possible) of your nodes or **layers** have a shape of the form **NHWC4** (i.e channels-C are multiple of four), if you plan to use **tflite gpu delegate**. This ensures that there are no **redundant memory copies** during shader execution. Similarly **avoid reshape** operators, whenever possible.These tricks can significanlty improve the overall **speed** or runnig time of your model on a mobile device(GPU).
 13. The parameters like **image size, kernel size and strides** (ie. of form - [x,x]) have significant impact on model running time(especially cpu). Clearly, the **model layer running time** seems to be proportional to the **square of image and kernel size(x)** and **inversely  proportional to the square of stride values(x)**,(other params. being const. in each case). This could be mostly due to the proportional increase/decreae in **MAC operations**.
-14. The **difference** between the **input image frame rate and output mask generation frame rate** may lead to an output(rendering), where the segmentation **mask lags behind current frame**.This **stale mask** phenemena arises due to the model(plus post-processing) taking more than 40ms (corr. to 25 fps input) per frame (real-time video). The **solution** is to render then output image in accordance to the **mask generation fps** (depends on device capability) or **reduce the input frame rate**.
+14. The **difference** between the **input image frame rate and output mask generation frame rate** may lead to an output(rendering), where the segmentation **mask lags behind current frame**.This **stale mask** phenomena arises due to the model(plus post-processing) taking more than 40ms (corr. to 25 fps input) per frame (real-time video), during an asynchronous execution. The **solution** is to render the output image in accordance to the **mask generation fps** (depends on device capability) or **reduce the input frame rate**.
 15. If your segmentaion-mask output contains **minor artifacts**, you can clean them up using **morphological operations** like **opening or closing**. However it can be slightly **expensive** if your output image size is **large**, especially if you perform them on every frame output.
 16. If the background consists of **noise, clutter or objects like clothes, bags**  etc. the model **fails** miserably.
 17. Even though the stand-alone **running time** of exported (tflite) model is  **low(around 100 ms)**,other operations like **pre/post-processing, data loading, data-transfer** etc. consumes **significant time** in a mobile device.
