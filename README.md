@@ -619,7 +619,12 @@ Here are some **advanced** techniques to improve the **accuracy, speed and robus
 
 The portrait-net model for **videos** was successfully trained using **pytorch** and exported to **tflite** format. The new dataset consist of **60,000** images for training and **8852** images for testing.It includes portrait images form **AISegment** dataset and **sythetic images** with custom backgrounds. This model with **input size of 256x256** took about **5 days** for training on a **GTX 1080 Ti** with batch size of **48**. Finally, an **mIOU of 98%** was obtained on the test-set after **500 epochs**, using a minimal learning rate of **1e^-6**(after decay). The new portrait dataset, conversion scripts, **trained models** and corresponding inference code in python are also available in the respective folders. It can be easily used with the current **android application**(SegMeV2) by slightly modifying the **I/O** handling steps. A frame rate of **30 FPS** was acheived using this model.
 
-**Note**: For more information check out the respective **papers and repositories**.
+Here is the link to **Android application**: [SegVid.apk](https://drive.google.com/file/d/1iTQUC9mXudfeUQBeavD1Rv0Cyh-T7E1o/view?usp=sharing)
+
+It supports 32 and 64 bit ARM architectures(armeabi-v7a and amr64-v8a).
+The application works best on portrait videos with **good lighting** conditions.
+
+**Note**: For more information on training, check out the respective **papers and repositories**.
 
 ### Post-Training Quantization and Edge TPU Inference
 
@@ -629,7 +634,7 @@ Again, there are two types of post-training quantization: **weight quantization 
 
 The **Coral USB Accelerator** is a USB device that provides an Edge TPU as a coprocessor for your computer. It accelerates inferencing for your machine learning models when attached to the host computer. Initially, we need to convert our float model to a **fully quantized** format, using the aforementioned techniques. Then, we need to convert the quantized model to tpu format with the help of **edge tpu compiler**. Finally, we can run the tpu model on the device with the help of **edge tpu runtime** library. Compared to quantized inference on CPU, TPU offers additional advantages like **faster inference, reduced power** etc. 
 
-The **portrait-net and prisma-net** models were successfully converted to quantized format. Their **size** was reduced by about **3x** and their outputs were verified using a test dataset. We were able to convert the prisma-net model to tpu format; but unfortunately the portrait-net model failed in the conversion process(layer compatability issue). The edge tpu model took only a mere **12.2 ms** for inference, in comparison to the quantized inference on CPU, which took about **4357.0ms** with quantized model and **500ms** with float model. The **CPU**(i7-3632QM CPU @ 2.20GHz) might mostly be using a **single core** for inference. But even if we include other possible overheads, this **300x speed-up** seems to be worth the effort. Besides, it consumes **20 times less power** than CPU. 
+The **portrait-net and prisma-net** models were successfully converted to quantized format. Their **size** was reduced by about **3x** and their outputs were verified using a test dataset. We were able to convert the prisma-net model to tpu format; but unfortunately the portrait-net model failed in the conversion process(layer compatability issue). The edge tpu model took only a mere **12.2 ms** for inference, in comparison to the inference on CPU, which took about **4357.0ms** with quantized model and **500ms** with float model. The **CPU**(i7-3632QM CPU @ 2.20GHz) might mostly be using a **single core** for inference. But even if we include other possible overheads, this **40x speed-up** seems to be worth the effort. Besides, it consumes **20 times less power** than CPU. 
 
 ## Key Insights and Drawbacks
 
@@ -657,6 +662,7 @@ The **portrait-net and prisma-net** models were successfully converted to quanti
 22. Instead of using an explicit softmax layer as the final layer of the model during training, pushing this **softmax** activation into the cross-entropy loss layer(with **from_logits=True**) significantly simplifies the loss computation and makes it more **numerically stable**. In the training dataset, the input images may be encoded in **jpg** format for saving memory; but the segmentation masks should be saved in **png** format(lossless). Also during preprocessing step, ensure that you use **nearest neighbour interpolation**  while resizing the segmentation masks(hard labels). 
 23. A fully quantized tflite seems to be significantly slower than float32 version, while performing inference on a pc using tflite python interpreter.But for **mobile CPUs**, considerable speedup can be observed. On the other hand, the quantized model gives more than **10x** speed-up on a **edge TPU** compared to the float32 model on **CPU**.
 24. No amount of skillful **post-processing** and attempting to extract useful data from the output will make up for a **poor model choice**, or one where too many **sacrifices** were made for **speed**.
+25. Recently, many vendors like Apple, Huawei and Qualcomm have come up with their own **Vision API's, NPU's, DSP's, ISP's** etc. The performace of these devices seems to be on par with the high-end PC's. After model exporting, we can directly run them on **high resolution** images in real-time. However, many of the features are still **experimental**, some are **not open-source** and there is a **lack of proper standardization** among the hardware and software vendors in this domain.
 
 
 ## TODO
@@ -703,6 +709,7 @@ Anil Sathyan
 * [Facebook SparkAR: Background Segmentation](https://sparkar.facebook.com/ar-studio/learn/documentation/tracking-people-and-places/segmentation/)
 * [Learning to Predict Depth on the Pixel 3 Phones](https://ai.googleblog.com/2018/11/learning-to-predict-depth-on-pixel-3.html)
 * [iOS Video Depth Maps Tutorial](https://www.raywenderlich.com/5999357-video-depth-maps-tutorial-for-ios-getting-started)
+* [Huawei: Portrait Segmentation](https://developer.huawei.com/consumer/en/doc/20201601)
 *   [Deeplab Image Segmentation](https://colab.research.google.com/github/tensorflow/models/blob/master/research/deeplab/deeplab_demo.ipynb)
 *   [Tensorflow - Image segmentation](https://www.tensorflow.org/beta/tutorials/images/segmentation)
 *   [Official Tflite Segmentation Demo](https://github.com/tensorflow/examples/tree/master/lite/examples/image_segmentation)
