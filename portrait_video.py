@@ -17,11 +17,11 @@ def blend(frame, alpha):
 
 
 # Initialize tflite-interpreter
-interpreter = tf.contrib.lite.Interpreter(model_path="models/portrait_video/portrait_video.tflite") # Use 'tf.lite' on recent tf versions
+interpreter = tf.lite.Interpreter(model_path="portrait_video.tflite") # Use 'tf.lite' on recent tf versions
 interpreter.allocate_tensors()
 input_details = interpreter.get_input_details()
 output_details = interpreter.get_output_details()
-input_shape = input_details[0]['shape'][1:3]
+height, width = input_details[0]['shape'][1:3]
 
 
 # Initialize video capturer
@@ -36,7 +36,7 @@ while True:
     image=Image.fromarray(frame)
     
     # Resize the image
-    image= image.resize(input_shape, Image.ANTIALIAS)
+    image= image.resize((width, height), Image.ANTIALIAS)
     image=np.asarray(image)
 
     # Normalize the input
@@ -44,7 +44,7 @@ while True:
 
     # Choose prior mask
     if cnt == 1:
-        prior = np.zeros((224, 224, 1)) # first frame
+        prior = np.zeros((height, width, 1)) # first frame
     else:
         prior = pred_video
     
@@ -57,7 +57,7 @@ while True:
     interpreter.set_tensor(input_details[0]['index'], np.array(prepimg, dtype=np.float32))
     interpreter.invoke()
     outputs = interpreter.get_tensor(output_details[0]['index'])
-    outputs = outputs.reshape(224,224,1)
+    outputs = outputs.reshape(height,width,1)
 
     # Save output to feed subsequent inputs
     pred_video = outputs
