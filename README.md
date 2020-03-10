@@ -4,6 +4,7 @@
 
 **Portrait segmentation** refers to the process of segmenting a person in an image from its background.
 Here we use the concept of **semantic segmentation** to predict the label of every pixel (dense prediction) in an image.
+This technique is widely used in computer vision applications like **background replacement and background blurring** on mobile devices.
 
 Here we limit ourselves to **binary classes** (person or background) and use only plain **portrait-selfie** images for matting.
 
@@ -25,7 +26,7 @@ pip install kito
 * Download training [data-set](https://drive.google.com/file/d/1UBLzvcqvt_fin9Y-48I_-lWQYfYpt_6J/view?usp=sharing)
 * GPU with CUDA support
 * Download caffe harmonization [model](https://drive.google.com/file/d/1bWafRdYBupr8eEuxSclIQpF7DaC_2MEY/view?usp=sharing)
-* Download mixed dataset: [portrait-mix](https://drive.google.com/file/d/12vl1fzh1WBib3i6fCweOKgukvxWO0t27/view?usp=sharing)
+* Download portrait dataset: [AISegment](https://datasetsearch.research.google.com/search?query=portrait%20segmentation&docid=O3kWsG%2FOg%2FZspufiAAAAAA%3D%3D)
 
 ## Dataset
 
@@ -616,7 +617,7 @@ Here are some **advanced** techniques to improve the **accuracy, speed and robus
 
 **Advanced Activation Function**: Newer activation  functions like **Swish**(mobilenetv3) or **PRelu**(mediapipe hair segmentation) seems to give better **accuracy** with lower execution time. However, we may need to restructure our network and implement **custom-layers**  for such operators to properly run on mobile **GPU**, using tensorflow-lite.
 
-The portrait-net model for **videos** was successfully trained using **pytorch** and exported to **tflite** format. The new dataset consist of **10,000** images for training and **2670** images for testing(without any augmentations).It includes portrait images form **pfcn, supervisely and baidu** datasets. It took about **1 week** for training the model on a **GTX 1060 6GB** with batch size of 32 and an **mIOU of 94%** was obtained on the test-set. The new portrait dataset, conversion scripts, **trained models** and corresponding inference code in python are also available in the respective folders. It can be easily used with the current **android application**(SegMeV2) by slightly modifying the **I/O** handling steps. A frame rate of **30 FPS** was acheived using this model.
+The portrait-net model for **videos** was successfully trained using **pytorch** and exported to **tflite** format. The new dataset consist of **60,000** images for training and **8852** images for testing.It includes portrait images form **AISegment** dataset and **sythetic images** with custom backgrounds. This model with **input size of 256x256** took about **5 days** for training on a **GTX 1080 Ti** with batch size of **48**. Finally, an **mIOU of 98%** was obtained on the test-set after **500 epochs**, using a minimal learning rate of **1e^-6**(after decay). The new portrait dataset, conversion scripts, **trained models** and corresponding inference code in python are also available in the respective folders. It can be easily used with the current **android application**(SegMeV2) by slightly modifying the **I/O** handling steps. A frame rate of **30 FPS** was acheived using this model.
 
 **Note**: For more information check out the respective **papers and repositories**.
 
@@ -726,6 +727,7 @@ Anil Sathyan
 * [TensorFlow Lite Android Support Library](https://github.com/tensorflow/tensorflow/blob/764a3ab93ac7425b49b9c13dc151bc9c2f2badf6/tensorflow/lite/experimental/support/java/README.md)
 * [Tensorflow lite gpu delegate inference using opengl and SSBO in android](https://github.com/tensorflow/tensorflow/issues/26297)
 * [Udacity: Intel Edge AI Fundamentals Course](https://www.udacity.com/scholarships/intel-edge-ai-scholarship)
+* [Udacity: Introduction to TensorFlow Lite](https://www.udacity.com/course/intro-to-tensorflow-lite--ud190)
 * [Android: Hair Segmentation with GPU](https://github.com/google/mediapipe/blob/master/mediapipe/docs/examples.md#hair-segmentation-with-gpu)
 * [Image Effects for Android using OpenCV: Image Blending](https://heartbeat.fritz.ai/image-effects-for-android-using-opencv-image-blending-319e0e042e27)
 * [Converting Bitmap to ByteBuffer (float) in Tensorflow-lite Android](https://stackoverflow.com/questions/55777086/converting-bitmap-to-bytebuffer-float-in-tensorflow-lite-android)
