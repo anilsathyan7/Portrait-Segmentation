@@ -233,9 +233,9 @@ Initially, download the [caffe-harmonization](http://vllab.ucmerced.edu/ytsai/CV
 
 Here is a demo video of the application ...
 
-<html>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/JD2oxC8khbY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</html>
+<video width="560" height="325" controls>
+  <source src="results/portrait_video_segmentation.mp4" type="video/mp4">
+</video>
 
 ### Model running time
 
