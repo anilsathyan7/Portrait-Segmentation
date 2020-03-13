@@ -234,7 +234,13 @@ Initially, download the [caffe-harmonization](http://vllab.ucmerced.edu/ytsai/CV
 Here is a demo video of the application ...
 
 <video width="560" height="325" controls>
-  <source src="results/portrait_video_segmentation.mp4" type="video/mp4">
+  <source src="results/portrait_video_segmentation.mp4">
+	<source src="results/portrait_video_segmentation.webm">
+</video>
+
+<video width="320" height="240" controls>
+  <source src="test.mp4" type="video/mp4">
+Your browser does not support the video tag.
 </video>
 
 ### Model running time
