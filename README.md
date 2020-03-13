@@ -233,7 +233,9 @@ Initially, download the [caffe-harmonization](http://vllab.ucmerced.edu/ytsai/CV
 
 Here is a demo video of the application ...
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+<html>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/JD2oxC8khbY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</html>
 
 ### Model running time
 
