@@ -231,6 +231,10 @@ This version of android demo application uses the **tensorflow-lite-gpu:1.15.0**
 
 Initially, download the [caffe-harmonization](http://vllab.ucmerced.edu/ytsai/CVPR17/harmonize_iter_200000.caffemodel) model and put it itn **assets** folder. Use **single-tap** on the image to **change filters** and **long-press** for **saving**(and harmonizing) the current frame as an image on device.
 
+Here is a demo video of the application ...
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
 ### Model running time
 
 Summary of model size and runnig time in android
