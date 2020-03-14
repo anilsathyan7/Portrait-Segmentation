@@ -642,6 +642,8 @@ Here are some **advanced** techniques to improve the **accuracy, speed and robus
 
 **Advanced Activation Function**: Newer activation  functions like **Swish**(mobilenetv3) or **PRelu**(mediapipe hair segmentation) seems to give better **accuracy** with lower execution time. However, we may need to restructure our network and implement **custom-layers**  for such operators to properly run on mobile **GPU**, using tensorflow-lite.
 
+![Screenshot](https://3.bp.blogspot.com/-MwDAEUfHrwU/WpXNbK-_LTI/AAAAAAAACaU/VVZrtCrideIAy_G07R-9mCl694pDXC1kgCLcBGAs/s640/image7.jpg)
+
 The portrait-net model for **videos** was successfully trained using **pytorch** and exported to **tflite** format. The new dataset consist of **60,000** images for training and **8852** images for testing.It includes portrait images form **AISegment** dataset and **sythetic images** with custom backgrounds. This model with **input size of 256x256** took about **5 days** for training on a **GTX 1080 Ti** with batch size of **48**. Finally, an **mIOU of 98%** was obtained on the test-set after **500 epochs**, using a minimal learning rate of **1e^-6**(after decay). The new portrait dataset, conversion scripts, **trained models** and corresponding inference code in python are also available in the respective folders. It can be easily used with the current **android application**(SegMeV2) by slightly modifying the **I/O** handling steps. A frame rate of **30 FPS** was acheived using this model.
 
 Here is the link to **Android application**: [SegVid.apk](https://drive.google.com/file/d/1iTQUC9mXudfeUQBeavD1Rv0Cyh-T7E1o/view?usp=sharing)
