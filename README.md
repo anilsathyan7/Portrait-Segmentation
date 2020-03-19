@@ -36,6 +36,8 @@ Now to increase the size of dataset and model robustness, we perform augmentatio
 
 Besides the aforesaid augmentation techniques, we **normalize(also standardize)** the images and perform **run-time augmentations like flip, shift and zoom** using keras data generator and preprocessing module.
 
+**AISegment**: It is a human matting dataset for **binary segmentation** of humans and their background. This dataset is currently the largest portrait matting dataset, containing **34,427 images** and corresponding matting results. The data set was marked by the high quality of Beijing Play Star Convergence Technology Co., Ltd., and the portrait soft segmentation model trained using this data set has been **commercialized**.
+
 ### Annotation Tools
 
 A [good dataset](https://hackernoon.com/stop-feeding-garbage-to-your-model-the-6-biggest-mistakes-with-datasets-and-how-to-avoid-them-3cb7532ad3b7) is always the first step for coming up with a robust and and accurate model, especially in the case of semantic segmentation. There are many standard datsets available for portrait(or person) segmentation like **PFCN, MSCOCO Person, PascalVOV Person, Supervisely** etc. But it seems that either the **quality or quantity** of the images are still insufficient for our use case. So, it would be a good idea to **collect custom images** for our training process. It is easy to collect images and create ground truth for tasks like classification or object detection; but for semantic segmentation we need to be extra-careful regarding the **quality of masks**. Also, data collection and annotation takes a lot of **time and effort**, compared to other computer vision tasks. 
@@ -602,6 +604,22 @@ The application also saves a **local copy** of output using **OpenCV VideoWriter
 
 **NB: Make sure that both opencv and ffmpeg are properly configured**
 
+### Deploying Model on Jetson TX2 with TensorRT
+
+**Jetson TX2** is a high performance embedded AI computing device from nvidia. The module consist of six 64 bit ARM CPU's, 8 GB RAM and a **256 core Pascal GPU**. The device consumes only **15W power** and runs on Ubuntu 18.04. **TensorRT** is a C++ library that facilitates high performance inference on NVIDIA GPU's. TensorRT takes a trained network, which consists of a network definition and a set of trained parameters, and produces a **highly optimized runtime engine** which performs inference for that network. The library is integrated with the latest tensorflow binary(TF-TRT) and can be directly accessed via **C++ or Python API**.
+
+The following are the steps to **configure and run** your model on jetson devices:-
+
+1. [Install](https://www.youtube.com/watch?v=s1QDsa6SzuQ) latest Jetpack 4.3 on you device (Ubuntu 18.04)
+2. [Install](https://jkjung-avt.github.io/tf-trt-revisited/) C++ protocol buffers library (default python seems to be slower)
+3. [Install](https://docs.nvidia.com/deeplearning/frameworks/install-tf-jetson-platform/index.html) latest tensorflow 2.1 on your machine for jetpack 4.3
+3. Convert your keras model to optimized tf-trt format using the python script(tftrt_convert).
+4. Run the inference code using the optimized model on webcam streams(tftrt_infer).
+
+The inference time was reduced from 40 ms to **28 ms** on using tf-trt (i.e **30% speed-up**), for our **prisma-net** segmentation model. The new tf-trt **FP16 saved model** includes generic tensorflow optimizations as well as TensorRT device specific tunings. In comparsions to the original  **keras model**, the optimized model seems to perform **10x faster** inference on jetson TX2.
+
+**NB:** For maximum performance, switch the power mode to **MAXN**(nvpmodel 0) and run the **jetson_clocks** script(/usr/bin) for maximum clock speed. 
+
 ### Segmentation via Background Subtraction: A Naive Approach
 
 If we have a **static background**, we can easily obtain the mask of new objects appearing on the scene using the methods of background subtraction. Even though this seems straight-forward; there seems to be couple of **challenges** in this scenario. Firstly, even if objects does not move in the background, there will be small variations in corresponding pixel values due to changes in **lighting**, noise, camera quality etc. Secondly, if the new objects have **colour** similar to that of the background, it becomes difficult to find the **image difference**.
@@ -773,3 +791,4 @@ Anil Sathyan
 * [Peter Warden's Blog: How to Quantize Neural Networks with TensorFlow](https://petewarden.com/2016/05/03/how-to-quantize-neural-networks-with-tensorflow/)
 * [Tensorflow: Post Training Quantization](https://www.tensorflow.org/lite/performance/post_training_quantization)
 * [How Qualcomm Brought Tremendous Improvements in AI Performance to the Snapdragon 865](https://www.xda-developers.com/qualcomm-snapdragon-865-ai-performance-machine-learning-analysis/)
+* [TF-TRT 2.0 Workflow With A SavedModel](https://docs.nvidia.com/deeplearning/frameworks/tf-trt-user-guide/index.html#worflow-with-savedmodel)
