@@ -612,11 +612,11 @@ The application also saves a **local copy** of output using **OpenCV VideoWriter
 
 The following are the steps to **configure and run** your model on jetson devices:-
 
-1. [Install](https://www.youtube.com/watch?v=s1QDsa6SzuQ) latest Jetpack 4.3 on you device (Ubuntu 18.04)
-2. [Install](https://jkjung-avt.github.io/tf-trt-revisited/) C++ protocol buffers library (default python seems to be slower)
-3. [Install](https://docs.nvidia.com/deeplearning/frameworks/install-tf-jetson-platform/index.html) latest tensorflow 2.1 on your machine for jetpack 4.3
-3. Convert your keras model to optimized tf-trt format using the python script(tftrt_convert).
-4. Run the inference code using the optimized model on webcam streams(tftrt_infer).
+1. [Install](https://www.youtube.com/watch?v=s1QDsa6SzuQ) latest Jetpack on you device with Ubuntu 18.04.
+2. [Install](https://jkjung-avt.github.io/tf-trt-revisited/) C++ version of protocol buffers library (python version has extremely long model loading time)
+3. [Install](https://docs.nvidia.com/deeplearning/frameworks/install-tf-jetson-platform/index.html) latest tensorflow framework on your machine for jetpack 4.3.
+3. Convert your keras model to optimized tf-trt format using the python script (tftrt_convert).
+4. Run the inference code using the optimized model on webcam streams (tftrt_infer).
 
 The inference time was reduced from 40 ms to **28 ms** on using tf-trt (i.e **30% speed-up**), for our **prisma-net** segmentation model. The new tf-trt **FP16 saved model** includes generic tensorflow optimizations as well as TensorRT device specific tunings. In comparsions to the original  **keras model**, the optimized model seems to perform **10x faster** inference on jetson TX2.
 
