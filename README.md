@@ -73,15 +73,17 @@ Download the **dataset** from the above link and put them in **data** folder.
 After ensuring the data files are stored in the **desired directorires**, run the scripts in the **following order**.
 
 ```python
-1. python train.py # Train the model on data-set
-2. python eval.py checkpoints/up_super_model-102-0.06.hdf5 # Evaluate the model on test-set
-3. python export.py checkpoints/up_super_model-102-0.06.hdf5 # Export the model for deployment
-4. python test.py test/four.jpeg # Test the model on a single image
-5. python webcam.py test/beach.jpg # Run the model on webcam feed
-6. python tflite_webcam.py  # Run the model using tflite interpreter
-7. python segvideo.py test/sunset.jpg # Apply blending filters on video
-8. python bgsub.py # Perform static background subtraction
-9. python portrait_video.py # Use portrait-net for video segmentation
+1.  python train.py # Train the model on data-set
+2.  python eval.py checkpoints/up_super_model-102-0.06.hdf5 # Evaluate the model on test-set
+3.  python export.py checkpoints/up_super_model-102-0.06.hdf5 # Export the model for deployment
+4.  python test.py test/four.jpeg # Test the model on a single image
+5.  python webcam.py test/beach.jpg # Run the model on webcam feed
+6.  python tflite_webcam.py  # Run the model using tflite interpreter
+7.  python segvideo.py test/sunset.jpg # Apply blending filters on video
+8.  python bgsub.py # Perform static background subtraction
+9.  python portrait_video.py # Use portrait-net for video segmentation
+10. python3 tftrt_convert.py # Convert keras model to tf-trt format
+11. python3 tftrt_infer.py test/beach.jpg # Perform inference on jetson tx2
 ```
 You may also run the **Jupyter Notebook** (ipynb) in google colaboratory, after downloading the training dataset.
 
