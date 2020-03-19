@@ -9,7 +9,7 @@ from tensorflow.python.framework import convert_to_constants
 from tensorflow.keras.models import Model, load_model
 
 # Convert keras model to saved model format
-model = load_model('prisma-net-15-0.08.hdf5', compile=False)
+model = load_model('models/prisma_seg/prisma-net-15-0.08.hdf5', compile=False)
 model.save('saved_model')
 
 # Configure the input and output paths
