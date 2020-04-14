@@ -188,6 +188,40 @@ Here is the model **summary**:-
 
 **NB:** Accuracy measured on a random **test data-set** and **executiom time**(GPU) using **tflite benchmark tool**.
 
+#### SlimNet: Real-time Portrait Segmentation on High Resolution Images
+
+Slim-net is a light weight CNN for performing **real-time portrait segmentation** on mobile devices, using **high resolution** images. We were able to achieve **99% training accuracy** on the aisegment portrait dataset and run the model(**1.5MB**) on a mid-range android smartphone at **20 fps** on deployment. Using the high resolution input images, we were able to preserve **fine details** and **avoid sharp edges** on segmentation masks, during inference .The architecture is heavily inspired from the mediapipe **hair-segmentation** model for android and the tflite model runs on any **android** device without additional API's.
+
+The following is a brief  **summary** of the **architectural features** of the model:-
+
+1. The model is based on **encoder-decoder** architecture and uses **PReLU** activation throught the network. It hepls us to achieve **faster convergence** and **improved accuracy**.
+
+2. The inputs are initially **downsampled** from a size of 512 to 128 (i,e 1/4'th). This helps us to **reduce** the overall **computation** costs; while preseving the details.
+
+3. It uses **skip connections** between the encoder and decoder blocks (like unet) and helps us to extract **fine details** and improves **gradient flow** across layers. 
+
+4. Further, it uses **bottleneck** layers (like resnet) with **depthwise** convolutions for **faster inference**.
+
+5. Also, it uses **dilated** convolution(like deeplab) and helps us to maintain **larger receptive field** with **same computation and memory costs**, while also **preserving resolution**.
+
+6. Finally, the features are **upsampled** to full resolution(512) with the help of **transposed convolutions**.
+
+**Benchmark and summary**:-
+
+* Dataset: AISegment
+* Device: Redmi Note 8 Pro (GPU: Mali-G76 MC4)
+* Size: 512x512
+
+| **Metrics** | **Values** |
+|----|----|
+| **Accuracy** | 99% |
+| **Time** | 50ms |
+| **Size** | 1.5 MB |
+| **Params** | 0.35M  |
+| **Size** | 512x512 |
+
+![Screenshot](pictures/result4.png)
+
 ### Android Application 
 
 #### SegMe_V0
