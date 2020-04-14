@@ -206,7 +206,7 @@ The following is a brief  **summary** of the **architectural features** of the m
 
 6. Finally, the features are **upsampled** to full resolution(512) with the help of **transposed convolutions**.
 
-**Benchmark and summary**:-
+**Benchmark and Test Summary**:-
 
 * Dataset: AISegment
 * Device: Redmi Note 8 Pro (GPU: Mali-G76 MC4)
