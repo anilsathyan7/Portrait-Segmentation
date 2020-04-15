@@ -222,6 +222,8 @@ The following is a brief  **summary** of the **architectural features** of the m
 
 The **slim-net** model for portrait segmentation was successfully trained using **tensorflow 1.15** and exported to **tflite** format. The new dataset consist of **55082** images for **training** and **13770** images for **testing**. It includes portrait images fromm **AISegment** dataset and sythetic images with custom backgrounds. This model with input size of **512x512** took about **2 days** for training on a GTX 1080 Ti with **batch size** of **64**. Finally, a **test accuracy** of **99%** was obtained on the test-set after **300 epochs**, using a minimal **learning rate** of **1e^-6**(after decay).
 
+The model seems to perform well on **still images**; but on videos on mobile it shows some flickering effect. 
+Possible **issues**: lack temporal information and parameters, heavy augmentations, overfitting etc.
 
 ![Screenshot](pictures/result4.png)
 
