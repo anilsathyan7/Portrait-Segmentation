@@ -222,7 +222,11 @@ Here are the **benchmark** results:-
 | CPU: Kryo 460 | 185 ms | Uint8 |   
 | DSP: Hexagon 685 | 80 ms | Uint8 |
 
-**NB: Hexagon deleagate is still in experimental stage(beta).**
+The automatic **mixed precision** feature in TensorFlow, PyTorch and MXNet provides deep learning researcher and engineers with AI training **speedups** of up to **3X** on NVIDIA Volta and Turing GPUs with adding just a few lines of code (Automatic Mixed Precision Training). On recent nvidia GPU's, they use **tensor cores**  with **half precision(FP16)** computations to speed up the training process, while maintaining the **same accuracy**. Using other techniques like **TensorRT and XLA** we can further improve the inference speed on such devices. However, tensor cores which provide mix precision(float and int8), requires certain **dimensions of tensors** such as dimensions of your dense layer, number of filters in Conv layers, number of units in RNN layer to be a **multiple of 8**. Also, currently they support very **few operations** and are still in **experimental** stage.
+
+Here is a bar chart comparing the **INT8 performance**of ML accelerators across various platforms.
+
+![Screenshot](pictures/acceleration_int8.png)
 
 
 #### SlimNet: Real-time Portrait Segmentation on High Resolution Images
