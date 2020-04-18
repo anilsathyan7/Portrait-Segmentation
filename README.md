@@ -188,6 +188,42 @@ Here is the model **summary**:-
 
 **NB:** Accuracy measured on a random **test data-set** and **executiom time**(GPU) using **tflite benchmark tool**.
 
+#### Deeplab, Quantization Aware Training and ML Accelerators
+
+DeepLab is a **state-of-art** deep learning model for semantic **image segmentation**. It was originally used in google **pixel** phones for implementing the **portrait mode** in their cameras. Later, it was shown to produce great results with popular segmentation datsets like **pascal voc, cityscapes, ADE20K** etc. Here, we use a deeplab model with **mobilenetv2** as backbone for portrait segmentation. The **deeplabv3+** model uses features like **depthwise convolution, atrous convolution(dilated) and relu6 activation function**, for fast and accurate segmentation. Here, we do not use **ASPP** blocks for training, for the sake of **higher inference speeds**. The model is trained with **output stride 16** and exported for **inference** with output stride of **8**.
+
+Initially, we need to train a **non-quantized** model with **AISegment** dataset until convergence. For this purpose, we use a **pretrained** deeplab model trained on coco and pascal voc with mobilenetv2 backbone and **depth multiplier 0.5**. For the initial checkpoint, the number of classes was 21 and input size was 513x513. We may **reuse** all the layer weights from the pretrained model for finetuning; except the **logits**. In the official training script, re-configure the settings for **dataset**(AISegment), final logits layer, **number of classes(2)** and initial checkpoint(dm 0.5). Once the model is completely trained, **fine-tune** this float model with **quantization** using a small learning rate. Finally, convert this model to **tflite** format for inference on android.
+
+The quantized models can be run on android phone using it's CPU; whereas **GPU** typically reguires a **float model**. It was found that the **float model** on gpu and **quantized model** on cpu (4 threads) took about the **same time** for inference. Even though the quantized model seems to suffer from small accuracy loss, there were **no visible differences** on inference. On the other hand, **gpu consumes less power** than cpu for the same task. If the inference is carried out using gpu rather than cpu **asynchronously**, the cpu can run other operations in parallel, for maximizig the overall **throughput**.
+
+![Screenshot](https://www.xda-developers.com/files/2017/12/tensorflow-dsp-feature.jpg)
+
+A third alternative is to offload the computations to specialized devices like **DSP or NPU's**. These chips like the **Hexagon 685 DSP**(Redmi Note 7 Pro), which are sometimes referred to as “neural processing units”, “neural engines”, or “machine learning cores”, are **tailored** specifically to **AI algorithms**’ mathematical needs. They’re much more rigid in design than a traditional CPUs, and contain **special instructions and arrangements** (HVX architecture, Tensor Cores etc.) that accelerate certain scalar and vector operations, which become noticeable in large-scale implementations. They consume **less power** than CPU's or GPU's and usually runs models in **FP16 or UINT8** format in a **faster and efficient** manner. In android we can run the quantized models on DSP using **NNAPI delegate or Hexagon Delegate**. The hexagon delegate leverages the Qualcomm Hexagon library to execute **quantized kernels** on the **DSP**.The delegate is intended to **complement** NNAPI functionality, particularly for devices where NNAPI DSP acceleration is unavailable.
+
+Here are the **benchmark** results:-
+
+**Deeplab Training:-**
+
+* Float Train: 150k epochs, 
+* Quant Train: 30k
+* Eval mIOU: 97%
+
+**Deeplab Testing:-** 
+
+* Device: Redmi Note 7 Pro, Snapdragon 675
+* Model: Deeplab_Mobilenetv2_DM05
+* Input SIze: 512x512
+* Output Classes: 2
+
+| **Device** | **Time** | **Mode** |
+|----|----|----|
+| GPU: Adreno 612 | 190 ms | Float |               
+| CPU: Kryo 460 | 185 ms | Uint8 |   
+| DSP: Hexagon 685 | 80 ms | Uint8 |
+
+**NB: Hexagon deleagate is still in experimental stage(beta).**
+
+
 #### SlimNet: Real-time Portrait Segmentation on High Resolution Images
 
 Slim-net is a light weight CNN for performing **real-time portrait segmentation** on mobile devices, using **high resolution** images. We were able to achieve **99% training accuracy** on the aisegment portrait dataset and run the model(**1.5MB**) on a mid-range android smartphone at **20 fps** on deployment. Using the high resolution input images, we were able to preserve **fine details** and **avoid sharp edges** on segmentation masks, during inference .The architecture is heavily inspired from the mediapipe **hair-segmentation** model for android and the tflite model runs on any **android** device without additional API's.
@@ -819,6 +855,7 @@ Anil Sathyan
 * [High-Resolution Network for Photorealistic Style Transfer](https://arxiv.org/pdf/1904.11617.pdf)
 * [Tflite Benchmark Tool](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/tools/benchmark)
 * [TensorFlow Lite Android Support Library](https://github.com/tensorflow/tensorflow/blob/764a3ab93ac7425b49b9c13dc151bc9c2f2badf6/tensorflow/lite/experimental/support/java/README.md)
+* [TensorFlow Lite Hexagon delegate](https://www.tensorflow.org/lite/performance/hexagon_delegate)
 * [Tensorflow lite gpu delegate inference using opengl and SSBO in android](https://github.com/tensorflow/tensorflow/issues/26297)
 * [Udacity: Intel Edge AI Fundamentals Course](https://www.udacity.com/scholarships/intel-edge-ai-scholarship)
 * [Udacity: Introduction to TensorFlow Lite](https://www.udacity.com/course/intro-to-tensorflow-lite--ud190)
@@ -832,5 +869,6 @@ Anil Sathyan
 * [Hacking Google Coral Edge TPU](https://towardsdatascience.com/hacking-google-coral-edge-tpu-motion-blur-and-lanczos-resize-9b60ebfaa552)
 * [Peter Warden's Blog: How to Quantize Neural Networks with TensorFlow](https://petewarden.com/2016/05/03/how-to-quantize-neural-networks-with-tensorflow/)
 * [Tensorflow: Post Training Quantization](https://www.tensorflow.org/lite/performance/post_training_quantization)
+* [Qualcomm Hexagon 685 DSP is a Boon for Machine Learning](https://www.xda-developers.com/qualcomm-snapdragon-845-hexagon-685-dsp)
 * [How Qualcomm Brought Tremendous Improvements in AI Performance to the Snapdragon 865](https://www.xda-developers.com/qualcomm-snapdragon-865-ai-performance-machine-learning-analysis/)
 * [TF-TRT 2.0 Workflow With A SavedModel](https://docs.nvidia.com/deeplearning/frameworks/tf-trt-user-guide/index.html#worflow-with-savedmodel)
