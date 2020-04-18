@@ -204,6 +204,7 @@ Here are the **benchmark** results:-
 
 **Deeplab Training:-**
 
+* Tensorflow version: 1.15
 * Float Train: 150k epochs, 
 * Quant Train: 30k
 * Eval mIOU: 97%
@@ -212,7 +213,7 @@ Here are the **benchmark** results:-
 
 * Device: Redmi Note 7 Pro, Snapdragon 675
 * Model: Deeplab_Mobilenetv2_DM05
-* Input SIze: 512x512
+* Input SIze: 513x513
 * Output Classes: 2
 
 | **Device** | **Time** | **Mode** |
