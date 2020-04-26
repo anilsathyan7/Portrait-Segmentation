@@ -1,12 +1,20 @@
 # Portrait-Segmentation
 
-**Real-time Automatic Deep Matting For Mobile Devices With Mobile-Unet**
+**Real-time Automatic Deep Matting For Mobile Devices**
 
 **Portrait segmentation** refers to the process of segmenting a person in an image from its background.
 Here we use the concept of **semantic segmentation** to predict the label of every pixel (dense prediction) in an image.
 This technique is widely used in computer vision applications like **background replacement and background blurring** on mobile devices.
 
 Here we limit ourselves to **binary classes** (person or background) and use only plain **portrait-selfie** images for matting.
+
+We experimented with the following **architectures** for implementing a real-time portrait segmentation model for mobile devices. The models were trained with standard(and custom) **portrait datasets** and their performance was compared with the help of  standard **evaluation metrics and benchmarking** tools. Finally, the models were deployed on **edge devices**, using popular embedded(mobile) machine-learning platforms for **real-time inference**.
+
+1. Mobile-Unet
+2. DeeplabV3+
+3. Prisma-Net
+4. Portrait-Net
+5. Slim-Net
 
 ## Dependencies
 
@@ -28,7 +36,7 @@ pip install kito
 * Download caffe harmonization [model](https://drive.google.com/file/d/1bWafRdYBupr8eEuxSclIQpF7DaC_2MEY/view?usp=sharing)
 * Download portrait dataset: [AISegment](https://datasetsearch.research.google.com/search?query=portrait%20segmentation&docid=O3kWsG%2FOg%2FZspufiAAAAAA%3D%3D)
 
-## Dataset
+## Datasets
 
 The dataset consists of **18698 human portrait images of size 128x128 in RGB format**, along with their **masks(ALPHA)**. Here we augment the [**PFCN**](https://1drv.ms/u/s!ApwdOxIIFBH19Ts5EuFd9gVJrKTo) dataset with (handpicked) portrait  images form **supervisely** dataset. Additionaly, we download **random selfie** images from web and generate their masks using state-of-the-art **deeplab-xception** model for semantic segmentation. 
 
@@ -53,7 +61,7 @@ If you are planning to use the model on mobile phones specifically for **portrai
 
 Also checkout the datset: [UCF Selfie](https://www.crcv.ucf.edu/data/Selfie)
 
-## Model Architecture
+## Mobile-Unet Architecture
 
 Here we use **Mobilent v2** with **depth multiplier 0.5** as encoder (feature extractor).
 
@@ -224,7 +232,7 @@ Here are the **benchmark** results:-
 
 The automatic **mixed precision** feature in TensorFlow, PyTorch and MXNet provides deep learning researcher and engineers with AI training **speedups** of up to **3X** on NVIDIA Volta and Turing GPUs with adding just a few lines of code (Automatic Mixed Precision Training). On recent nvidia GPU's, they use **tensor cores**  with **half precision(FP16)** computations to speed up the training process, while maintaining the **same accuracy**. Using other techniques like **TensorRT and XLA** we can further improve the inference speed on such devices. However, tensor cores which provide mix precision(float and int8), requires certain **dimensions of tensors** such as dimensions of your dense layer, number of filters in Conv layers, number of units in RNN layer to be a **multiple of 8**. Also, currently they support very **few operations** and are still in **experimental** stage.
 
-Here is a bar chart comparing the **INT8 performance**of ML accelerators across various platforms.
+Here is a bar chart comparing the **INT8 performance** of ML accelerators across various platforms.
 
 ![Screenshot](pictures/acceleration_int8.png)
 
@@ -795,7 +803,7 @@ The **portrait-net and prisma-net** models were successfully converted to quanti
 
 - [ ] **Combine** all techniques and train a **TF2.0** model
 - [x] Use a **bigger image** for training(224x224)
-- [ ] Try **quantization-aware** training
+- [x] Try **quantization-aware** training
 - [ ] Train with **mixed precision** (FP16) 
 - [ ] Optimize the model by performing weight **pruning**
 - [ ] Improve **accuracy** & reduce **artifacts** at runtime
