@@ -6,15 +6,15 @@
 Here we use the concept of **semantic segmentation** to predict the label of every pixel (dense prediction) in an image.
 This technique is widely used in computer vision applications like **background replacement and background blurring** on mobile devices.
 
-Here we limit ourselves to **binary classes** (person or background) and use only plain **portrait-selfie** images for matting.
-
-We experimented with the following **architectures** for implementing a real-time portrait segmentation model for mobile devices. The models were trained with standard(and custom) **portrait datasets** and their performance was compared with the help of  standard **evaluation metrics and benchmarking** tools. Finally, the models were deployed on **edge devices**, using popular embedded(mobile) machine-learning platforms for **real-time inference**.
+Here we limit ourselves to **binary classes** (person or background) and use only plain **portrait-selfie** images for matting. We experimented with the following **architectures** for implementing a real-time portrait segmentation model for mobile devices.
 
 1. Mobile-Unet
 2. DeeplabV3+
 3. Prisma-Net
 4. Portrait-Net
 5. Slim-Net
+
+The models were trained with standard(and custom) **portrait datasets** and their performance was compared with the help of  standard **evaluation metrics and benchmarking** tools. Finally, the models were deployed on **edge devices**, using popular embedded(mobile) machine-learning platforms for **real-time inference**.
 
 ## Dependencies
 
