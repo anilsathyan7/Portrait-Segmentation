@@ -737,8 +737,8 @@ Run the **applications on jetson** devices:-
 1. Install nvidia [deepstream sdk](https://docs.nvidia.com/metropolis/deepstream/dev-guide/index.html)(>=4.0) for jetson or tesla platform, pyton-gst bindings and gst-rtsp-server components by following the **deepstream dev-guide** documentation. 
 2. Connect two **webcams** to the jetson module through USB ports.
 3. Run these commands on the jetson device to **boost the clocks**: sudo nvpmodel -m 0; sudo jetson_clocks
-4. Run the applications from the **directory** '<DeepStream 4.0 ROOT>/sources/python' (i.e python deepstream samples).
-5. For the streaming application, open the rtsp stream using **VLC** player i.e 'rtsp://{jetson-ip}:8554/ds-seg' on another system (try vlc on android). 
+4. Run the applications from the **directory** '*<DeepStream 4.0 ROOT>/sources/python*' (i.e python deepstream samples).
+5. For the streaming application, open the rtsp stream using **VLC** player i.e '*rtsp://{jetson-ip}:8554/ds-seg*' on another system (try vlc on android). 
 
 **Note:** Refer **conversion_onnx** ipython notebooks for converting **tensorflow/kertas** models to onnx_nchw format for deepstream inference.
 
@@ -868,6 +868,8 @@ Anil Sathyan
 * https://github.com/yulu/GLtext
 * https://github.com/berak/opencv_smallfry/blob/master/java_dnn
 * https://github.com/HasnainRaz/SemSegPipeline
+* https://github.com/onnx/tensorflow-onnx
+* https://github.com/onnx/keras-onnx
 * https://machinethink.net/blog/mobilenet-v2/
 * [On-Device Neural Net Inference with Mobile GPUs](https://arxiv.org/pdf/1907.01989.pdf)
 * [AI Benchmark: All About Deep Learning on Smartphones in 2019](https://arxiv.org/pdf/1910.06663.pdf)
