@@ -717,6 +717,8 @@ In the deepstream python application we connect **two webcameras** to th system(
 
 Here is the **schematic diagram** of the segmentation pipeline (deepstream_egl_multiseg).
 
+![Screenshot](pictures/deepstream_segment.png)
+
 The above **segmentation pipeline** consists of the following plugins (ordered):
 
 * **GstV4l2Src** - Used to capture video from v4l2 devices, like webcams and tv cards
