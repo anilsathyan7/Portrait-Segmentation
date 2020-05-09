@@ -707,7 +707,40 @@ The following are the steps to **configure and run** your model on jetson device
 
 The inference time was reduced from 40 ms to **28 ms** on using tf-trt (i.e **30% speed-up**), for our **prisma-net** segmentation model. The new tf-trt **FP16 saved model** includes generic tensorflow optimizations as well as TensorRT device specific tunings. In comparsions to the original  **keras model**, the optimized model seems to perform **10x faster** inference on jetson TX2.
 
-**NB:** For maximum performance, switch the power mode to **MAXN**(nvpmodel 0) and run the **jetson_clocks** script(/usr/bin) for maximum clock speed. 
+**NB:** For maximum performance, switch the power mode to **MAXN**(nvpmodel 0) and run the **jetson_clocks** script(/usr/bin) for maximum clock speed.
+
+### Segmentation Pipeline with Nvidia Deepstream and Jetson TxX2
+
+The **deepStream sdk** generic streaming analytics architecture defines an extensible **video processing pipeline** that can be used to perform **inference, object tracking and reporting**. As DeepStream applications analyze each video frame, plugins extract information and store it as part of cascaded **metadata records**, maintaining a record's association with the source frame. The full metadata collection at the end of the pipeline represents the complete set of information extracted from the frame by deep learning models and other **analytics plugins**. This information can be used by the DeepStream application for **display**, or **transmitted externally** as part of a message for further analysis or long term archival. Currently, it supports applications like **object detection, image classification and instance/semantic segmentation**, and model formats like **Caffe, Onnx and Uff** for inference. Other features include plugins for **IOT deployment, streaming support, multi-gpu, multi-stream and batching support** for high throughput inference. These applications can be developed in **C/C++ or Python** and can be easily deployed on system's with a **nvidia dGPU** or on embedded platforms like **jetson**. Also, they also support **FP16 and INT8** inferecne on selected hardware accelerators.
+
+In the deepstream python application we have **two camera inputs** connected to the system(i.e. jeston). We **decode and batch** the frames together with the help of various nvgst plugins and perform **inference on gpu**, in rela-time using **nvinfer** plugin. In the first application the output **segmentation maps** are combined and displayed on screen with the help of **nvsegvisual** anf nvegl plugins; whereas in the second one, the results are **streamed using rtsp** server plugins. 
+
+Here is the **schematic diagram** of the segmentation pipeline (deepstream_egl_multiseg).
+
+The above **segmentation pipeline** consists of the following plugins (ordered):
+
+* **GstV4l2Src** - Used to capture video from v4l2 devices, like webcams and tv cards
+* **GstVideoConvert** - Convert video frames between a great variety of video formats
+* **Gst-nvvideoconvert** - Performs video color format conversion (I420 to RGBA)
+* **GstCapsFilter** - Enforces limitations on data (no data modification)
+* **Gst-nvstreammux** - Batch video streams before sending for AI inference
+* **Gst-nvinfer** - Runs inference using TensorRT
+* **Gst-nvsegvisual** - Visualizes segmentation results
+* **Gst-nvmultistreamtiler** - Composites a 2D tile from batched buffers
+* **Gst-nvegltransform** -  Transform input from NVMM to EGLimage format
+* **Gst-nveglglessink** - Render the EGL/GLES output on screen
+
+The second **streaming application** (deepstream_rtsp_multiseg) includes additional plugins for rtsp streaming i.e  **nvv4l2h264enc, rtph264pay and udpsink**.
+
+Run the **applications on jetson** devices:-
+
+1. Install nvidia [deepstream sdk](https://docs.nvidia.com/metropolis/deepstream/dev-guide/index.html)(>=4.0) for jetson or tesla platform, pyton-gst bindings and gst-rtsp-server components by following the **deepstream dev-guide** documentation. 
+2. Connect two **webcams** to the jetson module through USB ports.
+3. Run these commands on the jetson device to **boost the clocks**: sudo nvpmodel -m 0; sudo jetson_clocks
+4. Run the applications from the **directory** '<DeepStream 4.0 ROOT>/sources/python' (i.e python deepstream samples).
+5. For the streaming application, open the rtsp stream using **VLC** player i.e 'rtsp://{jetson-ip}:8554/ds-seg' on another system (try vlc on android). 
+
+**Note:** Refer **conversion_onnx** ipython notebooks for converting **tensorflow/kertas** models to onnx_nchw format for deepstream inference.
 
 ### Segmentation via Background Subtraction: A Naive Approach
 
