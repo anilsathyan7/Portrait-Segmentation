@@ -922,3 +922,4 @@ Anil Sathyan
 * [Qualcomm Hexagon 685 DSP is a Boon for Machine Learning](https://www.xda-developers.com/qualcomm-snapdragon-845-hexagon-685-dsp)
 * [How Qualcomm Brought Tremendous Improvements in AI Performance to the Snapdragon 865](https://www.xda-developers.com/qualcomm-snapdragon-865-ai-performance-machine-learning-analysis/)
 * [TF-TRT 2.0 Workflow With A SavedModel](https://docs.nvidia.com/deeplearning/frameworks/tf-trt-user-guide/index.html#worflow-with-savedmodel)
+* [NVIDIA-AI-IOT: Deepstream_Python_Applications](https://github.com/NVIDIA-AI-IOT/deepstream_python_apps)
