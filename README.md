@@ -742,6 +742,10 @@ Run the **applications on jetson** devices:-
 4. Run the applications from the **directory** '*<DeepStream 4.0 ROOT>/sources/python*' (i.e python deepstream samples).
 5. For the streaming application, open the rtsp stream using **VLC** player i.e '*rtsp://{jetson-ip}:8554/ds-seg*' on another system (try vlc on android). 
 
+<p align="center">
+  <img  src="pictures/deepstream_result.png" height="320" width="1024">
+</p>
+
 **Note:** Refer **onnx_nchw_conversion** ipython notebooks for converting **tensorflow/keras** models to onnx_nchw format for deepstream inference. Also,before running the application configure the **webcam properites**(video source and resolution) based on your hardware settings.
 
 ### Segmentation via Background Subtraction: A Naive Approach
