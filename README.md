@@ -709,7 +709,7 @@ The inference time was reduced from 40 ms to **28 ms** on using tf-trt (i.e **30
 
 **NB:** For maximum performance, switch the power mode to **MAXN**(nvpmodel 0) and run the **jetson_clocks** script(/usr/bin) for maximum clock speed.
 
-### Segmentation Pipeline with Nvidia Deepstream and Jetson TX2
+### Mult-stream Segmentation Pipeline with Nvidia Deepstream and Jetson TX2
 
 The **deepstream sdk** generic streaming analytics architecture defines an extensible **video processing pipeline** that can be used to perform **inference, object tracking and reporting**. As deepstream applications analyze each video frame, plugins extract information and store it as part of cascaded **metadata records**, maintaining a record's association with the source frame. The full metadata collection at the end of the pipeline represents the complete set of information extracted from the frame by deep learning models and other **analytics plugins**. This information can be used by the DeepStream application for **display**, or **transmitted externally** as part of a message for further analysis or long term archival. Currently, it supports applications like **object detection, image classification and instance/semantic segmentation**, and model formats like **Caffe, Onnx and Uff** for inference. Other features include plugins for **IOT deployment, streaming support, multi-gpu, multi-stream and batching support** for high throughput inference. These applications can be developed in **C/C++ or Python** and can be easily deployed on system's with a **nvidia dGPU** or on embedded platforms like **jetson**. Also, they also support **FP16 and INT8** inferecne on selected hardware accelerators.
 
@@ -742,7 +742,7 @@ Run the **applications on jetson** devices:-
 4. Run the applications from the **directory** '*<DeepStream 4.0 ROOT>/sources/python*' (i.e python deepstream samples).
 5. For the streaming application, open the rtsp stream using **VLC** player i.e '*rtsp://{jetson-ip}:8554/ds-seg*' on another system (try vlc on android). 
 
-**Note:** Refer **onnx_nchw_conversion** ipython notebooks for converting **tensorflow/keras** models to onnx_nchw format for deepstream inference.
+**Note:** Refer **onnx_nchw_conversion** ipython notebooks for converting **tensorflow/keras** models to onnx_nchw format for deepstream inference. Also,before running the application configure the **webcam properites**(video source and resolution) based on your hardware settings.
 
 ### Segmentation via Background Subtraction: A Naive Approach
 
