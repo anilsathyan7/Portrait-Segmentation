@@ -928,3 +928,4 @@ Anil Sathyan
 * [TF-TRT 2.0 Workflow With A SavedModel](https://docs.nvidia.com/deeplearning/frameworks/tf-trt-user-guide/index.html#worflow-with-savedmodel)
 * [NVIDIA-AI-IOT: Deepstream_Python_Applications](https://github.com/NVIDIA-AI-IOT/deepstream_python_apps)
 * [Awesome Tflite: Models, Samples, Tutorials, Tools & Learning Resources.](https://github.com/margaretmz/awesome-tflite)
+* [Google: Machine Learning Bootcamp for Mobile Developers](https://www.youtube.com/watch?v=uMokEy_921Q)
