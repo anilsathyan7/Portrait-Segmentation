@@ -929,4 +929,4 @@ Anil Sathyan
 * [NVIDIA-AI-IOT: Deepstream_Python_Applications](https://github.com/NVIDIA-AI-IOT/deepstream_python_apps)
 * [Awesome Tflite: Models, Samples, Tutorials, Tools & Learning Resources.](https://github.com/margaretmz/awesome-tflite)
 * [Google: Machine Learning Bootcamp for Mobile Developers](https://www.youtube.com/watch?v=uMokEy_921Q)
-* [New mobile neural network architectures](https://machinethink.net/blog/mobile-architectures/)
+* [Machinethink: New mobile neural network architectures](https://machinethink.net/blog/mobile-architectures/)
