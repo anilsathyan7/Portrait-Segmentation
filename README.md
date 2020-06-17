@@ -866,7 +866,7 @@ Anil Sathyan
 * https://github.com/cainxx/image-segmenter-ios
 * https://github.com/gallifilo/final-year-project
 * https://github.com/dong-x16/PortraitNet
-* https://github.com/HYOJINPARK/ExtPortraitSeg/tree/da30a04d7b7a86f1aeed8f0747a88a46e5963149
+* https://github.com/clovaai/ext_portrait_segmentation
 * https://github.com/tantara/JejuNet
 * https://github.com/lizhengwei1992/mobile_phone_human_matting
 * https://github.com/dailystudio/ml/tree/master/deeplab
