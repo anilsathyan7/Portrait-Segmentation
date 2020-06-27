@@ -931,3 +931,4 @@ Anil Sathyan
 * [Awesome Tflite: Models, Samples, Tutorials, Tools & Learning Resources.](https://github.com/margaretmz/awesome-tflite)
 * [Google: Machine Learning Bootcamp for Mobile Developers](https://www.youtube.com/watch?v=uMokEy_921Q)
 * [Machinethink: New mobile neural network architectures](https://machinethink.net/blog/mobile-architectures/)
+* [Deeplab Tflite Tfhub](https://tfhub.dev/s?publisher=sayakpaul)
