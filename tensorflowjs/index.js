@@ -18,6 +18,7 @@ async function loadModel() {
 // Perform mask feathering (Gaussian-blurring + Egde-smoothing)
 function refine(mask) {
 
+const refine_out = tf.tidy(() => {
  // Reshape input
  const newmask = mask.reshape([1, 128, 128, 1]);
 
@@ -36,24 +37,23 @@ function refine(mask) {
  // Convolve the mask with kernel   
  const blurred = tf.conv2d(newmask, kernel, strides = [1, 1], padding = 'same');
  //Reshape the output
- const fb = blurred.squeeze(0) //
+ const fb = blurred.squeeze(0) 
  //Normalize the mask  to 0..1 range
- const norm_msk = fb.sub(fb.min()).div(fb.max().sub(fb.min()));
-
- // Dispose tensors
- fb.dispose();
- blurred.dispose();
- kernel.dispose();
- newmask.dispose();
+ const norm_msk =   fb.sub(fb.min()).div(fb.max().sub(fb.min()))
 
  // Return the result
  return smoothstep(norm_msk);
 
+});
+
+return refine_out;
 }
 
 
 /* Smooth the mask edges */
 function smoothstep(x) {
+
+const smooth_out = tf.tidy(() => {
 
  // Define the left and right edges 
  const edge0 = tf.scalar(0.3);
@@ -61,9 +61,14 @@ function smoothstep(x) {
 
  // Scale, bias and saturate x to 0..1 range
  const z = tf.clipByValue(x.sub(edge0).div(edge1.sub(edge0)), 0.0, 1.0);
-
+ 
  //Evaluate polynomial  z * z * (3 - 2 * x)
  return tf.square(z).mul(tf.scalar(3).sub(z.mul(tf.scalar(2))));
+
+});
+
+ 
+ return smooth_out ;
 }
 
 /*
@@ -72,23 +77,20 @@ function smoothstep(x) {
  */
 function process(image, mask) {
 
- const img = image.resizeBilinear([300, 300]);
- const msk = refine(mask).resizeNearestNeighbor([300, 300]);
+const blend_out = tf.tidy(() => {
 
+ const img = image.resizeBilinear([300, 300]);
+ const msk = refine(mask).resizeNearestNeighbor([300, 300]);;
  const img_crop = img.mul(msk);
  const bgd_crop = bgim.mul(tf.scalar(1.0).sub(msk));
  const result = tf.add(img_crop, bgd_crop);
 
- img.dispose();
- msk.dispose();
- img_crop.dispose();
- bgd_crop.dispose();
  return result;
+});
+
+return blend_out;
 
 }
-
-
-
 
 
 /*
@@ -96,35 +98,40 @@ function process(image, mask) {
  */
 async function predict() {
  while (isPredicting) {
-  // Capture the frame from the webcam.
-  const img = await getImage();
 
-  // Resize image for prediction
-  const resized = tf.image.resizeBilinear(img, [128, 128]).expandDims(0);
+  // Capture the frame from the webcam.
+  const img =  await getImage();
+  const resize = img.resizeBilinear([128, 128]).expandDims(0);
+ 
+  console.log('dtype', resize.dtype);
+
 
   // Predict the model output
-  const predictions = model.predict(resized);
-
-  // Wait for the model results
-  const out = await predictions;
+  const out = await  model.predict(resize);
 
   // Threshold the output to obtain mask
-  const thresh = tf.tensor1d([0.5]);
-  const res = out.greater(thresh).toFloat();
+  const thresh = tf.scalar(0.5);
+  const msk = out.greater(thresh)
+  const cst = tf.cast(msk,'float32').squeeze(0);
 
   // Post-process the output and blend images
-  const blend = process(img.squeeze(), res.reshape([128, 128, 1]));
-
+  const blend = process(img, cst);
+  
   // Draw output on the canvas
   await tf.browser.toPixels(blend, canvas);
-
-  // Dispose all tensors
-  res.dispose();
-  img.dispose();
+ 
+  // Dispose all tensors  
   blend.dispose();
+  resize.dispose();
+  msk.dispose();
+  cst.dispose();
+  thresh.dispose();
+  out.dispose();
+  img.dispose();
 
   // Wait for next frame
   await tf.nextFrame();
+ 
  }
 
 }
@@ -144,7 +151,7 @@ document.getElementById('stop').addEventListener('click', () => {
 /*
  *Captures a frame from the webcam and normalize them to float: 0-1.
  */
-async function getImage() {
+  async function getImage() {
  const img = await webcam.capture();
  const processedImg =
   tf.tidy(() => img.div(tf.scalar(255.0)));
