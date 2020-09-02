@@ -1,4 +1,3 @@
-
 let webcam;  // Webcam iterator
 let model;  //  Tensorflowjs model
 let bg;    // Background image
@@ -101,18 +100,17 @@ async function predict() {
 
   // Capture the frame from the webcam.
   const img =  await getImage();
-  const resize = img.resizeBilinear([128, 128]).expandDims(0);
+  const resize = img.resizeBilinear([128, 128]);
+  const expdim = resize.expandDims(0);
  
-  console.log('dtype', resize.dtype);
-
 
   // Predict the model output
-  const out = await  model.predict(resize);
+  const out = await  model.predict(expdim);
 
   // Threshold the output to obtain mask
   const thresh = tf.scalar(0.5);
-  const msk = out.greater(thresh)
-  const cst = tf.cast(msk,'float32').squeeze(0);
+  const msk = out.greater(thresh);
+  const cst = tf.cast(msk,'float32');
 
   // Post-process the output and blend images
   const blend = process(img, cst);
@@ -124,6 +122,7 @@ async function predict() {
   blend.dispose();
   resize.dispose();
   msk.dispose();
+  expdim.dispose();
   cst.dispose();
   thresh.dispose();
   out.dispose();
@@ -216,7 +215,6 @@ defImg.onload = function() {
  canvas.style.height = defImg.height;
  ctx.drawImage(defImg, 0, 0,defImg.width,defImg.height,0,0,300,300);
 };
-
 
 
 
