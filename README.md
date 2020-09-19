@@ -327,6 +327,7 @@ Here is a demo video of the application ...
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=JD2oxC8khbY
 " target="_blank"><img src="http://img.youtube.com/vi/JD2oxC8khbY/0.jpg" 
 alt="Video bokeh" width="560" height="315" border="10" /></a>
+ 
 
 ### Model running time
 
@@ -747,6 +748,26 @@ Run the **applications on jetson** devices:-
 </p>
 
 **Note:** Refer **onnx_nchw_conversion** ipython notebooks for converting **tensorflow/keras** models to onnx_nchw format for deepstream inference. Also,before running the application configure the **webcam properites**(video source and resolution) based on your hardware settings.
+
+### Portrait Segmentaion Using Mediapipe And Slimnet
+
+Mediapipe is an **open-source** framework for developing machine learning application, for **mobile**, desktop, web and IoT devices.
+It can be used to process data in various formats like **images, audio and video streams**. The basic idea is to construct a high-level **pipeline graph** for a ML workflow by integrating a set of modular components for individual operations like **data transformations, model inference, I/O operations**  etc.
+
+**Advantages**:-
+
+1. **Portable pipelines**: The same **pipeline graphs** can be developed and deployed on desktops, mobile or IOT devices.
+2. **Rapid prototyping**: Most of the common **image, video and ML operations** can be integrated as **nodes** in the development workflow.
+3. **Documentation and support**: It was developed by **google** and has a very good documentation, with lots of **demo** applications.
+4. **Extensibility**: Custom operations can be easily developed in **opencv(C++)** and integrated into the mediapipe workflow.
+
+The following are the steps for building android application with bazel, mediapipe and tflite:-
+
+1. Install bazel, jdk, **android sdk & ndk**, and mediapipe
+2. Convert the **slim_net** model for portrait segmentaion to tflite format 
+3. Modify the **hair_segmentaion** demo application from mediapipe repository
+4. Build the portrait_segmentaion application for android devices using **bazel**
+5. Install and run the portrait_segmentation application on **mobile**
 
 ### Segmentation via Background Subtraction: A Naive Approach
 
