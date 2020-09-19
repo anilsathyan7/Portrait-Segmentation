@@ -763,6 +763,8 @@ It can be used to process data in various formats like **images, audio and video
 
 **Portrait segmentaion mediapipe graphs**:-
 
+The basic pipeline for **video segmentaion** is described in the mediapipe [hair_segmentaion](https://google.github.io/mediapipe/solutions/hair_segmentation.html#mobile) application. Here, we use our **slimnet model** on the pipeline and segment out the foreground person from the background. Additionally, we apply an **edge detection** filter on the masked background region of the image.
+
 ![Screenshot](mediapipe_slimnet/mediapipe_graph.png)
 
 The following are the **steps** for building android application with bazel, mediapipe and tflite:-
@@ -773,7 +775,7 @@ The following are the **steps** for building android application with bazel, med
 4. Build the portrait_segmentaion application for android devices using **bazel**
 5. Install and run the portrait_segmentation application on **mobile**
 
-**Mediapipe portrait_segmentation(APK)**: [slimnet android](https://drive.google.com/file/d/1-67V2MFGmPRJadENxvnqnYiuI6XpD70g/view?usp=sharing) 
+Mediapipe portrait_segmentation(APK): [slimnet android](https://drive.google.com/file/d/1-67V2MFGmPRJadENxvnqnYiuI6XpD70g/view?usp=sharing) 
 
 ### Segmentation via Background Subtraction: A Naive Approach
 
@@ -959,3 +961,5 @@ Anil Sathyan
 * [Google: Machine Learning Bootcamp for Mobile Developers](https://www.youtube.com/watch?v=uMokEy_921Q)
 * [Machinethink: New mobile neural network architectures](https://machinethink.net/blog/mobile-architectures/)
 * [Deeplab Tflite Tfhub](https://tfhub.dev/s?publisher=sayakpaul)
+* [MediaPipe with Custom tflite Model](https://blog.gofynd.com/mediapipe-with-custom-tflite-model-d3ea0427b3c1)
+* [Google Mediapipe Github](https://github.com/google/mediapipe)
