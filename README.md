@@ -761,17 +761,19 @@ It can be used to process data in various formats like **images, audio and video
 3. **Documentation and support**: It was developed by **google** and has a very good documentation, with lots of **demo** applications.
 4. **Extensibility**: Custom operations can be easily developed in **opencv(C++)** and integrated into the mediapipe workflow.
 
-Portrait segmentaion mediapipe graphs:-
+**Portrait segmentaion mediapipe graphs**:-
 
 ![Screenshot](mediapipe_slimnet/mediapipe_graph.png)
 
-The following are the steps for building android application with bazel, mediapipe and tflite:-
+The following are the **steps** for building android application with bazel, mediapipe and tflite:-
 
 1. Install bazel, jdk, **android sdk & ndk**, and mediapipe
 2. Convert the **slim_net** model for portrait segmentaion to tflite format 
 3. Modify the **hair_segmentaion** demo application from mediapipe repository
 4. Build the portrait_segmentaion application for android devices using **bazel**
 5. Install and run the portrait_segmentation application on **mobile**
+
+**Mediapipe portrait_segmentation(APK)**: [slimnet android](https://drive.google.com/file/d/1-67V2MFGmPRJadENxvnqnYiuI6XpD70g/view?usp=sharing) 
 
 ### Segmentation via Background Subtraction: A Naive Approach
 
