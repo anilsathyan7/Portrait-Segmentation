@@ -775,11 +775,13 @@ The following are the **steps** for building android application with bazel, med
 4. Build the portrait_segmentaion application for android devices using **bazel**
 5. Install and run the portrait_segmentation application on **mobile**
 
-Mediapipe portrait_segmentation(APK): [slimnet android](https://drive.google.com/file/d/1-67V2MFGmPRJadENxvnqnYiuI6XpD70g/view?usp=sharing) 
+Mediapipe slimnet application screenshot:-
 
 <p align="left">
   <img  src="mediapipe_slimnet/mediapipe_app.jpg" height="420" width="240">
 </p>
+
+Mediapipe portrait_segmentation(APK): [slimnet android](https://drive.google.com/file/d/1-67V2MFGmPRJadENxvnqnYiuI6XpD70g/view?usp=sharing) 
 
 ### Segmentation via Background Subtraction: A Naive Approach
 
