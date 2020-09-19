@@ -752,7 +752,7 @@ Run the **applications on jetson** devices:-
 ### Portrait Segmentaion Using Mediapipe And Slimnet
 
 Mediapipe is an **open-source** framework for developing machine learning application, for **mobile**, desktop, web and IoT devices.
-It can be used to process data in various formats like **images, audio and video streams**. The basic idea is to construct a high-level **pipeline graph** for a ML workflow by integrating a set of modular components for individual operations like **data transformations, model inference, I/O operations**  etc.
+It can be used to process data in various formats like **images, audio and video streams**. The basic idea is to construct a high-level **pipeline graph** for a ML workflow by integrating a set of modular components for individual operations like **data transformations, model inference, I/O operations**  etc
 
 **Advantages**:-
 
@@ -760,6 +760,10 @@ It can be used to process data in various formats like **images, audio and video
 2. **Rapid prototyping**: Most of the common **image, video and ML operations** can be integrated as **nodes** in the development workflow.
 3. **Documentation and support**: It was developed by **google** and has a very good documentation, with lots of **demo** applications.
 4. **Extensibility**: Custom operations can be easily developed in **opencv(C++)** and integrated into the mediapipe workflow.
+
+Portrait segmentaion mediapipe graphs:-
+
+![Screenshot](mediapipe_slimnet/mediapipe_graph.png)
 
 The following are the steps for building android application with bazel, mediapipe and tflite:-
 
