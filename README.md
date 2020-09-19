@@ -777,6 +777,10 @@ The following are the **steps** for building android application with bazel, med
 
 Mediapipe portrait_segmentation(APK): [slimnet android](https://drive.google.com/file/d/1-67V2MFGmPRJadENxvnqnYiuI6XpD70g/view?usp=sharing) 
 
+<p align="left">
+  <img  src="mediapipe_slimnet/mediapipe_app.jpg" height="420" width="240">
+</p>
+
 ### Segmentation via Background Subtraction: A Naive Approach
 
 If we have a **static background**, we can easily obtain the mask of new objects appearing on the scene using the methods of background subtraction. Even though this seems straight-forward; there seems to be couple of **challenges** in this scenario. Firstly, even if objects does not move in the background, there will be small variations in corresponding pixel values due to changes in **lighting**, noise, camera quality etc. Secondly, if the new objects have **colour** similar to that of the background, it becomes difficult to find the **image difference**.
