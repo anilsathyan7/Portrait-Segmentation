@@ -783,6 +783,10 @@ Mediapipe slimnet application screenshot:-
 
 Mediapipe portrait_segmentation(APK): [slimnet android](https://drive.google.com/file/d/1-67V2MFGmPRJadENxvnqnYiuI6XpD70g/view?usp=sharing) 
 
+In the android demo, we used the default **mask_overlay_calculator** for performing alpha blending operation. Now, if we want to perfrom some advanced blending opertations, we will have to implement it as a **custom calculator** in mediapipe. In this demo, we will build a portrait segmentaion aplication using custom calculators on desktop, using mediapipe. There will be two inputs: a portrait video and a background video and a single output in the form of a video file. Our aim is to **blend** the portrait foreground region into the background video, with the help of a segmentaion mask. As in the case of android, we will follow the basic segmentation pipeline from **hair segmentaion** example. Since the application uses **gpu** operations, choose a GPU runtime for development and deployment.
+
+
+
 ### Segmentation via Background Subtraction: A Naive Approach
 
 If we have a **static background**, we can easily obtain the mask of new objects appearing on the scene using the methods of background subtraction. Even though this seems straight-forward; there seems to be couple of **challenges** in this scenario. Firstly, even if objects does not move in the background, there will be small variations in corresponding pixel values due to changes in **lighting**, noise, camera quality etc. Secondly, if the new objects have **colour** similar to that of the background, it becomes difficult to find the **image difference**.
