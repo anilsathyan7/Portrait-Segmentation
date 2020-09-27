@@ -783,7 +783,13 @@ Mediapipe slimnet application screenshot:-
 
 Mediapipe portrait_segmentation(APK): [slimnet android](https://drive.google.com/file/d/1-67V2MFGmPRJadENxvnqnYiuI6XpD70g/view?usp=sharing) 
 
-In the android demo, we used the default **mask_overlay_calculator** for performing alpha blending operation. Now, if we want to perfrom some advanced blending opertations, we will have to implement it as a **custom calculator** in mediapipe. In this demo, we will build a portrait segmentaion aplication using custom calculators on desktop, using mediapipe. There will be two inputs: a portrait video and a background video and a single output in the form of a video file. Our aim is to **blend** the portrait foreground region into the background video, with the help of a segmentaion mask. As in the case of android, we will follow the basic segmentation pipeline from **hair segmentaion** example. Since the application uses **gpu** operations, choose a GPU runtime for development and deployment.
+In the android demo, we used the default **mask_overlay_calculator** for performing alpha blending operation. Now, if we want to perfrom some advanced blending opertations, we will have to implement it as a **custom calculator** in mediapipe. In this [demo](https://github.com/anilsathyan7/Portrait-Segmentation/blob/master/mediapipe_slimnet/desktop/mediapipe_custom_calculator.ipynb), we will build a portrait segmentaion aplication using custom calculators on desktop, using mediapipe. There will be two inputs: a portrait video and a background video and a single output in the form of a video file. Our aim is to **blend** the portrait foreground region into the background video, with the help of a **segmentaion mask**. As in the case of android, we will follow the basic segmentation pipeline from **hair segmentaion** example. Since the application uses **gpu** operations, choose a GPU runtime for development and deployment.
+
+Portrait segmentaion desktop:-
+
+<p align="left">
+  <img  src="mediapipe_slimnet/desktop/seamless_clone.gif">
+</p>
 
 
 
