@@ -279,6 +279,7 @@ The model seems to perform well on **still images**; but on videos in mobile it 
 
 SINet is an **lightweight** portrait segmentaion dnn architecture for mobile devices. The  model which contains around **86.9 K parameters** is able to run at **100 FPS** on iphone (input size -224) , while maintaining the **accuracy** under an 1% margin from the state-of-the-art portrait segmentation method. The proposed portrait segmentation model conatins two new modules for fast and accurate segmentaion viz. **information blocking decoder structure and spatial squeeze modules**.
 
+![Screenshot](SINet/SINet_Architecture.png)
 
 1. **Information Blocking Decoder**: It measures the confidence in a low-resolution feature map, and blocks the influence of high-resolution feature maps in
 highly confident pixels. This prevents noisy information to ruin already certain areas, and allows the model to focuson regions with high uncertainty.  
@@ -290,6 +291,8 @@ Besides the aforementioned features, the SINet architecture uses **depthwise sep
 
 
 We trained the sinet model with **aisegment + baidu portrait** dataset using input size **320** and cross entropy loss ginction, for 600 epochs and achieved an **mIOU of  97.5%**. The combined datset consists of around **80K images**(train+val), after data augmentaion. The final trained model has a size of **480kB** and params. Finally, the pytorch model was exported to ONNX and CoreML formats for mobile deployment.
+
+![Screenshot](SINet/SINet_Result.png)
 
 ### Android Application 
 
