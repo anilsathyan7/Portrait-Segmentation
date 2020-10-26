@@ -290,7 +290,7 @@ highly confident pixels. This prevents noisy information to ruin already certain
 Besides the aforementioned features, the SINet architecture uses **depthwise separable convolution and PReLU actiavtion** in the encoder modules. They also use **Squeeze-and-Excitation** (SE) blocks that adaptively recalibrates channel-wise feature responses by explicitly modelling interdependencies between channels, for improving the model accuracy. For training, they used cross entropy loss with additional **boundary refinement**. In general it is **faster and smaller** than most of the  portrait segmentaion models; but in terms of accuracy it falls behind portrait-net model by a small margin. The model seems to be **faster than mobilentv3** in iOS; but in android it seems likely to make only a marginal difference(due to optimized tflite swish operator).
 
 
-We trained the sinet model with **aisegment + baidu portrait** dataset using input size **320** and cross entropy loss ginction, for 600 epochs and achieved an **mIOU of  97.5%**. The combined datset consists of around **80K images**(train+val), after data augmentaion. The final trained model has a size of **480kB** and **86.91K parameters**. Finally, the pytorch model was exported to ONNX and CoreML formats for mobile deployment.
+We trained the sinet model with **aisegment + baidu portrait** dataset using input size **320** and cross entropy loss function, for 600 epochs and achieved an **mIOU of  97.5%**. The combined dataset consists of around **80K images**(train+val), after data augmentaion. The final trained model has a size of **480kB** and **86.91K parameters**. Finally, the pytorch model was exported to ONNX and CoreML formats for mobile deployment.
 
 ![Screenshot](SINet/SINet_Result.png)
 
