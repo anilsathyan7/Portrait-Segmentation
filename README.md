@@ -292,6 +292,8 @@ Besides the aforementioned features, the SINet architecture uses **depthwise sep
 
 We trained the sinet model with **aisegment + baidu portrait** dataset using input size **320** and cross entropy loss function, for 600 epochs and achieved an **mIOU of  97.5%**. The combined dataset consists of around **80K images**(train+val), after data augmentaion. The final trained model has a size of **480kB** and **86.91K parameters**. Finally, the pytorch model was exported to ONNX and CoreML formats for mobile deployment.
 
+In practice the model works well with **simple portrait images**; but for videos with more background regions the model produces **artefacts** on the output during inference. Unfortunaltely both the original models and aisegment retrained models suffer from this problem, even after acheiving 95% mIOU after training. In the worst case scenario, we may need to run a **localizer** over the image and crop out the tightly bound roi region containing person before running the segmentation model or apply morphological opening/closing over the output binary mask. But this comes with additional cost and may nullify the overall advantage of the light weight segmenation model.
+
 ![Screenshot](SINet/SINet_Result.png)
 
 ### Android Application 
