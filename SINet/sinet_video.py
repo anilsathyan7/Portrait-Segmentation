@@ -13,8 +13,7 @@ model.load_state_dict(torch.load('model_296.pth'))
 model.eval()
 
 # Enable gpu mode, if cuda available
-#device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-device = torch.device("cpu" if torch.cuda.is_available() else "cpu")
+device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 model.to(device)
 
 # Load and resize the background image
