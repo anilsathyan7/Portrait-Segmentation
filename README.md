@@ -13,6 +13,7 @@ Here we limit ourselves to **binary classes** (person or background) and use onl
 3. Prisma-Net
 4. Portrait-Net
 5. Slim-Net
+6. SINet
 
 The models were trained with standard(and custom) **portrait datasets** and their performance was compared with the help of  standard **evaluation metrics and benchmarking** tools. Finally, the models were deployed on **edge devices**, using popular embedded(mobile) machine-learning platforms for **real-time inference**.
 
