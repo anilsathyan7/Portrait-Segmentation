@@ -307,6 +307,21 @@ We trained the sinet model with **aisegment + baidu portrait** dataset using inp
 
 In practice the model works well with **simple portrait images**; but for videos with more background regions the model produces **artefacts** on the output during inference. Unfortunaltely both the original models and aisegment retrained models suffer from this problem, even after acheiving 95% mIOU after training. In the worst case scenario, we may need to run a **localizer** over the image and crop out the tightly bound roi region containing person before running the segmentation model or apply morphological opening/closing over the output binary mask. But this comes with **additional cost** and would nullify the overall advantage of the light weight segmenation model.
 
+#### Quantizing MobilenetV3 Models With Keras API
+
+**MobileNetV3** is the next generation of on-device deep vision model from google. It is twice as fast as MobileNetV2 with equivalent accuracy, and advances the state-of-the-art for mobile computer vision networks. Here we use minimalistic version of **mobilenetv3** with input size 256 as the encoder part of the network. In the **decoder** module we use **transition blocks** along with upsampling layers , similar to the decoder modules in the portrait-net architecture. There are two branches in this block: one branch contains two **depthwise separable convolutions** and  the other contains a single **1×1 convolution** to adjust the number of channels. For upsampling we use **bilinear resize** along with the transition blocks in the decoder module. In the case of **skip connections** between encoder anmd decoder, we use **element-wise addition** instead of concatenation for faster inference speed.
+
+During training, initially we **freeze** all the layers of encoder  and train it for 10 epochs. After that, we unfreeze all the layers and train the model for additional 10 epochs. Finally, we perform **quantization aware training** on the float model, and convert all of the the models to **tflite** format.
+
+**Observations:-**
+
+1. Using the pretrained mobilnetv3 as the encoder during training greatly improved the **convergence speed**. Also, the input images were normalized to [-1.0, 1.0] range before passing to the model. The float model convegerd to **98% validation accuracy** within first 20 epochs.
+2. Using the latest tensorflow built from source and aisegment dataset with 68852 images, the training process took about **2 hours** for completing **20 epochs**, on a Tesla P100 GPU in google colaboratory.
+3. In the current tensorflow 2.3 and tf model optimization library, some layers like **Rescale, Upsampling2D, Conv2DTranspose** are not supported by the tf.keras Quantization Aware Training API's. For this purpose you have to install the latest **nightly version** or build the same from source. Similarly the mobilenetv3 pretrained models are only available in tf-nightly(currently).
+4. Using **elementwise additon** instead of concatenation on skip connection bewteen encoder and decoder geartly helped to decrease the model size and improve it's **inference** time.
+5. After quantization aware training, even though the model **size was reduced by 3x**, there was **no considerable loss in model accuracy**. However we were unable to convert the QAT model to full integer quantized version due to some internal tensorflow issues.
+
+
 ### Android Application 
 
 #### SegMe_V0
