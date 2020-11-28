@@ -1,0 +1,177 @@
+STARTING!
+Duplicate flags: num_threads
+Min num runs: [50]
+Min runs duration (seconds): [1]
+Max runs duration (seconds): [150]
+Inter-run delay (seconds): [-1]
+Num threads: [2]
+Benchmark name: []
+Output prefix: []
+Min warmup runs: [1]
+Min warmup runs duration (seconds): [0.5]
+Graph: [/data/local/tmp/mnv3_seg_float.tflite]
+Input layers: []
+Input shapes: []
+Input value ranges: []
+Input layer values files: []
+Use legacy nnapi : [0]
+Allow fp16 : [0]
+Require full delegation : [0]
+Enable op profiling: [1]
+Max profiling buffer entries: [1024]
+CSV File to export profiling data to: []
+Enable platform-wide tracing: [0]
+#threads used for CPU inference: [2]
+Max number of delegated partitions : [0]
+Min nodes per partition : [0]
+External delegate path : []
+External delegate options : []
+Use gpu : [0]
+Allow lower precision in gpu : [1]
+Enable running quant models in gpu : [1]
+Use Hexagon : [0]
+Hexagon lib path : [/data/local/tmp]
+Hexagon Profiling : [0]
+Use nnapi : [0]
+Use xnnpack : [0]
+Loaded model /data/local/tmp/mnv3_seg_float.tflite
+The input model file size (MB): 3.79893
+Initialized session in 0.746ms.
+Running benchmark for at least 1 iterations and at least 0.5 seconds but terminate if exceeding 150 seconds.
+count=27 first=49587 curr=17228 min=17052 max=49587 avg=18851.5 std=6059
+
+Running benchmark for at least 50 iterations and at least 1 seconds but terminate if exceeding 150 seconds.
+count=58 first=17231 curr=17201 min=16993 max=17256 avg=17138 std=58
+
+Inference timings in us: Init: 746, First inference: 49587, Warmup (avg): 18851.5, Inference (avg): 17138
+Note: as the benchmark tool itself affects memory footprint, the following is only APPROXIMATE to the actual memory footprint of the model at runtime. Take the information at your discretion.
+Peak memory footprint (MB): init=2.58594 overall=15.7461
+Profiling Info for Benchmark Initialization:
+============================== Run Order ==============================
+	             [node type]	          [start]	  [first]	 [avg ms]	     [%]	  [cdf%]	  [mem KB]	[times called]	[Name]
+	         AllocateTensors	            0.000	    0.110	    0.110	100.000%	100.000%	     0.000	        1	AllocateTensors/0
+
+============================== Top by Computation Time ==============================
+	             [node type]	          [start]	  [first]	 [avg ms]	     [%]	  [cdf%]	  [mem KB]	[times called]	[Name]
+	         AllocateTensors	            0.000	    0.110	    0.110	100.000%	100.000%	     0.000	        1	AllocateTensors/0
+
+Number of nodes executed: 1
+============================== Summary by node type ==============================
+	             [Node type]	  [count]	  [avg ms]	    [avg %]	    [cdf %]	  [mem KB]	[times called]
+	         AllocateTensors	        1	     0.110	   100.000%	   100.000%	     0.000	        1
+
+Timings (microseconds): count=1 curr=110
+Memory (bytes): count=0
+1 nodes observed
+
+
+
+Operator-wise Profiling Info for Regular Benchmark Runs:
+============================== Run Order ==============================
+	             [node type]	          [start]	  [first]	 [avg ms]	     [%]	  [cdf%]	  [mem KB]	[times called]	[Name]
+	                 CONV_2D	            0.000	    1.504	    1.502	  8.780%	  8.780%	     0.000	        1	[model/re_lu/Relu;model/Conv/BatchNorm/FusedBatchNormV3;model/expanded_conv/depthwise/BatchNorm/FusedBatchNormV3;model/expanded_conv/depthwise/depthwise;model/conv2d_10/Conv2D;model/Conv/Conv2D]:0
+	                     PAD	            1.502	    0.239	    0.190	  1.109%	  9.889%	     0.000	        1	[model/expanded_conv/depthwise/pad/Pad]:1
+	       DEPTHWISE_CONV_2D	            1.693	    0.235	    0.216	  1.265%	 11.154%	     0.000	        1	[model/re_lu_1/Relu;model/expanded_conv/depthwise/BatchNorm/FusedBatchNormV3;model/expanded_conv/depthwise/depthwise;model/conv2d_10/Conv2D]:2
+	                 CONV_2D	            1.909	    0.120	    0.123	  0.721%	 11.875%	     0.000	        1	[model/expanded_conv/project/BatchNorm/FusedBatchNormV3;model/conv2d_10/Conv2D;model/expanded_conv/project/Conv2D1]:3
+	                 CONV_2D	            2.033	    0.217	    0.235	  1.373%	 13.248%	     0.000	        1	[model/re_lu_2/Relu;model/expanded_conv_1/expand/BatchNorm/FusedBatchNormV3;model/expanded_conv_1/depthwise/BatchNorm/FusedBatchNormV3;model/expanded_conv_1/depthwise/depthwise;model/depthwise_conv2d_6/depthwise;model/expanded_conv_1/expand/Conv2D]:4
+	                     PAD	            2.269	    0.152	    0.155	  0.907%	 14.155%	     0.000	        1	[model/expanded_conv_1/depthwise/pad/Pad]:5
+	       DEPTHWISE_CONV_2D	            2.424	    0.291	    0.298	  1.745%	 15.900%	     0.000	        1	[model/re_lu_3/Relu;model/expanded_conv_1/depthwise/BatchNorm/FusedBatchNormV3;model/expanded_conv_1/depthwise/depthwise;model/depthwise_conv2d_6/depthwise]:6
+	                 CONV_2D	            2.723	    0.120	    0.114	  0.669%	 16.570%	     0.000	        1	[model/expanded_conv_1/project/BatchNorm/FusedBatchNormV3;model/expanded_conv_2/project/Conv2D;model/expanded_conv_1/project/Conv2D1]:7
+	                 CONV_2D	            2.838	    0.108	    0.093	  0.541%	 17.111%	     0.000	        1	[model/re_lu_4/Relu;model/expanded_conv_2/expand/BatchNorm/FusedBatchNormV3;model/expanded_conv_2/depthwise/BatchNorm/FusedBatchNormV3;model/expanded_conv_2/depthwise/depthwise;model/expanded_conv_2/expand/Conv2D]:8
+	       DEPTHWISE_CONV_2D	            2.931	    0.171	    0.181	  1.061%	 18.172%	     0.000	        1	[model/re_lu_5/Relu;model/expanded_conv_2/depthwise/BatchNorm/FusedBatchNormV3;model/expanded_conv_2/depthwise/depthwise]:9
+	                 CONV_2D	            3.113	    0.105	    0.112	  0.657%	 18.829%	     0.000	        1	[model/expanded_conv_2/project/BatchNorm/FusedBatchNormV3;model/expanded_conv_2/project/Conv2D1]:10
+	                     ADD	            3.226	    0.016	    0.014	  0.084%	 18.913%	     0.000	        1	[model/expanded_conv_2/Add/add]:11
+	                 CONV_2D	            3.241	    0.107	    0.098	  0.570%	 19.483%	     0.000	        1	[model/re_lu_6/Relu;model/expanded_conv_3/expand/BatchNorm/FusedBatchNormV3;model/expanded_conv_3/depthwise/BatchNorm/FusedBatchNormV3;model/expanded_conv_3/depthwise/depthwise;model/depthwise_conv2d_4/depthwise;model/expanded_conv_3/expand/Conv2D]:12
+	                     PAD	            3.338	    0.032	    0.031	  0.184%	 19.667%	     0.000	        1	[model/expanded_conv_3/depthwise/pad/Pad]:13
+	       DEPTHWISE_CONV_2D	            3.370	    0.056	    0.063	  0.367%	 20.034%	     0.000	        1	[model/re_lu_7/Relu;model/expanded_conv_3/depthwise/BatchNorm/FusedBatchNormV3;model/expanded_conv_3/depthwise/depthwise;model/depthwise_conv2d_4/depthwise]:14
+	                 CONV_2D	            3.433	    0.045	    0.050	  0.290%	 20.324%	     0.000	        1	[model/expanded_conv_3/project/BatchNorm/FusedBatchNormV3;model/expanded_conv_5/project/Conv2D;model/expanded_conv_3/project/Conv2D1]:15
+	                 CONV_2D	            3.483	    0.101	    0.093	  0.543%	 20.867%	     0.000	        1	[model/re_lu_8/Relu;model/expanded_conv_4/expand/BatchNorm/FusedBatchNormV3;model/expanded_conv_5/depthwise/BatchNorm/FusedBatchNormV3;model/expanded_conv_5/depthwise/depthwise;model/expanded_conv_4/expand/Conv2D]:16
+	       DEPTHWISE_CONV_2D	            3.576	    0.087	    0.093	  0.545%	 21.411%	     0.000	        1	[model/re_lu_9/Relu;model/expanded_conv_4/depthwise/BatchNorm/FusedBatchNormV3;model/expanded_conv_5/depthwise/BatchNorm/FusedBatchNormV3;model/expanded_conv_5/depthwise/depthwise;model/expanded_conv_4/depthwise/depthwise]:17
+	                 CONV_2D	            3.670	    0.114	    0.109	  0.639%	 22.050%	     0.000	        1	[model/expanded_conv_4/project/BatchNorm/FusedBatchNormV3;model/expanded_conv_5/project/Conv2D;model/expanded_conv_4/project/Conv2D1]:18
+	                     ADD	            3.780	    0.007	    0.006	  0.037%	 22.087%	     0.000	        1	[model/expanded_conv_4/Add/add]:19
+	                 CONV_2D	            3.786	    0.091	    0.093	  0.544%	 22.630%	     0.000	        1	[model/re_lu_10/Relu;model/expanded_conv_5/expand/BatchNorm/FusedBatchNormV3;model/expanded_conv_5/depthwise/BatchNorm/FusedBatchNormV3;model/expanded_conv_5/depthwise/depthwise;model/expanded_conv_5/expand/Conv2D]:20
+	       DEPTHWISE_CONV_2D	            3.880	    0.108	    0.098	  0.575%	 23.205%	     0.000	        1	[model/re_lu_11/Relu;model/expanded_conv_5/depthwise/BatchNorm/FusedBatchNormV3;model/expanded_conv_5/depthwise/depthwise]:21
+	                 CONV_2D	            3.978	    0.096	    0.099	  0.578%	 23.783%	     0.000	        1	[model/expanded_conv_5/project/BatchNorm/FusedBatchNormV3;model/expanded_conv_5/project/Conv2D1]:22
+	                     ADD	            4.077	    0.005	    0.005	  0.032%	 23.815%	     0.000	        1	[model/expanded_conv_5/Add/add]:23
+	                 CONV_2D	            4.083	    0.047	    0.052	  0.307%	 24.121%	     0.000	        1	[model/re_lu_12/Relu;model/expanded_conv_6/expand/BatchNorm/FusedBatchNormV3;model/expanded_conv_6/depthwise/BatchNorm/FusedBatchNormV3;model/expanded_conv_6/depthwise/depthwise;model/expanded_conv_6/expand/Conv2D]:24
+	       DEPTHWISE_CONV_2D	            4.136	    0.053	    0.057	  0.334%	 24.456%	     0.000	        1	[model/re_lu_13/Relu;model/expanded_conv_6/depthwise/BatchNorm/FusedBatchNormV3;model/expanded_conv_6/depthwise/depthwise]:25
+	                 CONV_2D	            4.193	    0.058	    0.060	  0.351%	 24.807%	     0.000	        1	[model/expanded_conv_6/project/BatchNorm/FusedBatchNormV3;model/expanded_conv_7/project/Conv2D;model/expanded_conv_6/project/Conv2D1]:26
+	                 CONV_2D	            4.254	    0.065	    0.069	  0.405%	 25.212%	     0.000	        1	[model/re_lu_14/Relu;model/expanded_conv_7/expand/BatchNorm/FusedBatchNormV3;model/expanded_conv_7/depthwise/BatchNorm/FusedBatchNormV3;model/expanded_conv_7/depthwise/depthwise;model/expanded_conv_7/expand/Conv2D]:27
+	       DEPTHWISE_CONV_2D	            4.323	    0.071	    0.061	  0.354%	 25.566%	     0.000	        1	[model/re_lu_15/Relu;model/expanded_conv_7/depthwise/BatchNorm/FusedBatchNormV3;model/expanded_conv_7/depthwise/depthwise]:28
+	                 CONV_2D	            4.384	    0.071	    0.070	  0.407%	 25.973%	     0.000	        1	[model/expanded_conv_7/project/BatchNorm/FusedBatchNormV3;model/expanded_conv_7/project/Conv2D1]:29
+	                     ADD	            4.454	    0.007	    0.007	  0.039%	 26.012%	     0.000	        1	[model/expanded_conv_7/Add/add]:30
+	                 CONV_2D	            4.461	    0.124	    0.127	  0.743%	 26.755%	     0.000	        1	[model/re_lu_16/Relu;model/expanded_conv_8/expand/BatchNorm/FusedBatchNormV3;model/expanded_conv_8/depthwise/BatchNorm/FusedBatchNormV3;model/expanded_conv_8/depthwise/depthwise;model/depthwise_conv2d_2/depthwise;model/expanded_conv_8/expand/Conv2D]:31
+	                     PAD	            4.588	    0.022	    0.022	  0.126%	 26.881%	     0.000	        1	[model/expanded_conv_8/depthwise/pad/Pad]:32
+	       DEPTHWISE_CONV_2D	            4.611	    0.039	    0.047	  0.274%	 27.155%	     0.000	        1	[model/re_lu_17/Relu;model/expanded_conv_8/depthwise/BatchNorm/FusedBatchNormV3;model/expanded_conv_8/depthwise/depthwise;model/depthwise_conv2d_2/depthwise]:33
+	                 CONV_2D	            4.658	    0.077	    0.081	  0.472%	 27.628%	     0.000	        1	[model/expanded_conv_8/project/BatchNorm/FusedBatchNormV3;model/depthwise_conv2d_4/depthwise;model/expanded_conv_8/project/Conv2D1]:34
+	                 CONV_2D	            4.739	    0.145	    0.138	  0.808%	 28.436%	     0.000	        1	[model/re_lu_18/Relu;model/expanded_conv_9/expand/BatchNorm/FusedBatchNormV3;model/expanded_conv_10/depthwise/BatchNorm/FusedBatchNormV3;model/expanded_conv_10/depthwise/depthwise;model/depthwise_conv2d/depthwise;model/expanded_conv_9/expand/Conv2D]:35
+	       DEPTHWISE_CONV_2D	            4.877	    0.054	    0.061	  0.357%	 28.792%	     0.000	        1	[model/re_lu_19/Relu;model/expanded_conv_9/depthwise/BatchNorm/FusedBatchNormV3;model/expanded_conv_10/depthwise/BatchNorm/FusedBatchNormV3;model/expanded_conv_10/depthwise/depthwise;model/depthwise_conv2d/depthwise;model/expanded_conv_9/depthwise/depthwise]:36
+	                 CONV_2D	            4.939	    0.151	    0.156	  0.910%	 29.702%	     0.000	        1	[model/expanded_conv_9/project/BatchNorm/FusedBatchNormV3;model/depthwise_conv2d_4/depthwise;model/expanded_conv_9/project/Conv2D1]:37
+	                     ADD	            5.095	    0.004	    0.005	  0.028%	 29.730%	     0.000	        1	[model/expanded_conv_9/Add/add]:38
+	                 CONV_2D	            5.100	    0.149	    0.138	  0.806%	 30.536%	     0.000	        1	[model/re_lu_20/Relu;model/expanded_conv_10/expand/BatchNorm/FusedBatchNormV3;model/expanded_conv_10/depthwise/BatchNorm/FusedBatchNormV3;model/expanded_conv_10/depthwise/depthwise;model/depthwise_conv2d/depthwise;model/expanded_conv_10/expand/Conv2D]:39
+	       DEPTHWISE_CONV_2D	            5.238	    0.057	    0.063	  0.369%	 30.905%	     0.000	        1	[model/re_lu_21/Relu;model/expanded_conv_10/depthwise/BatchNorm/FusedBatchNormV3;model/expanded_conv_10/depthwise/depthwise;model/depthwise_conv2d/depthwise]:40
+	                 CONV_2D	            5.302	    0.146	    0.147	  0.858%	 31.763%	     0.000	        1	[model/expanded_conv_10/project/BatchNorm/FusedBatchNormV3;model/depthwise_conv2d_4/depthwise;model/expanded_conv_10/project/Conv2D1]:41
+	                     ADD	            5.449	    0.004	    0.004	  0.025%	 31.788%	     0.000	        1	[model/expanded_conv_10/Add/add]:42
+	                 CONV_2D	            5.453	    0.133	    0.135	  0.789%	 32.577%	     0.000	        1	[model/Conv_1/BatchNorm/FusedBatchNormV3;model/depthwise_conv2d/depthwise;model/Conv_1/Conv2D1]:43
+	                 CONV_2D	            5.589	    0.414	    0.416	  2.430%	 35.007%	     0.000	        1	[model/batch_normalization_4/FusedBatchNormV3;model/conv2d_2/BiasAdd/ReadVariableOp/resource;model/conv2d_2/BiasAdd;model/expanded_conv_8/depthwise/BatchNorm/FusedBatchNormV3;model/expanded_conv_8/depthwise/depthwise;model/depthwise_conv2d_2/depthwise;model/conv2d_2/Conv2D]:44
+	       DEPTHWISE_CONV_2D	            6.005	    0.086	    0.068	  0.398%	 35.406%	     0.000	        1	[model/activation/Relu;model/batch_normalization/FusedBatchNormV3;model/depthwise_conv2d/depthwise;model/depthwise_conv2d/BiasAdd;model/depthwise_conv2d/BiasAdd/ReadVariableOp/resource1]:45
+	                 CONV_2D	            6.073	    0.418	    0.425	  2.484%	 37.889%	     0.000	        1	[model/activation_1/Relu;model/batch_normalization_1/FusedBatchNormV3;model/conv2d/BiasAdd/ReadVariableOp/resource;model/conv2d/BiasAdd;model/depthwise_conv2d_2/depthwise;model/conv2d/Conv2D1]:46
+	       DEPTHWISE_CONV_2D	            6.499	    0.033	    0.036	  0.208%	 38.097%	     0.000	        1	[model/activation_2/Relu;model/batch_normalization_2/FusedBatchNormV3;model/depthwise_conv2d_1/depthwise;model/depthwise_conv2d_1/BiasAdd;model/depthwise_conv2d_2/depthwise;model/depthwise_conv2d_1/BiasAdd/ReadVariableOp/resource1]:47
+	                 CONV_2D	            6.535	    0.224	    0.212	  1.240%	 39.337%	     0.000	        1	[model/batch_normalization_3/FusedBatchNormV3;model/conv2d_1/BiasAdd/ReadVariableOp/resource;model/conv2d_1/BiasAdd;model/expanded_conv_8/depthwise/BatchNorm/FusedBatchNormV3;model/expanded_conv_8/depthwise/depthwise;model/depthwise_conv2d_2/depthwise;model/conv2d_1/Conv2D]:48
+	                     ADD	            6.747	    0.013	    0.013	  0.079%	 39.415%	     0.000	        1	[model/activation_3/Relu;model/add/add]:49
+	         RESIZE_BILINEAR	            6.761	    0.124	    0.126	  0.735%	 40.151%	     0.000	        1	[model/up_sampling2d/resize/ResizeBilinear]:50
+	                     ADD	            6.887	    0.047	    0.049	  0.286%	 40.437%	     0.000	        1	[model/add_1/add]:51
+	                 CONV_2D	            6.937	    0.249	    0.258	  1.508%	 41.945%	     0.000	        1	[model/batch_normalization_9/FusedBatchNormV3;model/conv2d_5/BiasAdd/ReadVariableOp/resource;model/conv2d_5/BiasAdd;model/expanded_conv_3/depthwise/BatchNorm/FusedBatchNormV3;model/expanded_conv_3/depthwise/depthwise;model/depthwise_conv2d_4/depthwise;model/conv2d_5/Conv2D]:52
+	       DEPTHWISE_CONV_2D	            7.195	    0.124	    0.133	  0.777%	 42.721%	     0.000	        1	[model/activation_4/Relu;model/batch_normalization_5/FusedBatchNormV3;model/depthwise_conv2d_2/depthwise;model/depthwise_conv2d_2/BiasAdd;model/depthwise_conv2d_2/BiasAdd/ReadVariableOp/resource1]:53
+	                 CONV_2D	            7.328	    0.258	    0.247	  1.445%	 44.166%	     0.000	        1	[model/activation_5/Relu;model/batch_normalization_6/FusedBatchNormV3;model/conv2d_3/BiasAdd/ReadVariableOp/resource;model/conv2d_3/BiasAdd;model/depthwise_conv2d_4/depthwise;model/conv2d_3/Conv2D1]:54
+	       DEPTHWISE_CONV_2D	            7.576	    0.041	    0.048	  0.282%	 44.448%	     0.000	        1	[model/activation_6/Relu;model/batch_normalization_7/FusedBatchNormV3;model/depthwise_conv2d_3/depthwise;model/depthwise_conv2d_3/BiasAdd;model/depthwise_conv2d_4/depthwise;model/depthwise_conv2d_3/BiasAdd/ReadVariableOp/resource1]:55
+	                 CONV_2D	            7.624	    0.083	    0.087	  0.508%	 44.956%	     0.000	        1	[model/batch_normalization_8/FusedBatchNormV3;model/conv2d_4/BiasAdd/ReadVariableOp/resource;model/conv2d_4/BiasAdd;model/expanded_conv_3/depthwise/BatchNorm/FusedBatchNormV3;model/expanded_conv_3/depthwise/depthwise;model/depthwise_conv2d_4/depthwise;model/conv2d_4/Conv2D]:56
+	                     ADD	            7.711	    0.014	    0.013	  0.076%	 45.032%	     0.000	        1	[model/activation_7/Relu;model/add_2/add]:57
+	         RESIZE_BILINEAR	            7.725	    0.171	    0.172	  1.004%	 46.036%	     0.000	        1	[model/up_sampling2d_1/resize/ResizeBilinear]:58
+	                     ADD	            7.898	    0.057	    0.055	  0.322%	 46.359%	     0.000	        1	[model/add_3/add]:59
+	                 CONV_2D	            7.954	    0.266	    0.262	  1.531%	 47.889%	     0.000	        1	[model/batch_normalization_14/FusedBatchNormV3;model/conv2d_8/BiasAdd/ReadVariableOp/resource;model/conv2d_8/BiasAdd;model/expanded_conv_1/depthwise/BatchNorm/FusedBatchNormV3;model/expanded_conv_1/depthwise/depthwise;model/depthwise_conv2d_6/depthwise;model/conv2d_8/Conv2D]:60
+	       DEPTHWISE_CONV_2D	            8.216	    0.163	    0.167	  0.979%	 48.868%	     0.000	        1	[model/activation_8/Relu;model/batch_normalization_10/FusedBatchNormV3;model/depthwise_conv2d_4/depthwise;model/depthwise_conv2d_4/BiasAdd;model/depthwise_conv2d_4/BiasAdd/ReadVariableOp/resource1]:61
+	                 CONV_2D	            8.383	    0.257	    0.266	  1.556%	 50.425%	     0.000	        1	[model/activation_9/Relu;model/batch_normalization_11/FusedBatchNormV3;model/conv2d_6/BiasAdd/ReadVariableOp/resource;model/conv2d_6/BiasAdd;model/depthwise_conv2d_6/depthwise;model/conv2d_6/Conv2D1]:62
+	       DEPTHWISE_CONV_2D	            8.650	    0.155	    0.146	  0.852%	 51.277%	     0.000	        1	[model/activation_10/Relu;model/batch_normalization_12/FusedBatchNormV3;model/depthwise_conv2d_5/depthwise;model/depthwise_conv2d_5/BiasAdd;model/depthwise_conv2d_6/depthwise;model/depthwise_conv2d_5/BiasAdd/ReadVariableOp/resource1]:63
+	                 CONV_2D	            8.796	    0.189	    0.191	  1.118%	 52.395%	     0.000	        1	[model/batch_normalization_13/FusedBatchNormV3;model/conv2d_7/BiasAdd/ReadVariableOp/resource;model/conv2d_7/BiasAdd;model/expanded_conv_1/depthwise/BatchNorm/FusedBatchNormV3;model/expanded_conv_1/depthwise/depthwise;model/depthwise_conv2d_6/depthwise;model/conv2d_7/Conv2D]:64
+	                     ADD	            8.988	    0.042	    0.042	  0.247%	 52.641%	     0.000	        1	[model/activation_11/Relu;model/add_4/add]:65
+	         RESIZE_BILINEAR	            9.031	    0.539	    0.541	  3.165%	 55.807%	     0.000	        1	[model/up_sampling2d_2/resize/ResizeBilinear]:66
+	                     ADD	            9.572	    0.268	    0.269	  1.574%	 57.381%	     0.000	        1	[model/add_5/add]:67
+	                 CONV_2D	            9.842	    0.398	    0.412	  2.410%	 59.791%	     0.000	        1	[model/batch_normalization_19/FusedBatchNormV3;model/conv2d_11/BiasAdd/ReadVariableOp/resource;model/conv2d_11/BiasAdd;model/expanded_conv/depthwise/BatchNorm/FusedBatchNormV3;model/expanded_conv/depthwise/depthwise;model/conv2d_10/Conv2D;model/conv2d_11/Conv2D]:68
+	       DEPTHWISE_CONV_2D	           10.255	    0.663	    0.676	  3.955%	 63.747%	     0.000	        1	[model/activation_12/Relu;model/batch_normalization_15/FusedBatchNormV3;model/depthwise_conv2d_6/depthwise;model/depthwise_conv2d_6/BiasAdd;model/depthwise_conv2d_6/BiasAdd/ReadVariableOp/resource1]:69
+	                 CONV_2D	           10.932	    0.403	    0.407	  2.378%	 66.125%	     0.000	        1	[model/activation_13/Relu;model/batch_normalization_16/FusedBatchNormV3;model/conv2d_9/BiasAdd/ReadVariableOp/resource;model/conv2d_9/BiasAdd;model/conv2d_10/Conv2D;model/conv2d_9/Conv2D1]:70
+	       DEPTHWISE_CONV_2D	           11.339	    0.137	    0.141	  0.825%	 66.949%	     0.000	        1	[model/activation_14/Relu;model/batch_normalization_17/FusedBatchNormV3;model/depthwise_conv2d_7/depthwise;model/depthwise_conv2d_7/BiasAdd;model/conv2d_10/Conv2D;model/depthwise_conv2d_7/BiasAdd/ReadVariableOp/resource1]:71
+	                 CONV_2D	           11.481	    0.113	    0.119	  0.694%	 67.644%	     0.000	        1	[model/batch_normalization_18/FusedBatchNormV3;model/conv2d_10/BiasAdd/ReadVariableOp/resource;model/conv2d_10/BiasAdd;model/expanded_conv/depthwise/BatchNorm/FusedBatchNormV3;model/expanded_conv/depthwise/depthwise;model/conv2d_10/Conv2D]:72
+	                     ADD	           11.600	    0.037	    0.040	  0.231%	 67.875%	     0.000	        1	[model/activation_15/Relu;model/add_6/add]:73
+	         RESIZE_BILINEAR	           11.640	    0.916	    0.793	  4.634%	 72.509%	     0.000	        1	[model/up_sampling2d_3/resize/ResizeBilinear]:74
+	         RESIZE_BILINEAR	           12.433	    3.179	    3.180	 18.597%	 91.106%	     0.000	        1	[model/up_sampling2d_4/resize/ResizeBilinear]:75
+	                 CONV_2D	           15.614	    1.511	    1.521	  8.894%	100.000%	     0.000	        1	[Identity]:76
+
+============================== Top by Computation Time ==============================
+	             [node type]	          [start]	  [first]	 [avg ms]	     [%]	  [cdf%]	  [mem KB]	[times called]	[Name]
+	         RESIZE_BILINEAR	           12.433	    3.179	    3.180	 18.597%	 18.597%	     0.000	        1	[model/up_sampling2d_4/resize/ResizeBilinear]:75
+	                 CONV_2D	           15.614	    1.511	    1.521	  8.894%	 27.491%	     0.000	        1	[Identity]:76
+	                 CONV_2D	            0.000	    1.504	    1.502	  8.780%	 36.271%	     0.000	        1	[model/re_lu/Relu;model/Conv/BatchNorm/FusedBatchNormV3;model/expanded_conv/depthwise/BatchNorm/FusedBatchNormV3;model/expanded_conv/depthwise/depthwise;model/conv2d_10/Conv2D;model/Conv/Conv2D]:0
+	         RESIZE_BILINEAR	           11.640	    0.916	    0.793	  4.634%	 40.906%	     0.000	        1	[model/up_sampling2d_3/resize/ResizeBilinear]:74
+	       DEPTHWISE_CONV_2D	           10.255	    0.663	    0.676	  3.955%	 44.861%	     0.000	        1	[model/activation_12/Relu;model/batch_normalization_15/FusedBatchNormV3;model/depthwise_conv2d_6/depthwise;model/depthwise_conv2d_6/BiasAdd;model/depthwise_conv2d_6/BiasAdd/ReadVariableOp/resource1]:69
+	         RESIZE_BILINEAR	            9.031	    0.539	    0.541	  3.165%	 48.026%	     0.000	        1	[model/up_sampling2d_2/resize/ResizeBilinear]:66
+	                 CONV_2D	            6.073	    0.418	    0.425	  2.484%	 50.510%	     0.000	        1	[model/activation_1/Relu;model/batch_normalization_1/FusedBatchNormV3;model/conv2d/BiasAdd/ReadVariableOp/resource;model/conv2d/BiasAdd;model/depthwise_conv2d_2/depthwise;model/conv2d/Conv2D1]:46
+	                 CONV_2D	            5.589	    0.414	    0.416	  2.430%	 52.940%	     0.000	        1	[model/batch_normalization_4/FusedBatchNormV3;model/conv2d_2/BiasAdd/ReadVariableOp/resource;model/conv2d_2/BiasAdd;model/expanded_conv_8/depthwise/BatchNorm/FusedBatchNormV3;model/expanded_conv_8/depthwise/depthwise;model/depthwise_conv2d_2/depthwise;model/conv2d_2/Conv2D]:44
+	                 CONV_2D	            9.842	    0.398	    0.412	  2.410%	 55.351%	     0.000	        1	[model/batch_normalization_19/FusedBatchNormV3;model/conv2d_11/BiasAdd/ReadVariableOp/resource;model/conv2d_11/BiasAdd;model/expanded_conv/depthwise/BatchNorm/FusedBatchNormV3;model/expanded_conv/depthwise/depthwise;model/conv2d_10/Conv2D;model/conv2d_11/Conv2D]:68
+	                 CONV_2D	           10.932	    0.403	    0.407	  2.378%	 57.729%	     0.000	        1	[model/activation_13/Relu;model/batch_normalization_16/FusedBatchNormV3;model/conv2d_9/BiasAdd/ReadVariableOp/resource;model/conv2d_9/BiasAdd;model/conv2d_10/Conv2D;model/conv2d_9/Conv2D1]:70
+
+Number of nodes executed: 77
+============================== Summary by node type ==============================
+	             [Node type]	  [count]	  [avg ms]	    [avg %]	    [cdf %]	  [mem KB]	[times called]
+	                 CONV_2D	       36	     8.695	    50.958%	    50.958%	     0.000	       36
+	         RESIZE_BILINEAR	        5	     4.809	    28.184%	    79.142%	     0.000	        5
+	       DEPTHWISE_CONV_2D	       19	     2.646	    15.507%	    94.649%	     0.000	       19
+	                     ADD	       13	     0.517	     3.030%	    97.679%	     0.000	       13
+	                     PAD	        4	     0.396	     2.321%	   100.000%	     0.000	        4
+
+Timings (microseconds): count=58 first=17196 curr=17169 min=16967 max=17219 avg=17101.5 std=59
+Memory (bytes): count=0
+77 nodes observed
+
+
+
