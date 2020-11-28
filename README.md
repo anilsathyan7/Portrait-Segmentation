@@ -318,8 +318,9 @@ During training, initially we **freeze** all the layers of encoder  and train it
 1. Using the pretrained mobilnetv3 as the encoder during training greatly improved the **convergence speed**. Also, the input images were normalized to [-1.0, 1.0] range before passing to the model. The float model convegerd to **98% validation accuracy** within first 20 epochs.
 2. Using the latest tensorflow built from source and aisegment dataset with 68852 images, the training process took about **2 hours** for completing **20 epochs**, on a Tesla P100 GPU in google colaboratory.
 3. In the current tensorflow 2.3 and tf model optimization library, some layers like **Rescale, Upsampling2D, Conv2DTranspose** are not supported by the tf.keras Quantization Aware Training API's. For this purpose you have to install the latest **nightly version** or build the same from source. Similarly the mobilenetv3 pretrained models are only available in tf-nightly(currently).
-4. Using **elementwise additon** instead of concatenation on skip connection bewteen encoder and decoder geartly helped to decrease the model size and improve it's **inference** time.
+4. Using **elementwise additon** instead of concatenation on skip connection bewteen encoder and decoder greatly helped us to decrease the model size and improve it's **inference** time.
 5. After quantization aware training, even though the model **size was reduced by 3x**, there was **no considerable loss in model accuracy**. However we were unable to convert the QAT model to full integer quantized version due to some internal tensorflow issues.
+6. On POCO X3 android phone, the float model takes around **17ms on CPU and 9ms on it's GPU** (>100 FPS), whereas the quantized model takes around 15ms on CPU (2 threads).
 
 
 ### Android Application 
