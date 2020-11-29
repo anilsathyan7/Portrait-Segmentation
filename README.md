@@ -322,6 +322,58 @@ During training, initially we **freeze** all the layers of encoder  and train it
 5. After quantization aware training, even though the model **size was reduced by 3x**, there was **no considerable loss in model accuracy**. However we were unable to convert the QAT model to full integer quantized version due to some internal tensorflow issues.
 6. On **POCO X3** android phone, the float model takes around **17ms on CPU and 9ms on it's GPU** (>100 FPS), whereas the quantized model takes around 15ms on CPU (2 threads). We were unable to run the fully quantized models(UINT8) using nnapi opr hexagon delegate since some of the layers were not fully supported. However we can run them partially on such accelerators with decreased performance(comparatively).
 
+**Android Tflite Benchmark**
+
+To measure the performance of a tflite model on **android** devices, we can use the native binary benchmark tool. It provides a summary of average **execution time and memory** consumption of individual operators on the device(CPU, GPU and DSP). To benchmark the models on your own android device using a linux system, perform the following steps :-
+
+1. Install adb tool on your system.
+```
+sudo apt-get install android-tools-adb android-tools-fastboot.
+```
+2. Connect your phone to system and copy the benchmark tool.
+```
+adb push benchmark_model_latest /data/local/tmp
+```
+3. Make the binary executable.
+```
+adb shell chmod +x /data/local/tmp/benchmark_model
+```
+4. Copy all the tflite models into the device.
+```
+adb push mnv3_post_quant.tflite /data/local/tmp
+adb push mnv3_seg_float.tflite /data/local/tmp
+adb push mnv3_seg_quant.tflite /data/local/tmp
+```
+5. Optionally, copy all the hexagon delegate library files.
+```
+adb push libhexagon_interface.so /data/local/tmp
+adb push libhexagon_nn_skel*.so /data/local/tmp
+```
+6. Finally run the benchmarks on the device.
+```
+adb shell /data/local/tmp/benchmark_model_latest \
+  --graph=/data/local/tmp/mnv3_seg_float.tflite \
+  --num_threads=2 \
+  ----enable_op_profiling=true
+
+adb shell /data/local/tmp/benchmark_model_latest \
+  --graph=/data/local/tmp/mnv3_seg_quant.tflite \
+  --num_threads=2 \
+  --enable_op_profiling=true
+
+adb shell /data/local/tmp/benchmark_model_latest \
+  --graph=/data/local/tmp/mnv3_seg_float.tflite \
+  --use_gpu=true \
+  --enable_op_profiling=true
+
+adb shell /data/local/tmp/benchmark_model_latest \
+  --graph=/data/local/tmp/mnv3_post_quant.tflite \
+  --use_hexagon=true \
+  --hexagon_profiling=true \
+  --enable_op_profiling=true
+```
+**Note:** The benchmark binary and hexagon library files are stored in the directory - libraries and binaries.
+
 
 ### Android Application 
 
