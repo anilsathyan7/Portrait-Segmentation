@@ -56,6 +56,7 @@ Besides the aforesaid augmentation techniques, we **normalize(also standardize)*
 5. [Baidu_Aug](https://drive.google.com/file/d/1zkh7gAhWwoX1nR5GzTzBziG8tgTKtr73/view?usp=sharing)
 6. [Supervisely](https://supervise.ly/explore/projects/supervisely-person-dataset-23304/datasets)
 7. [Pascal_Person](https://github.com/PINTO0309/TensorflowLite-UNet/tree/master/data_set/VOCdevkit/person)
+8. [Supervisely Portrait](https://www.dropbox.com/s/bv8r5vmjc52a8s6/supervisely_portrait.zip)
 
 ### Annotation Tools
 
