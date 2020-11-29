@@ -20,7 +20,7 @@ The models were trained with standard(and custom) **portrait datasets** and thei
 ## Dependencies
 
 * Tensorflow(>=1.14.0), Python 3
-* Keras(>=2.2.4), Kito, Scipy
+* Keras(>=2.2.4), Kito, Scipy, Dlib
 * Opencv(>=3.4), PIL, Matplotlib
 
 ```
