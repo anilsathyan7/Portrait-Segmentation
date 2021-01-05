@@ -58,6 +58,8 @@ Besides the aforesaid augmentation techniques, we **normalize(also standardize)*
 7. [Pascal_Person](https://github.com/PINTO0309/TensorflowLite-UNet/tree/master/data_set/VOCdevkit/person)
 8. [Supervisely Portrait](https://www.dropbox.com/s/bv8r5vmjc52a8s6/supervisely_portrait.zip)
 
+Also checkout the datset: [UCF Selfie](https://www.crcv.ucf.edu/data/Selfie)
+
 ### Annotation Tools
 
 A [good dataset](https://hackernoon.com/stop-feeding-garbage-to-your-model-the-6-biggest-mistakes-with-datasets-and-how-to-avoid-them-3cb7532ad3b7) is always the first step for coming up with a robust and and accurate model, especially in the case of semantic segmentation. There are many standard datsets available for portrait(or person) segmentation like **PFCN, MSCOCO Person, PascalVOV Person, Supervisely** etc. But it seems that either the **quality or quantity** of the images are still insufficient for our use case. So, it would be a good idea to **collect custom images** for our training process. It is easy to collect images and create ground truth for tasks like classification or object detection; but for semantic segmentation we need to be extra-careful regarding the **quality of masks**. Also, data collection and annotation takes a lot of **time and effort**, compared to other computer vision tasks. 
@@ -71,7 +73,10 @@ Here are some tools for **annotation and data collection** which i found to be u
 
 If you are planning to use the model on mobile phones specifically for **portrait selfies**, it would be a good idea to include lots of such **portrait images captured using mobile phones** in your dataset.
 
-Also checkout the datset: [UCF Selfie](https://www.crcv.ucf.edu/data/Selfie)
+The following are some examples of the **tools/models** which offers reasonable **accuracy** and flexibility.
+
+* **unscreen.com**: An automatic online tool for removing backgrounds from videos(paid).
+* **MODNet** : A real-time portrait video matting model with very high accuracy(open-source).
 
 ## Mobile-Unet Architecture
 
