@@ -1009,7 +1009,7 @@ The **portrait-net and prisma-net** models were successfully converted to quanti
 
 ## License
 
-This project is licensed under the terms of the [MIT](https://en.wikipedia.org/wiki/MIT_License) license.
+This project is licensed under the terms of the [MIT](LICENSE) license.
 
 ## Versioning
 
