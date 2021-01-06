@@ -1007,6 +1007,10 @@ The **portrait-net and prisma-net** models were successfully converted to quanti
 - [ ] Incroporate **depth** information
 - [ ] Apply **photorealistic style transfer** on foreground based on **background image**
 
+## License
+
+This project is licensed under the terms of the [MIT](https://en.wikipedia.org/wiki/MIT_License) license.
+
 ## Versioning
 
 Version 1.0
